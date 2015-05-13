@@ -31,8 +31,8 @@
 
     <modules>
         <module>../tsweb-core</module>
-        <!-- <module>tsweb-com-domain</module>
-        <module>tsweb-com-dao</module>
+        <module>../tsweb-main</module>
+        <!-- <module>tsweb-com-dao</module>
         <module>tsweb-com-service</module>
         <module>tsweb-com-web</module>
         <module>tsweb-main-web</module>
@@ -43,29 +43,18 @@
         <dependencies>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>tsweb-com-util</artifactId>
+                <artifactId>tsweb-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>tsweb-com-domain</artifactId>
+                <artifactId>tsweb-main</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>tsweb-com-dao</artifactId>
+                <artifactId>tsweb-sys</artifactId>
                 <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>tsweb-com-service</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>tsweb-com-web</artifactId>
-                <version>${project.version}</version>
-                <type>war</type>
             </dependency>
             <dependency>
                 <groupId>org.apache.tomcat</groupId>

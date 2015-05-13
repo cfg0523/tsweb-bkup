@@ -27,5 +27,16 @@
 
     <build>
         <finalName>tsweb-sys</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <configuration>
+                    <server>${tomcat.server.id}</server>
+                    <url>${tomcat.deploy.url}</url>
+                    <path>/${project.artifactId}</path>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 </project>

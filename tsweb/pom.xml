@@ -32,8 +32,8 @@
     <modules>
         <module>../tsweb-core</module>
         <module>../tsweb-main</module>
-        <!-- <module>tsweb-com-dao</module>
-        <module>tsweb-com-service</module>
+        <module>../tsweb-sys</module>
+        <!-- <module>tsweb-com-service</module>
         <module>tsweb-com-web</module>
         <module>tsweb-main-web</module>
         <module>../tsweb-sys</module> -->

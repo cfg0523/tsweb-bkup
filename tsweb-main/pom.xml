@@ -5,6 +5,7 @@
         <groupId>com.techsen.tsweb</groupId>
         <artifactId>tsweb</artifactId>
         <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../tsweb/pom.xml</relativePath>
     </parent>
     <artifactId>tsweb-main</artifactId>
     <packaging>war</packaging>

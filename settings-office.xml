@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+    <localRepository>D:/repository/mvn</localRepository>
+    <pluginGroups></pluginGroups>
+    <proxies></proxies>
+
+    <servers>
+        <server>
+            <id>nexus-release</id>
+            <username>admin</username>
+            <password>debian99</password>
+        </server>
+        <server>
+            <id>nexus-snapshots</id>
+            <username>admin</username>
+            <password>debian99</password>
+        </server>
+        <server>
+            <id>tomcat</id>
+            <username>hayden</username>
+            <password>hayden</password>
+        </server>
+    </servers>
+
+    <mirrors>
+        <mirror>
+            <id>all-respositories</id>
+            <mirrorOf>*</mirrorOf>
+            <name>All Repositories Mirror</name>
+            <url>http://125.1.0.40:8080/nexus/content/groups/public</url>
+        </mirror>
+    </mirrors>
+
+    <profiles>
+        <profile>
+            <id>office</id>
+            <properties>
+                <nexus.ip>125.1.0.40</nexus.ip>
+                <nexus.port>8080</nexus.port>
+                <snapshots.id>nexus-snapshots</snapshots.id>
+                <releases.id>nexus-releases</releases.id>
+                <tomcat.server.id>tomcat</tomcat.server.id>
+                <tomcat.deploy.url>http://localhost:8080/manager/html</tomcat.deploy.url>
+            </properties>
+        </profile>
+        <profile>
+            <id>home</id>
+            <properties>
+                <nexus.ip>localhost</nexus.ip>
+                <nexus.port>8081</nexus.port>
+                <snapshots.id>nexus-snapshots</snapshots.id>
+                <releases.id>nexus-releases</releases.id>
+                <tomcat.server.id>tomcat</tomcat.server.id>
+                <tomcat.deploy.url>http://localhost:8080/manager/html</tomcat.deploy.url>
+            </properties>
+        </profile>
+        <profile>
+            <id>default-profile</id>
+            <properties>
+                <maven.compiler.source>1.7</maven.compiler.source>
+                <maven.compiler.target>1.7</maven.compiler.target>
+                <maven.compiler.compilerVersion>1.7</maven.compiler.compilerVersion>
+            </properties>
+            <repositories>
+                <repository>
+                    <id>public</id>
+                    <url>http://125.1.0.40:8080/nexus/content/groups/public</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>public</id>
+                    <url>http://125.1.0.40:8080/nexus/content/groups/public</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+    </profiles>
+
+    <activeProfiles>
+        <activeProfile>office</activeProfile>
+        <activeProfile>default-profile</activeProfile>
+    </activeProfiles>
+</settings>

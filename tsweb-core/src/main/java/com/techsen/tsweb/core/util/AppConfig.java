@@ -22,7 +22,10 @@ import java.util.Properties;
 import org.apache.log4j.Logger;
 
 /**
- * 读取system.properties配置工具类
+ * 读取所有配置文件的工具类
+ * 读取的文件包括如下：
+ * classpath:META-INF/system.properties
+ * classpath:META-INF/**\/${project.name}-*.properties
  */
 public class AppConfig {
     private static Logger logger = getLogger(AppConfig.class);

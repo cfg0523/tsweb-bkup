@@ -2,6 +2,7 @@ package com.techsen.tsweb.core.util;
 
 import static com.techsen.tsweb.core.util.CharCodeUtil.decode;
 import static com.techsen.tsweb.core.util.CloseUtil.close;
+import static com.techsen.tsweb.core.util.Const.EMPTY_STRING;
 import static com.techsen.tsweb.core.util.ExceptionUtil.throwRuntimeException;
 import static com.techsen.tsweb.core.util.Log4jUtil.getLogger;
 import static com.techsen.tsweb.core.util.PropertiesUtil.loadProperties;
@@ -39,7 +40,7 @@ public class AppConfig {
      * 将会根据检测到的值匹配以下路径规则的properties文件：
      * classpath:META-INF/**\/${project.name}-*.properties
      */
-    private static String PROJECT_NAME = "";
+    private static String PROJECT_NAME = EMPTY_STRING;
 
     /**
      * 上一次加载system.properties时的文件的修改时间

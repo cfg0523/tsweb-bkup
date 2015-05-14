@@ -17,6 +17,11 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
+            <artifactId>tsweb-com</artifactId>
+            <type>war</type>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>tsweb-sys</artifactId>
             <type>war</type>
         </dependency>
@@ -86,6 +91,10 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <configuration>
                     <overlays>
+                        <overlay>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>tsweb-com</artifactId>
+                        </overlay>
                         <overlay>
                             <groupId>${project.groupId}</groupId>
                             <artifactId>tsweb-sys</artifactId>

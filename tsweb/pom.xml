@@ -27,6 +27,8 @@
         <commons-logging.version>1.2</commons-logging.version>
         <mysql.jdbc.driver.version>5.1.34</mysql.jdbc.driver.version>
         <c3p0.version>0.9.5</c3p0.version>
+        <mybatis.version>3.2.6</mybatis.version>
+        <mybatis-spring.version>1.1.1</mybatis-spring.version>
     </properties>
 
     <modules>
@@ -111,6 +113,11 @@
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
+                <artifactId>spring-jdbc</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
                 <version>${spring.version}</version>
             </dependency>
@@ -138,6 +145,17 @@
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-webmvc</artifactId>
                 <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis-spring</artifactId>
+                <version>${mybatis-spring.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

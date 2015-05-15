@@ -8,9 +8,37 @@
     <context:property-placeholder location="classpath:META-INF/sys/tsweb-sys.properties"/>
 
     <context:component-scan base-package="com.techsen.tsweb.sys">
-        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+        <context:exclude-filter type="annotation"
+            expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
     <context:annotation-config/>
+
+    <!-- 本地数据库的DataSource -->
+    <bean id="localDataSource" parent="abstractDataSource">
+        <property name="driverClass" value="${jdbc.local.driver}"/>
+        <property name="jdbcUrl" value="${jdbc.local.url}"/>
+        <property name="user" value="${jdbc.local.username}"/>
+        <property name="password" value="${jdbc.local.password}"/>
+    </bean>
+
+    <!-- 本地数据库的SqlSessionFactory -->
+    <bean id="localSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="localDataSource"/>
+        <property name="mapperLocations" value="classpath:META-INF/sys/**/Local_*.xml"/>
+        <property name="typeAliasesPackage" value="com.techsen.tsweb.sys.domain"/>
+    </bean>
+
+    <!-- tsweb-sys模块下的Mapper扫描器，扫描com.techsen.tsweb.sys -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.techsen.tsweb.sys"/>
+        <property name="sqlSessionFactoryBeanName" value="localSqlSessionFactory"/>
+    </bean>
+
+    <!-- 本地数据库的SqlSessionTemplate -->
+    <bean id="localSqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="localSqlSessionFactory"/>
+        <constructor-arg index="1" value="BATCH"/>
+    </bean>
 
 </beans>

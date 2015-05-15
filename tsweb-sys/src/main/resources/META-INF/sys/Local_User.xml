@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.techsen.tsweb.sys.mapper.UserMapper">
+    <resultMap type="User" id="UserMap">
+        <result property="id" column="id"/>
+        <result property="username" column="usr_name"/>
+        <result property="password" column="usr_pwd"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createDate" column="create_date"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateDate" column="update_by"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+
+    <sql id="UserColumns">
+        id, usr_name, usr_pwd, create_by,
+        create_date, update_by,
+        update_by,
+        remark
+    </sql>
+
+    <sql id="UserProperties">
+        id, username, password, createBy,
+        createDate, updateBy,
+        updateDate,
+        remark
+    </sql>
+
+    <insert id="addEntity" parameterMap="UserMap">
+        insert into sys_usr_mstr (
+            <include refid="UserColumns"/>
+        ) values (
+            #{id},
+            #{username}, #{password}, #{createBy},
+            #{createDate},
+            #{updateBy}, #{updateDate},
+            #{remark}
+        );
+    </insert>
+
+    <delete id="deleteEntity" parameterType="string">
+        delete from sys_usr_mstr where id = #{id}
+    </delete>
+
+    <update id="updateEntity" parameterMap="UserMap">
+        update sys_usr_mstr set
+            usr_name = #{username},
+            usr_pwd = #{password},
+            create_by = #{createBy},
+            create_date = #{createDate},
+            update_by = #{updateBy},
+            update_by = #{updateDate},
+            remark = #{remark}
+        where id = #{id}
+    </update>
+
+    <select id="getEntity" parameterType="string" resultMap="UserMap">
+        select <include refid="UserColumns"/>
+        from sys_usr_mstr
+        where id = #{id}
+    </select>
+
+</mapper>

@@ -1,5 +1,7 @@
 package com.techsen.tsweb.core.util;
 
+import static com.techsen.tsweb.core.util.Const.FORMAT_DEFAULT_DATE;
+import static com.techsen.tsweb.core.util.Const.FORMAT_DEFAULT_TIME;
 import static com.techsen.tsweb.core.util.ExceptionUtil.throwRuntimeException;
 
 import java.text.ParseException;
@@ -14,12 +16,10 @@ import org.apache.log4j.Logger;
 public class DateUtil {
     private static Logger logger = Log4jUtil.getLogger(DateUtil.class);
 
-    public static final String DATE_DEFAULT_FORMAT = "yyyy-MM-dd";
-    public static final String TIME_DEFAULT_FORMAT = "HH:mm:ss";
     public static final SimpleDateFormat SIMPLEDATEFORMAT_DEFAULT_DATE = new SimpleDateFormat(
-            DATE_DEFAULT_FORMAT);
+            FORMAT_DEFAULT_DATE);
     public static final SimpleDateFormat SIMPLEDATEFORMAT_DEFAULT_TIME = new SimpleDateFormat(
-            TIME_DEFAULT_FORMAT);
+            FORMAT_DEFAULT_TIME);
 
     /**
      * 以给定的格式格式化日期或时间

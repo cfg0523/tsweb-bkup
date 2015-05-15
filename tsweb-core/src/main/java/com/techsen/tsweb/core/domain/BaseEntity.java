@@ -1,6 +1,5 @@
 package com.techsen.tsweb.core.domain;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -10,10 +9,9 @@ import java.util.Date;
 public abstract class BaseEntity<T> extends BaseObject<T> {
 
     /**
-     * ID采用Serializable类型，是为了能与其他非String类型的设计兼容，
      * 推荐采用32位字符串类型的UUID值
      */
-    protected Serializable id;
+    protected String id;
     protected String createBy;
     protected Date createDate;
     protected String updateBy;
@@ -54,12 +52,12 @@ public abstract class BaseEntity<T> extends BaseObject<T> {
         }
     }
 
-    public Serializable getId() {
+    public String getId() {
         return id;
     }
 
     @SuppressWarnings("unchecked")
-    public T setId(Serializable id) {
+    public T setId(String id) {
         this.id = id;
         return (T) this;
     }

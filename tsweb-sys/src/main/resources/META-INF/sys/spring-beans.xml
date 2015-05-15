@@ -29,12 +29,6 @@
         <property name="typeAliasesPackage" value="com.techsen.tsweb.sys.domain"/>
     </bean>
 
-    <!-- tsweb-sys模块下的Mapper扫描器，扫描com.techsen.tsweb.sys -->
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.techsen.tsweb.sys"/>
-        <property name="sqlSessionFactoryBeanName" value="localSqlSessionFactory"/>
-    </bean>
-
     <!-- 本地数据库的SqlSessionTemplate -->
     <bean id="localSqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
         <constructor-arg index="0" ref="localSqlSessionFactory"/>

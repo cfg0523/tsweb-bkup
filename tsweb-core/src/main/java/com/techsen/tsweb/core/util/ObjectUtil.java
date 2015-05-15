@@ -63,16 +63,15 @@ public class ObjectUtil {
     /**
      * 取得对象的泛型类型
      */
-    @SuppressWarnings("unchecked")
-    public static <T> Class<T> getGenericType(T obj) {
-        Class<T> retVal = null;
+    public static Class<?> getGenericType(Object obj) {
+        Class<?> retVal = null;
         try {
             ParameterizedType type = (ParameterizedType) obj.getClass()
                     .getGenericSuperclass();
             if (type != null) {
                 Type[] types = type.getActualTypeArguments();
                 if (isValid(types)) {
-                    retVal = (Class<T>) types[0];
+                    retVal = (Class<?>) types[0];
                 }
             }
         } catch (Exception e) {

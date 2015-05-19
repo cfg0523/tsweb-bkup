@@ -6,3 +6,5 @@ mvn deploy
 
 cd ../tsweb-main
 mvn tomcat7:deploy
+
+cd ..

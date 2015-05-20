@@ -11,8 +11,13 @@
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:META-INF/**/spring-*.xml</param-value>
+        <param-value>classpath:spring-*.xml</param-value>
     </context-param>
+
+    <!-- 启动Spring容器 -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
 
     <!-- 配置SpringMVC的DispatcherServlet -->
     <servlet>
@@ -20,7 +25,7 @@
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>classpath:META-INF/**/spring-mvc.xml</param-value>
+            <param-value>classpath:spring-mvc.xml</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>

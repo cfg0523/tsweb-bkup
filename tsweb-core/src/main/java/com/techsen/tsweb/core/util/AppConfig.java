@@ -24,14 +24,14 @@ import org.apache.log4j.Logger;
 /**
  * 读取所有配置文件的工具类
  * 读取的文件包括如下：
- * classpath:META-INF/system.properties
- * classpath:META-INF/**\/${project.name}-*.properties
+ * classpath:system.properties
+ * classpath:${project.name}-*.properties
  */
 public class AppConfig {
     private static Logger logger = getLogger(AppConfig.class);
 
     private static Properties props = new Properties();
-    private static String SYSTEM_PROPERTIES_PATH = "META-INF/system.properties";
+    private static String SYSTEM_PROPERTIES_PATH = "system.properties";
 
     /**
      * 用来在运行时判断是否重新加载system.properties中的配置
@@ -39,9 +39,9 @@ public class AppConfig {
     private static boolean reload = false;
 
     /**
-     * 项目的工程名， 系统检测classpath:META-INF/system.properties中的project.name属性，
+     * 项目的工程名， 系统检测classpath:system.properties中的project.name属性，
      * 将会根据检测到的值匹配以下路径规则的properties文件：
-     * classpath:META-INF/**\/${project.name}-*.properties
+     * classpath:${project.name}-*.properties
      */
     private static String PROJECT_NAME = EMPTY_STRING;
 
@@ -51,7 +51,7 @@ public class AppConfig {
     private static long lastModified = -1L;
 
     /**
-     * 暂存classpath:META-INF/**\/${project.name}-*.properties文件的lastModified
+     * 暂存classpath:${project.name}-*.properties文件的lastModified
      */
     private static Map<String, Long> lastModifiedProperties = new HashMap<String, Long>();
 
@@ -80,7 +80,7 @@ public class AppConfig {
                 String systemFileName = SYSTEM_PROPERTIES_PATH
                         .substring(SYSTEM_PROPERTIES_PATH.indexOf("/") + 1);
 
-                // 排除掉META-INF/system.properties文件
+                // 排除掉system.properties文件
                 if (!absolutePath.contains(systemFileName)) {
                     String fileName = file.getName();
                     if (fileName.endsWith(".properties")
@@ -118,7 +118,7 @@ public class AppConfig {
         }
         try {
             /**
-             * 加载classpath:META-INF/system.properties文件
+             * 加载classpath:system.properties文件
              */
             String filepath = decode(url.getFile());
             File systemFile = new File(filepath);
@@ -130,7 +130,7 @@ public class AppConfig {
             }
 
             /**
-             * 加载classpath:META-INF/**\/${project.name}.properties
+             * 加载classpath:${project.name}-*.properties
              */
             loadConfigToProps(systemFile.getParentFile(), props);
         } catch (UnsupportedEncodingException e) {
@@ -188,9 +188,9 @@ public class AppConfig {
     }
 
     /**
-     * 获得项目的工程名， 检测classpath:META-INF/system.properties中的project.name属性，
+     * 获得项目的工程名， 检测classpath:system.properties中的project.name属性，
      * 系统将会根据检测值匹配以下路径规则的properties文件：
-     * classpath:META-INF/**\/${project.name}-*.properties
+     * classpath:${project.name}-*.properties
      */
     public static String getProjectName() {
         return PROJECT_NAME;

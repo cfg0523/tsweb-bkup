@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.techsen.tsweb.core.dao.BaseDao;
 import com.techsen.tsweb.sys.domain.User;
 
-@Repository
+@Repository("userDao")
 public class UserDao extends BaseDao<User> {
 
     @Override

@@ -32,7 +32,7 @@
         <mybatis.version>3.2.6</mybatis.version>
         <mybatis-spring.version>1.1.1</mybatis-spring.version>
 
-        <jetty.maven.plugin.version>8.1.16.v20140903</jetty.maven.plugin.version>
+        <jetty-maven-plugin.version>8.1.16.v20140903</jetty-maven-plugin.version>
     </properties>
 
     <modules>
@@ -248,6 +248,20 @@
                         <server>${tomcat.server.id}</server>
                         <url>${tomcat.deploy.url}</url>
                         <path>/${project.artifactId}</path>
+                    </configuration>
+                </plugin>
+
+                <!-- integrate jetty-maven-plugin -->
+                <plugin>
+                    <groupId>org.mortbay.jetty</groupId>
+                    <artifactId>jetty-maven-plugin</artifactId>
+                    <version>${jetty-maven-plugin.version}</version>
+                    <configuration>
+                        <scanIntervalSeconds>10</scanIntervalSeconds>
+                        <webAppConfig>
+                            <contextPath>/tsweb</contextPath>
+                        </webAppConfig>
+                        <war>${basedir}/target/${project.artifactId}.war</war>
                     </configuration>
                 </plugin>
             </plugins>

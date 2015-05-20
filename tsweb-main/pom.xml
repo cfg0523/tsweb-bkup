@@ -26,6 +26,10 @@
             <type>war</type>
         </dependency>
         <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
         </dependency>
@@ -63,8 +67,8 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <id>run-integrate-test</id>
-                        <phase>integrate-test</phase>
+                        <id>run-integration-test</id>
+                        <phase>integration-test</phase>
                         <goals>
                             <goal>test</goal>
                         </goals>
@@ -81,7 +85,7 @@
                 <executions>
                     <execution>
                         <id>start-jetty</id>
-                        <phase>pre-integrate-test</phase>
+                        <phase>pre-integration-test</phase>
                         <goals>
                             <goal>run</goal>
                         </goals>

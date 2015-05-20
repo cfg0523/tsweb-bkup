@@ -4,6 +4,6 @@ cd tsweb
 mvn clean install
 
 cd ../tsweb-main
-mvn jetty:run-war
+mvn jetty:run
 
 cd ..

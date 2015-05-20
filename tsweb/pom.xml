@@ -216,11 +216,19 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>${maven-surefire-plugin.version}</version>
+                    <configuration>
+                        <!-- 跳过测试 -->
+                        <skipTests>true</skipTests>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-war-plugin</artifactId>
                     <version>${maven-war-plugin.version}</version>
+                    <configuration>
+                        <!-- 缺少web.xml文件时不要报错 -->
+                        <failOnMissingWebXml>false</failOnMissingWebXml>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -251,17 +259,17 @@
                     </configuration>
                 </plugin>
 
-                <!-- integrate jetty-maven-plugin -->
                 <plugin>
                     <groupId>org.mortbay.jetty</groupId>
                     <artifactId>jetty-maven-plugin</artifactId>
                     <version>${jetty-maven-plugin.version}</version>
                     <configuration>
+                        <stopPort>9966</stopPort>
+                        <stopKey>stop-jetty-for-it</stopKey>
                         <scanIntervalSeconds>10</scanIntervalSeconds>
                         <webAppConfig>
                             <contextPath>/tsweb</contextPath>
                         </webAppConfig>
-                        <war>${basedir}/target/${project.artifactId}.war</war>
                     </configuration>
                 </plugin>
             </plugins>

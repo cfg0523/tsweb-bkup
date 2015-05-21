@@ -12,7 +12,7 @@ import com.techsen.tsweb.sys.domain.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations="classpath:spring-*.xml")
-public class UserDaoIT {
+public class UserDaoTest {
     @Resource UserDao userDao;
     
     @Test

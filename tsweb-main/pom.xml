@@ -22,8 +22,18 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
+            <artifactId>tsweb-com</artifactId>
+            <classifier>classes</classifier>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>tsweb-sys</artifactId>
             <type>war</type>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>tsweb-sys</artifactId>
+            <classifier>classes</classifier>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

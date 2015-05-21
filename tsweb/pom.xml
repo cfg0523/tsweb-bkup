@@ -57,7 +57,25 @@
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
+                <artifactId>tsweb-com</artifactId>
+                <version>${project.version}</version>
+                <classifier>classes</classifier>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>tsweb-sys</artifactId>
+                <version>${project.version}</version>
+                <type>war</type>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>tsweb-sys</artifactId>
+                <version>${project.version}</version>
+                <classifier>classes</classifier>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>tsweb-main</artifactId>
                 <version>${project.version}</version>
                 <type>war</type>
             </dependency>
@@ -65,7 +83,7 @@
                 <groupId>${project.groupId}</groupId>
                 <artifactId>tsweb-main</artifactId>
                 <version>${project.version}</version>
-                <type>war</type>
+                <classifier>classes</classifier>
             </dependency>
             <dependency>
                 <groupId>javax.servlet</groupId>
@@ -216,10 +234,34 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>${maven-surefire-plugin.version}</version>
-                    <!-- 跳过测试 -->
-                    <!-- <configuration>
-                        <skipTests>true</skipTests>
-                    </configuration> -->
+                    <!-- <configuration> <skipTests>true</skipTests> </configuration> -->
+                    <executions>
+                        <execution>
+                            <id>run-test</id>
+                            <phase>test</phase>
+                            <goals>
+                                <goal>test</goal>
+                            </goals>
+                            <configuration>
+                                <includes>
+                                    <include>**/*Test.java</include>
+                                    <include>**/Test*.java</include>
+                                </includes>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>run-integration-test</id>
+                            <phase>integration-test</phase>
+                            <goals>
+                                <goal>test</goal>
+                            </goals>
+                            <configuration>
+                                <includes>
+                                    <include>**/*IT.java</include>
+                                </includes>
+                            </configuration>
+                        </execution>
+                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -228,6 +270,10 @@
                     <configuration>
                         <!-- 缺少web.xml文件时不要报错 -->
                         <failOnMissingWebXml>false</failOnMissingWebXml>
+                        <!-- 把class打包成jar作为附件 -->
+                        <attachClasses>true</attachClasses>
+                        <!-- 把class打包成jar -->
+                        <archiveClasses>true</archiveClasses>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -259,6 +305,7 @@
                     </configuration>
                 </plugin>
 
+                <!-- 集成jetty-maven-plugin进行集成测试 -->
                 <plugin>
                     <groupId>org.mortbay.jetty</groupId>
                     <artifactId>jetty-maven-plugin</artifactId>
@@ -273,6 +320,26 @@
                             <contextPath>/tsweb</contextPath>
                         </webAppConfig>
                     </configuration>
+                    <executions>
+                        <execution>
+                            <id>start-jetty</id>
+                            <phase>pre-integration-test</phase>
+                            <goals>
+                                <goal>run</goal>
+                            </goals>
+                            <configuration>
+                                <scanIntervalSeconds>0</scanIntervalSeconds>
+                                <daemon>true</daemon>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>stop-jetty</id>
+                            <phase>post-integration-test</phase>
+                            <goals>
+                                <goal>stop</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -284,6 +351,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

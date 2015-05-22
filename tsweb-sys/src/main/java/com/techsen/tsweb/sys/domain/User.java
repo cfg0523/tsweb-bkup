@@ -5,6 +5,13 @@ import com.techsen.tsweb.core.domain.BaseEntity;
 public class User extends BaseEntity<User> {
     private static final long serialVersionUID = -6378136187265089253L;
 
+    public User() {}
+    
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+    
     private String username;
     private String password;
 

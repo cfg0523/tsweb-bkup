@@ -1,5 +1,7 @@
 package com.techsen.tsweb.core.domain;
 
+import static com.techsen.tsweb.core.util.UUIDUtil.uuid;
+
 import java.util.Date;
 
 /**
@@ -17,6 +19,17 @@ public abstract class BaseEntity<T> extends BaseObject<T> {
     protected String updateBy;
     protected Date updateDate;
     protected String remark;
+    
+    /**
+     * 默认构造方法
+     */
+    public BaseEntity() {
+        //以32位的UUID作为实体类的主键
+        this.id = uuid();
+        
+        //设置对象创建的时间
+        this.createDate = new Date();
+    }
 
     /**
      * 公共的hashCode方法

@@ -22,8 +22,8 @@ public abstract class BaseObject<T> implements Serializable {
      * 公共的clone方法，供子类继承
      */
     @Override
-    protected T clone() {
+    public T clone() {
         return ObjectUtil.clone(this);
-    };
+    }
 
 }

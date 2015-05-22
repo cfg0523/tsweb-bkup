@@ -46,10 +46,4 @@ public class UserDaoTest {
         Assert.assertEquals("test by cfg0523", tmp.getRemark());
     }
     
-    @Test
-    public void testDeleteEntity() {
-        this.userDao.deleteEntity(this.user);
-        Assert.assertNull(this.userDao.getEntity(this.user.getId()));
-    }
-
 }

@@ -8,7 +8,7 @@ import com.techsen.tsweb.core.domain.BaseEntity;
 import com.techsen.tsweb.core.util.Log4jUtil;
 
 /**
- * 公共的BaseDao接口
+ * 公共的BaseMapper抽象类
  */
 public abstract class BaseMapper<T extends BaseEntity<T>> implements Dao<T> {
     private Logger logger = Log4jUtil.getLogger(this);
@@ -24,24 +24,36 @@ public abstract class BaseMapper<T extends BaseEntity<T>> implements Dao<T> {
         return statement;
     }
 
+    /**
+     * 新增一个Entity对象
+     */
     @Override
     public void addEntity(T t) {
         this.defaultSqlSessionTemplate.insert(getStatement("addEntity"), t);
     }
 
+    /**
+     * 根据Entity的id属性删除一个实体
+     */
     @Override
     public void deleteEntity(T t) {
         this.defaultSqlSessionTemplate.delete(getStatement("deleteEntity"), t);
     }
 
+    /**
+     * 根据Entity的id属性更新一个实体
+     */
     @Override
     public void updateEntity(T t) {
         this.defaultSqlSessionTemplate.update(getStatement("updateEntity"), t);
     }
 
+    /**
+     * 根据id查找一个实体
+     */
     @Override
     public T getEntity(String id) {
-        return this.defaultSqlSessionTemplate.selectOne("getEntity", id);
+        return this.defaultSqlSessionTemplate.selectOne(getStatement("getEntity"), id);
     }
 
 }

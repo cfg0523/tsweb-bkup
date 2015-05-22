@@ -1,15 +1,16 @@
-package com.techsen.tsweb.core.dao;
+package com.techsen.tsweb.core.mapper;
 
 import org.apache.log4j.Logger;
 import org.mybatis.spring.SqlSessionTemplate;
 
+import com.techsen.tsweb.core.dao.Dao;
 import com.techsen.tsweb.core.domain.BaseEntity;
 import com.techsen.tsweb.core.util.Log4jUtil;
 
 /**
  * 公共的BaseDao接口
  */
-public abstract class BaseDao<T extends BaseEntity<T>> implements Dao<T> {
+public abstract class BaseMapper<T extends BaseEntity<T>> implements Dao<T> {
     private Logger logger = Log4jUtil.getLogger(this);
     
     protected SqlSessionTemplate defaultSqlSessionTemplate;

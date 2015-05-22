@@ -1,4 +1,4 @@
-package com.techsen.tsweb.sys.dao.impl;
+package com.techsen.tsweb.sys.mapper;
 
 import javax.annotation.Resource;
 
@@ -10,7 +10,7 @@ import com.techsen.tsweb.sys.dao.UserDao;
 import com.techsen.tsweb.sys.domain.User;
 
 @Repository("userDao")
-public class UserDaoImpl extends BaseDao<User> implements UserDao {
+public class UserMapper extends BaseDao<User> implements UserDao {
 
     @Override
     @Resource(name = "localSqlSessionTemplate")

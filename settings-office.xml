@@ -44,6 +44,11 @@
                 <releases.id>nexus-releases</releases.id>
                 <tomcat.server.id>tomcat</tomcat.server.id>
                 <tomcat.deploy.url>http://localhost:8080/manager/html</tomcat.deploy.url>
+                <local.database.ip>localhost</local.database.ip>
+                <local.database.port>3306</local.database.port>
+                <local.database.name>tsweb</local.database.name>
+                <local.database.username>root</local.database.username>
+                <local.database.password>qiannianhu</local.database.password>
             </properties>
         </profile>
         <profile>
@@ -55,6 +60,11 @@
                 <releases.id>nexus-releases</releases.id>
                 <tomcat.server.id>tomcat</tomcat.server.id>
                 <tomcat.deploy.url>http://localhost:8080/manager/html</tomcat.deploy.url>
+                <local.database.ip>localhost</local.database.ip>
+                <local.database.port>3306</local.database.port>
+                <local.database.name>tsweb</local.database.name>
+                <local.database.username>root</local.database.username>
+                <local.database.password>qiannianhu</local.database.password>
             </properties>
         </profile>
         <profile>

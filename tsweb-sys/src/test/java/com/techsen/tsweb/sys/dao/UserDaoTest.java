@@ -20,7 +20,7 @@ public class UserDaoTest {
         User user = this.userDao.getEntity("1");
         Assert.assertEquals("1", user.getId());
         Assert.assertEquals("hayden", user.getUsername());
-        Assert.assertEquals("chenchen", user.getPassword());
+        Assert.assertEquals("hayden", user.getPassword());
         Assert.assertEquals("1", user.getCreateBy());
         Assert.assertEquals("1", user.getUpdateBy());
         Assert.assertEquals("test", user.getRemark());

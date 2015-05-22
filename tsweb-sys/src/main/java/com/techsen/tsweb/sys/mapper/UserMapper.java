@@ -9,7 +9,7 @@ import com.techsen.tsweb.core.mapper.BaseMapper;
 import com.techsen.tsweb.sys.dao.UserDao;
 import com.techsen.tsweb.sys.domain.User;
 
-@Repository("userDao")
+@Repository
 public class UserMapper extends BaseMapper<User> implements UserDao {
 
     @Override

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:context="http://www.springframework.org/schema/context"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
@@ -7,43 +8,49 @@
 
     <context:component-scan base-package="com.techsen.tsweb">
         <context:exclude-filter type="annotation"
-            expression="org.springframework.stereotype.Controller"/>
+            expression="org.springframework.stereotype.Controller" />
     </context:component-scan>
 
-    <context:property-placeholder location="classpath:tsweb-*.properties"/>
-    <context:annotation-config/>
+    <context:property-placeholder location="classpath:tsweb-*.properties" />
+    <context:annotation-config />
 
     <!-- 抽象数据源 -->
     <bean id="abstractDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
         abstract="true">
-        <property name="checkoutTimeout" value="30000"/>
-        <property name="idleConnectionTestPeriod" value="30"/>
-        <property name="maxIdleTime" value="30"/>
-        <property name="initialPoolSize" value="3"/>
-        <property name="maxPoolSize" value="15"/>
-        <property name="minPoolSize" value="3"/>
-        <property name="acquireIncrement" value="3"/>
+        <property name="checkoutTimeout" value="30000" />
+        <property name="idleConnectionTestPeriod" value="30" />
+        <property name="maxIdleTime" value="30" />
+        <property name="initialPoolSize" value="3" />
+        <property name="maxPoolSize" value="15" />
+        <property name="minPoolSize" value="3" />
+        <property name="acquireIncrement" value="3" />
     </bean>
 
     <!-- 本地数据库的DataSource -->
     <bean id="localDataSource" parent="abstractDataSource">
-        <property name="driverClass" value="${jdbc.local.driver}"/>
-        <property name="jdbcUrl" value="${jdbc.local.url}"/>
-        <property name="user" value="${jdbc.local.username}"/>
-        <property name="password" value="${jdbc.local.password}"/>
+        <property name="driverClass" value="${jdbc.local.driver}" />
+        <property name="jdbcUrl" value="${jdbc.local.url}" />
+        <property name="user" value="${jdbc.local.username}" />
+        <property name="password" value="${jdbc.local.password}" />
     </bean>
 
     <!-- 本地数据库的SqlSessionFactory -->
     <bean id="localSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="localDataSource"/>
-        <property name="mapperLocations" value="classpath:mapper/sys/*.xml"/>
-        <property name="typeAliasesPackage" value="com.techsen.tsweb.sys.domain"/>
+        <property name="dataSource" ref="localDataSource" />
+        <property name="mapperLocations" value="classpath:mapper/sys/*.xml" />
+        <property name="typeAliasesPackage" value="com.techsen.tsweb.sys.domain" />
     </bean>
 
     <!-- 本地数据库的SqlSessionTemplate -->
     <bean id="localSqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
-        <constructor-arg index="0" ref="localSqlSessionFactory"/>
-        <constructor-arg index="1" value="BATCH"/>
+        <constructor-arg index="0" ref="localSqlSessionFactory" />
+        <constructor-arg index="1" value="BATCH" />
+    </bean>
+
+    <!-- 配置Mapper扫描 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.techsen.tsweb.**.dao" />
+        <property name="sqlSessionFactoryBeanName" value="localSqlSessionFactory" />
     </bean>
 
 </beans>

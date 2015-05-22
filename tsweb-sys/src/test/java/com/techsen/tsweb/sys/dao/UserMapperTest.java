@@ -14,7 +14,7 @@ import com.techsen.tsweb.sys.domain.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:spring-*.xml")
-public class UserDaoTest {
+public class UserMapperTest {
     @Resource
     private UserDao userDao;
 
@@ -22,7 +22,7 @@ public class UserDaoTest {
 
     @Before
     public void init() {
-        this.user = new User("hayden", "hayden");
+        this.user = new User("cfg0523", "cfg0523");
         this.userDao.addEntity(this.user);
     }
     
@@ -46,4 +46,10 @@ public class UserDaoTest {
         Assert.assertEquals("test by cfg0523", tmp.getRemark());
     }
     
+    @Test
+    public void testGetUserByName() {
+        User tmp = this.userDao.getUserByName("cfg0523");
+        Assert.assertEquals("cfg0523", tmp.getUsername());
+        Assert.assertEquals("cfg0523", tmp.getPassword());
+    }
 }

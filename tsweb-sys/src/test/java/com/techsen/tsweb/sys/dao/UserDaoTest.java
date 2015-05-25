@@ -14,7 +14,7 @@ import com.techsen.tsweb.sys.domain.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:spring-*.xml")
-public class UserMapperTest {
+public class UserDaoTest {
     @Resource
     private UserDao userDao;
 

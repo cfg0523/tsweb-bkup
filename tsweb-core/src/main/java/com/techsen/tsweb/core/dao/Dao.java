@@ -3,7 +3,7 @@ package com.techsen.tsweb.core.dao;
 import com.techsen.tsweb.core.domain.BaseEntity;
 
 /**
- * 公共的BaseDao接口
+ * 公共的Dao接口
  */
 public interface Dao<T extends BaseEntity<T>> {
     

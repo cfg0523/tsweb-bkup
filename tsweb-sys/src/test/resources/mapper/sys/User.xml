@@ -4,8 +4,8 @@
 <mapper namespace="com.techsen.tsweb.sys.dao.UserDao">
     <resultMap type="User" id="UserMap">
         <result property="id" column="id"/>
-        <result property="username" column="usr_name"/>
-        <result property="password" column="usr_pwd"/>
+        <result property="username" column="user_name"/>
+        <result property="password" column="user_pwd"/>
         <result property="createBy" column="create_by"/>
         <result property="createDate" column="create_date"/>
         <result property="updateBy" column="update_by"/>
@@ -14,7 +14,7 @@
     </resultMap>
 
     <sql id="UserColumns">
-        id, usr_name, usr_pwd, create_by,
+        id, user_name, user_pwd, create_by,
         create_date, update_by,
         update_date,
         remark
@@ -28,7 +28,7 @@
     </sql>
 
     <insert id="addEntity" parameterType="User">
-        insert into sys_usr_mstr (
+        insert into sys_user (
             <include refid="UserColumns"/>
         ) values (
             #{id},
@@ -40,13 +40,13 @@
     </insert>
 
     <delete id="deleteEntity" parameterType="string">
-        delete from sys_usr_mstr where id = #{id}
+        delete from sys_user where id = #{id}
     </delete>
 
     <update id="updateEntity" parameterType="User">
-        update sys_usr_mstr set
-            usr_name = #{username},
-            usr_pwd = #{password},
+        update sys_user set
+            user_name = #{username},
+            user_pwd = #{password},
             create_by = #{createBy},
             create_date = #{createDate},
             update_by = #{updateBy},
@@ -57,14 +57,14 @@
 
     <select id="getEntity" parameterType="string" resultMap="UserMap">
         select <include refid="UserColumns"/>
-        from sys_usr_mstr
+        from sys_user
         where id = #{id}
     </select>
 
     <select id="getUserByName" parameterType="string" resultMap="UserMap">
         select <include refid="UserColumns"/>
-        from sys_usr_mstr
-        where usr_name = #{username}
+        from sys_user
+        where user_name = #{username}
     </select>
 
 </mapper>

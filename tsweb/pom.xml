@@ -276,7 +276,7 @@
                     </configuration>
                     <executions>
                         <execution>
-                            <id>create-tables</id>
+                            <id>create-tables-and-import-datas</id>
                             <phase>process-test-resources</phase>
                             <goals>
                                 <goal>execute</goal>
@@ -284,11 +284,11 @@
                             <configuration>
                                 <autocommit>true</autocommit>
                                 <srcFiles>
-                                    <srcFile>src/main/sql/tsweb.sql</srcFile>
+                                    <srcFile>src/main/resources/tsweb.sql</srcFile>
                                 </srcFiles>
                             </configuration>
                         </execution>
-                        <execution>
+                        <!-- <execution>
                             <id>import-datas</id>
                             <phase>process-test-resources</phase>
                             <goals>
@@ -299,12 +299,11 @@
                                 <fileset>
                                     <basedir>${basedir}</basedir>
                                     <includes>
-                                        <include>src/test/sql/sys_usr_mstr.sql</include>
+                                        <include>src/test/resources/sys_usr_mstr.sql</include>
                                     </includes>
                                 </fileset>
                             </configuration>
-                        </execution>
-
+                        </execution> -->
                     </executions>
                 </plugin>
 

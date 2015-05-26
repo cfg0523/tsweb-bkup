@@ -7,6 +7,6 @@
 <title>Main</title>
 </head>
 <body>
-    <c:out value="${user}"/>
+    User: <shiro:principal/>
 </body>
 </html>

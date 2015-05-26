@@ -7,5 +7,5 @@ import com.techsen.tsweb.sys.domain.Role;
 
 public interface RoleDao extends Dao<Role> {
     Role getRoleByName(String roleName);
-    List<Role> getRolesByUsername(String username);
+    List<Role> getRolesByUserId(String username);
 }

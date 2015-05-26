@@ -65,13 +65,13 @@
         where role_name = #{roleName}
     </select>
 
-    <select id="getRolesByUsername" parameterType="string" resultMap="RoleMap">
+    <select id="getRolesByUserId" parameterType="string" resultMap="RoleMap">
         select r.*
         from
             sys_role as r
             join sys_user_role as ur on r.id = ur.role_id
             join sys_user as u on ur.user_id = u.id
-        where u.user_name = #{username}
+        where u.id = #{userId}
     </select>
 
 </mapper>

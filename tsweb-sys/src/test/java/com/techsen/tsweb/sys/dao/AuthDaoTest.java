@@ -54,9 +54,18 @@ public class AuthDaoTest {
     }
     
     @Test
-    public void testGetAuthsByUsername() {
-        String username = "hayden";
-        List<Auth> auths = this.authDao.getAuthsByUsername(username);
+    public void testGetAuthsByUserId() {
+        String userId = "1";
+        List<Auth> auths = this.authDao.getAuthsByUserId(userId);
+        for (Auth auth : auths) {
+            System.out.println(auth);
+        }
+    }
+    
+    @Test
+    public void testGetAuthsByRoleId() {
+        String roleId = "1";
+        List<Auth> auths = this.authDao.getAuthsByRoleId(roleId);
         for (Auth auth : auths) {
             System.out.println(auth);
         }

@@ -52,9 +52,9 @@ public class RoleDaoTest {
     }
     
     @Test
-    public void testGetRolesByUsername() {
-        String username = "hayden";
-        List<Role> roles = this.roleDao.getRolesByUsername(username);
+    public void testGetRolesByUserId() {
+        String userId = "1";
+        List<Role> roles = this.roleDao.getRolesByUserId(userId);
         System.out.println(roles);
     }
     

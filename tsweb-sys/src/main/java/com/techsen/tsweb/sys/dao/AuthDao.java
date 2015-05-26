@@ -7,5 +7,6 @@ import com.techsen.tsweb.sys.domain.Auth;
 
 public interface AuthDao extends Dao<Auth>{
     Auth getAuthByName(String authName);
-    List<Auth> getAuthsByUsername(String username);
+    List<Auth> getAuthsByUserId(String userId);
+    List<Auth> getAuthsByRoleId(String roleId);
 }

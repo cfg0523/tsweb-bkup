@@ -4,7 +4,7 @@
 drop table if exists sys_user;
 create table sys_user (
     id varchar(32),
-    user_name varchar(32) not null comment '用户名',
+    user_name varchar(32) not null comment '用户英文名',
     user_pwd varchar(32) not null comment '密码',
     create_by varchar(32) comment '创建人ID',
     create_date datetime comment '创建时间',
@@ -14,7 +14,7 @@ create table sys_user (
     primary key(id),
     unique key(user_name)
 ) comment '用户表';
-insert into sys_user values ('1', 'hayden', 'hayden', '1', '2015-01-01 00:00:00', '1', '2015-01-01 00:00:00', 'test by hayden');
+insert into sys_user values ('1', 'hayden', 'qiannianhu', '1', '2015-01-01 00:00:00', '1', '2015-01-01 00:00:00', 'test by hayden');
 
 /**
  * sys_role

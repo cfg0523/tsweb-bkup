@@ -36,6 +36,7 @@
         <jetty-maven-plugin.version>8.1.16.v20140903</jetty-maven-plugin.version>
         <sql-maven-plugin.version>1.5</sql-maven-plugin.version>
         <shiro.version>1.2.3</shiro.version>
+        <jstl.version>1.2</jstl.version>
     </properties>
 
     <modules>
@@ -202,6 +203,11 @@
                 <artifactId>shiro-all</artifactId>
                 <version>${shiro.version}</version>
             </dependency>
+            <dependency>
+                <groupId>jstl</groupId>
+                <artifactId>jstl</artifactId>
+                <version>${jstl.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -348,10 +354,8 @@
                     <configuration>
                         <!-- 缺少web.xml文件时不要报错 -->
                         <failOnMissingWebXml>false</failOnMissingWebXml>
-                        <!-- 把class打包成jar作为附件 -->
                         <attachClasses>true</attachClasses>
-                        <!-- 把class打包成jar -->
-                        <archiveClasses>true</archiveClasses>
+                        <archiveClasses>false</archiveClasses>
                     </configuration>
                 </plugin>
                 <plugin>

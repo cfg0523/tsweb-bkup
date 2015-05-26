@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.techsen.tsweb.sys.dao.RoleDao">
+    <resultMap type="Role" id="RoleMap">
+        <result property="id" column="id"/>
+        <result property="roleName" column="role_name"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createDate" column="create_date"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateDate" column="update_Date"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+
+    <sql id="RoleColumns">
+        id, role_name, create_by,
+        create_date, update_by,
+        update_date,
+        remark
+    </sql>
+
+    <sql id="RoleProperties">
+        id, roleName, createBy,
+        createDate, updateBy,
+        updateDate,
+        remark
+    </sql>
+
+    <insert id="addEntity" parameterType="Role">
+        insert into sys_role (
+            <include refid="RoleColumns"/>
+        ) values (
+            #{id},
+            #{roleName}, #{createBy},
+            #{createDate},
+            #{updateBy}, #{updateDate},
+            #{remark}
+        );
+    </insert>
+
+    <delete id="deleteEntity" parameterType="string">
+        delete from sys_role where id = #{id}
+    </delete>
+
+    <update id="updateEntity" parameterType="Role">
+        update sys_role set
+            role_name = #{roleName},
+            create_by = #{createBy},
+            create_date = #{createDate},
+            update_by = #{updateBy},
+            update_by = #{updateDate},
+            remark = #{remark}
+        where id = #{id}
+    </update>
+
+    <select id="getEntity" parameterType="string" resultMap="RoleMap">
+        select <include refid="RoleColumns"/>
+        from sys_role
+        where id = #{id}
+    </select>
+
+    <select id="getRoleByName" parameterType="string" resultMap="RoleMap">
+        select <include refid="RoleColumns"/>
+        from sys_role
+        where role_name = #{roleName}
+    </select>
+
+    <select id="getRolesByUsername" parameterType="string" resultMap="RoleMap">
+        select r.*
+        from
+            sys_role as r
+            join sys_user_role as ur on r.id = ur.role_id
+            join sys_user as u on ur.user_id = u.id
+        where u.user_name = #{username}
+    </select>
+
+</mapper>

@@ -14,7 +14,11 @@ create table sys_user (
     primary key(id),
     unique key(user_name)
 ) comment '用户表';
-insert into sys_user values ('1', 'hayden', 'qiannianhu', '1', '2015-01-01 00:00:00', '1', '2015-01-01 00:00:00', 'test by hayden');
+insert into sys_user values ('1', 'admin', 'admin', '1', '2015-01-01 00:00:00', '1', '2015-01-01 00:00:00', '');
+insert into sys_user values ('2', 'giny', 'giny', '1', '2015-01-01 00:00:00', '1', '2015-01-01 00:00:00', '');
+insert into sys_user values ('3', 'syxie', 'syxie', '1', '2015-01-01 00:00:00', '1', '2015-01-01 00:00:00', '');
+insert into sys_user values ('4', 'hayden', 'hayden', '1', '2015-01-01 00:00:00', '1', '2015-01-01 00:00:00', '');
+insert into sys_user values ('5', 'yilia', 'yilia', '1', '2015-01-01 00:00:00', '1', '2015-01-01 00:00:00', '');
 
 /**
  * sys_role
@@ -31,7 +35,9 @@ create table sys_role (
     primary key(id),
     unique key(role_name)
 ) comment '角色表';
-insert into sys_role values ('1', 'administrator', '1', '2015-01-01 00:00:00', '1', '2015-01-01 00:00:00', 'test by hayden');
+insert into sys_role values ('1', 'superuser', '1', '2015-01-01 00:00:00', '1', '2015-01-01 00:00:00', '');
+insert into sys_role values ('2', 'manager', '1', '2015-01-01 00:00:00', '1', '2015-01-01 00:00:00', '');
+insert into sys_role values ('3', 'staff', '1', '2015-01-01 00:00:00', '1', '2015-01-01 00:00:00', '');
 
 /**
  * sys_auth
@@ -49,7 +55,13 @@ create table sys_auth (
     primary key(id),
     unique key(auth_name)
 ) comment '权限表';
-insert into sys_auth values ('1', '*', '所有的权限', '1', '2015-01-01 00:00:00', '1', '2015-01-01 00:00:00', 'test by hayden');
+insert into sys_auth values ('1', '*:*', '所有的权限', '1', '2015-01-01 00:00:00', '1', '2015-01-01 00:00:00', '');
+insert into sys_auth values ('2', 'user:*', '对用户操作有所有权限', '1', '2015-01-01 00:00:00', '1', '2015-01-01 00:00:00', '');
+insert into sys_auth values ('3', 'user:view', '查看用户', '1', '2015-01-01 00:00:00', '1', '2015-01-01 00:00:00', '');
+insert into sys_auth values ('4', 'user:add', '添加用户', '1', '2015-01-01 00:00:00', '1', '2015-01-01 00:00:00', '');
+insert into sys_auth values ('5', 'user:update', '修改用户', '1', '2015-01-01 00:00:00', '1', '2015-01-01 00:00:00', '');
+insert into sys_auth values ('6', 'user:delete', '删除用户', '1', '2015-01-01 00:00:00', '1', '2015-01-01 00:00:00', '');
+insert into sys_auth values ('7', 'menu:*', '对菜单操作有所有权限', '1', '2015-01-01 00:00:00', '1', '2015-01-01 00:00:00', '');
 
 /**
  * sys_user_role
@@ -67,7 +79,11 @@ create table sys_user_role (
     primary key(id),
     unique key(user_id, role_id)
 ) comment '用户角色表';
-insert into sys_user_role values ('1', '1', '1', '1', '2015-01-01 00:00:00', '1', '2015-01-01 00:00:00', 'test by hayden');
+insert into sys_user_role values ('1', '1', '1', '1', '2015-01-01 00:00:00', '1', '2015-01-01 00:00:00', '');
+insert into sys_user_role values ('2', '2', '2', '1', '2015-01-01 00:00:00', '1', '2015-01-01 00:00:00', '');
+insert into sys_user_role values ('3', '3', '2', '1', '2015-01-01 00:00:00', '1', '2015-01-01 00:00:00', '');
+insert into sys_user_role values ('4', '4', '3', '1', '2015-01-01 00:00:00', '1', '2015-01-01 00:00:00', '');
+insert into sys_user_role values ('5', '5', '3', '1', '2015-01-01 00:00:00', '1', '2015-01-01 00:00:00', '');
 
 /**
  * sys_role_auth
@@ -85,4 +101,8 @@ create table sys_role_auth (
     primary key(id),
     unique key(role_id, auth_id)
 ) comment '角色权限表';
-insert into sys_role_auth values ('1', '1', '1', '1', '2015-01-01 00:00:00', '1', '2015-01-01 00:00:00', 'test by hayden');
+insert into sys_role_auth values ('1', '1', '1', '1', '2015-01-01 00:00:00', '1', '2015-01-01 00:00:00', '');
+insert into sys_role_auth values ('2', '2', '2', '1', '2015-01-01 00:00:00', '1', '2015-01-01 00:00:00', '');
+insert into sys_role_auth values ('3', '3', '3', '1', '2015-01-01 00:00:00', '1', '2015-01-01 00:00:00', '');
+insert into sys_role_auth values ('4', '3', '4', '1', '2015-01-01 00:00:00', '1', '2015-01-01 00:00:00', '');
+insert into sys_role_auth values ('5', '3', '5', '1', '2015-01-01 00:00:00', '1', '2015-01-01 00:00:00', '');

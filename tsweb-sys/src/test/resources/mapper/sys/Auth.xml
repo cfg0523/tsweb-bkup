@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.techsen.tsweb.sys.dao.AuthDao">
+    <resultMap type="Auth" id="AuthMap">
+        <result property="id" column="id"/>
+        <result property="authName" column="auth_name"/>
+        <result property="authDesc" column="auth_desc"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createDate" column="create_date"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateDate" column="update_Date"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+
+    <sql id="AuthColumns">
+        id, auth_name, auth_desc, create_by,
+        create_date, update_by,
+        update_date,
+        remark
+    </sql>
+
+    <sql id="AuthProperties">
+        id, auth_name, auth_desc, createBy,
+        createDate, updateBy,
+        updateDate,
+        remark
+    </sql>
+
+    <insert id="addEntity" parameterType="Auth">
+        insert into sys_auth (
+            <include refid="AuthColumns"/>
+        ) values (
+            #{id},
+            #{authName}, #{authDesc}, #{createBy},
+            #{createDate},
+            #{updateBy}, #{updateDate},
+            #{remark}
+        );
+    </insert>
+
+    <delete id="deleteEntity" parameterType="string">
+        delete from sys_auth where id = #{id}
+    </delete>
+
+    <update id="updateEntity" parameterType="Auth">
+        update sys_auth set
+            auth_name = #{authName},
+            auth_desc = #{authDesc},
+            create_by = #{createBy},
+            create_date = #{createDate},
+            update_by = #{updateBy},
+            update_by = #{updateDate},
+            remark = #{remark}
+        where id = #{id}
+    </update>
+
+    <select id="getEntity" parameterType="string" resultMap="AuthMap">
+        select <include refid="AuthColumns"/>
+        from sys_auth
+        where id = #{id}
+    </select>
+
+    <select id="getAuthByName" parameterType="string" resultMap="AuthMap">
+        select <include refid="AuthColumns"/>
+        from sys_auth
+        where auth_name = #{authName}
+    </select>
+
+    <select id="getAuthsByUsername" parameterType="string" resultMap="AuthMap">
+        select a.*
+        from
+            sys_auth as a
+            join sys_role_auth as ra on a.id = ra.auth_id
+            join sys_role as r on ra.role_id = r.id
+            join sys_user_role as ur on r.id = ur.role_id
+            join sys_user as u on ur.user_id = u.id
+        where u.user_name = #{username}
+    </select>
+</mapper>

@@ -2,6 +2,9 @@ package com.techsen.tsweb.sys.domain;
 
 import com.techsen.tsweb.core.domain.BaseEntity;
 
+/**
+ * 用户实体
+ */
 public class User extends BaseEntity<User> {
     private static final long serialVersionUID = -6378136187265089253L;
 
@@ -15,23 +18,21 @@ public class User extends BaseEntity<User> {
     private String username;
     private String password;
 
-    public static long getSerialversionuid() {
-        return serialVersionUID;
-    }
-
     public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
+    public User setUsername(String username) {
         this.username = username;
+        return this;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public User setPassword(String password) {
         this.password = password;
+        return this;
     }
 }

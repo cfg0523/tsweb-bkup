@@ -16,6 +16,11 @@ public class ObjectUtilTest {
     }
     
     @Test
+    public void testToString() {
+        System.out.println(this.a);
+    }
+    
+    @Test
     public void testGetGenericType() {
         Assert.assertEquals(A.class, ObjectUtil.getGenericType(this.a));;
     }

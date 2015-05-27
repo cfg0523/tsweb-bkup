@@ -5,17 +5,18 @@ import static com.techsen.tsweb.core.util.Const.EMPTY_STRING;
 import static com.techsen.tsweb.core.util.ExceptionUtil.throwRuntimeException;
 import static com.techsen.tsweb.core.util.ValidUtil.isValid;
 
+import java.beans.PropertyDescriptor;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Date;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.BeanUtils;
 
 public class ObjectUtil {
 
@@ -23,40 +24,40 @@ public class ObjectUtil {
 
     /**
      * 将obj对象中的属性序列化成一种类似JSON的字符串 属性的类型必须为数字，字符，日期，逻辑值才会序列化
+     * 序列化的深度为superClass指定的类
      */
     public static String toString(Object obj) {
         if (obj == null) {
             return EMPTY_STRING;
         }
+        Class<?> clazz = obj.getClass();
         StringBuilder sb = new StringBuilder();
+        sb.append(clazz.getSimpleName()).append("[");
         try {
-            Class<?> clazz = obj.getClass();
-            sb.append(clazz.getSimpleName()).append("[");
-            Field[] fields = clazz.getDeclaredFields();
-            if (isValid(fields)) {
-                Field field = fields[0];
-                field.setAccessible(true);
-                sb.append(field.getName()).append("=").append(field.get(obj));
-                if (fields.length > 1) {
-                    for (int i = 1; i < fields.length; i++) {
-                        field = fields[i];
-                        field.setAccessible(true);
-                        Object fieldValue = field.get(obj);
+            PropertyDescriptor[] pds = BeanUtils.getPropertyDescriptors(clazz);
+            if (isValid(pds)) {
+                for (int i = 0; i < pds.length; i++) {
+                    PropertyDescriptor pd = pds[i];
+                    Object value = pd.getReadMethod().invoke(obj);
 
-                        if (CharSequence.class.isInstance(fieldValue)
-                                || Boolean.class.isInstance(fieldValue)
-                                || Date.class.isInstance(fieldValue)
-                                || Number.class.isInstance(fieldValue)) {
-                            sb.append(", ").append(field.getName()).append("=")
-                                    .append(field.get(obj));
+                    Class<?> propType = pd.getPropertyType();
+
+                    if (CharSequence.class.isAssignableFrom(propType)
+                            || Boolean.class.isAssignableFrom(propType)
+                            || Date.class.isAssignableFrom(propType)
+                            || Number.class.isAssignableFrom(propType)
+                            || Class.class.isAssignableFrom(propType)) {
+                        if (i != 0) {
+                            sb.append(", ");
                         }
+                        sb.append(pd.getName()).append("=").append(value);
                     }
                 }
             }
-            sb.append("]");
         } catch (Exception e) {
             throwRuntimeException(e);
         }
+        sb.append("]");
         return sb.toString();
     }
 

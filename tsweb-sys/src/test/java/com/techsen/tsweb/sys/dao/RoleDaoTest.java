@@ -53,7 +53,7 @@ public class RoleDaoTest {
     
     @Test
     public void testGetRolesByUserId() {
-        String userId = "1";
+        String userId = "U1";
         List<Role> roles = this.roleDao.getRolesByUserId(userId);
         System.out.println(roles);
     }

@@ -42,10 +42,12 @@
     </bean>
 
     <!-- 本地数据库的SqlSessionTemplate -->
+    <!--
     <bean id="localSqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
         <constructor-arg index="0" ref="localSqlSessionFactory" />
         <constructor-arg index="1" value="BATCH" />
     </bean>
+     -->
 
     <!-- 配置Mapper扫描 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">

@@ -47,14 +47,15 @@ public class LocalRealm extends AuthorizingRealm {
             PrincipalCollection principals) {
         SimpleAuthorizationInfo authzInfo = new SimpleAuthorizationInfo();
 
-        User user = (User) this.getAvailablePrincipal(principals);
-        List<Role> roles = this.roleDao.getRolesByUserId(user.getId());
-        List<Auth> auths = this.authDao.getAuthsByUserId(user.getId());
+        String userId = (String) this.getAvailablePrincipal(principals);
+        List<Role> roles = this.roleDao.getRolesByUserId(userId);
         if (isValid(roles)) {
             for (Role role : roles) {
                 authzInfo.addRole(role.getRoleName());
             }
         }
+        
+        List<Auth> auths = this.authDao.getAuthsByUserId(userId);
         if (isValid(auths)) {
             for (Auth auth : auths) {
                 authzInfo.addStringPermission(auth.getAuthName());
@@ -77,7 +78,7 @@ public class LocalRealm extends AuthorizingRealm {
             User user = this.userDao.getUserByName(username);
             if (user != null) {
                 if (user.getPassword().equals(password)) {
-                    return new SimpleAuthenticationInfo(user,
+                    return new SimpleAuthenticationInfo(user.getId(),
                             user.getPassword(), this.getName());
                 } else {
                     throw new CredentialsException("密码不正确");

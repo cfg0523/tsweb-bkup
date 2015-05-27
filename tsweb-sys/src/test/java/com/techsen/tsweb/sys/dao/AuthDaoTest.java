@@ -55,7 +55,7 @@ public class AuthDaoTest {
     
     @Test
     public void testGetAuthsByUserId() {
-        String userId = "1";
+        String userId = "U1";
         List<Auth> auths = this.authDao.getAuthsByUserId(userId);
         for (Auth auth : auths) {
             System.out.println(auth);
@@ -64,7 +64,7 @@ public class AuthDaoTest {
     
     @Test
     public void testGetAuthsByRoleId() {
-        String roleId = "1";
+        String roleId = "R1";
         List<Auth> auths = this.authDao.getAuthsByRoleId(roleId);
         for (Auth auth : auths) {
             System.out.println(auth);

@@ -3,22 +3,27 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
     version="2.5">
-    
+
     <welcome-file-list>
         <welcome-file>/sys/login.jsp</welcome-file>
     </welcome-file-list>
+
+    <session-config>
+        <!-- 默认会话超时时间(分钟) -->
+        <session-timeout>30</session-timeout>
+    </session-config>
 
     <!-- 配置Spring扫描的文件 -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:spring-*.xml</param-value>
     </context-param>
-    
+
     <!-- 启用Spring容器 -->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
-    
+
     <!-- 启用Spring字符过滤器 -->
     <filter>
         <filter-name>characterEncodingFilter</filter-name>
@@ -32,7 +37,7 @@
         <filter-name>characterEncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-    
+
     <!-- 启用Shiro -->
     <filter>
         <filter-name>shiroFilter</filter-name>

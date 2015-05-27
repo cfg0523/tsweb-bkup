@@ -1,4 +1,4 @@
-package com.techsen.tsweb.sys.action;
+package com.techsen.tsweb.sys.controller;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -11,7 +11,7 @@ import com.techsen.tsweb.sys.domain.User;
 
 @Controller
 @RequestMapping("/sys")
-public class LoginAction {
+public class LoginController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(boolean error) {
         if (error) {

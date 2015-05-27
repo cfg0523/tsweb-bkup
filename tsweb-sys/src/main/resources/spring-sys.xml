@@ -11,11 +11,17 @@
     </bean>
 
     <!-- 配置缓存管理器 -->
-    <bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager"/>
+    <bean id="ehCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+        <property name="configLocation" value="classpath:ehcache.xml"/>
+    </bean>
+    
+    <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+        <property name="cacheManager" ref="ehCacheManager"/>
+    </bean>
 
+    <!-- 配置Shiro的安全管理器 -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <property name="realm" ref="localRealm"/>
-        <!-- 配置缓存管理器 -->
         <property name="cacheManager" ref="cacheManager"/>
     </bean>
 

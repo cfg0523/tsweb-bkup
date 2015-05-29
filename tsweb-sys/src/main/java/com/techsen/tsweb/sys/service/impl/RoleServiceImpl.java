@@ -18,9 +18,10 @@ import com.techsen.tsweb.sys.service.RoleService;
 
 @Service("roleService")
 public class RoleServiceImpl implements RoleService {
-    
-    @Resource private RoleDao roleDao;
-    
+
+    @Resource
+    private RoleDao roleDao;
+
     @Override
     @Cacheable(value = CACHE_ROLE)
     public Role getRole(String roleId) {

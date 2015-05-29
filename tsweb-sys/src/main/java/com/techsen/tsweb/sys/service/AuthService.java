@@ -32,6 +32,11 @@ public interface AuthService {
     void updateAuth(Auth auth);
 
     /**
+     * 根据roleId获取角色所有的Auth
+     */
+    List<Auth> getAuthsByRoleId(String roleId);
+    
+    /**
      * 根据userId获取用户的所有Auth
      */
     List<Auth> getAuthsByUserId(String userId);

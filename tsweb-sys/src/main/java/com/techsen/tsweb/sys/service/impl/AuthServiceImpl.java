@@ -54,6 +54,11 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
+    public List<Auth> getAuthsByRoleId(String roleId) {
+        return this.authDao.getAuthsByRoleId(roleId);
+    }
+    
+    @Override
     public List<Auth> getAuthsByUserId(String userId) {
         return this.authDao.getAuthsByUserId(userId);
     }

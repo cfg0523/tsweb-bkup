@@ -1,5 +1,7 @@
 package com.techsen.tsweb.sys.domain;
 
+import java.util.List;
+
 import com.techsen.tsweb.core.domain.BaseEntity;
 
 /**
@@ -7,6 +9,14 @@ import com.techsen.tsweb.core.domain.BaseEntity;
  */
 public class User extends BaseEntity<User> {
     private static final long serialVersionUID = -6378136187265089253L;
+    
+    private String username;
+    private String password;
+    
+    /**
+     * 用户所拥有的角色
+     */
+    private List<Role> roles;
 
     public User() {}
     
@@ -14,9 +24,6 @@ public class User extends BaseEntity<User> {
         this.username = username;
         this.password = password;
     }
-    
-    private String username;
-    private String password;
 
     public String getUsername() {
         return username;
@@ -33,6 +40,15 @@ public class User extends BaseEntity<User> {
 
     public User setPassword(String password) {
         this.password = password;
+        return this;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public User setRoles(List<Role> roles) {
+        this.roles = roles;
         return this;
     }
 }

@@ -51,8 +51,9 @@
 
     <!-- 配置Mapper扫描 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.techsen.tsweb.**.dao" />
+        <property name="basePackage" value="com.techsen.tsweb" />
         <property name="sqlSessionFactoryBeanName" value="localSqlSessionFactory" />
+        <property name="annotationClass" value="com.techsen.tsweb.core.annotation.LocalMyBatisDao"/>
     </bean>
 
 </beans>

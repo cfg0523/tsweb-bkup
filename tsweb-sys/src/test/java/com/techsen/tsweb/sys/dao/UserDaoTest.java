@@ -48,7 +48,7 @@ public class UserDaoTest {
     
     @Test
     public void testGetUserByName() {
-        User tmp = this.userDao.getUserByName("cfg0523");
+        User tmp = this.userDao.getUserByUsername("cfg0523");
         Assert.assertEquals("cfg0523", tmp.getUsername());
         Assert.assertEquals("cfg0523", tmp.getPassword());
     }

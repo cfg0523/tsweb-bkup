@@ -77,10 +77,6 @@
             <groupId>net.sf.ehcache</groupId>
             <artifactId>ehcache-web</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.googlecode.ehcache-spring-annotations</groupId>
-            <artifactId>ehcache-spring-annotations</artifactId>
-        </dependency>
     </dependencies>
 
     <build>

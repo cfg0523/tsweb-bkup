@@ -12,9 +12,32 @@
         <persistence strategy="localTempSwap" />
     </defaultCache>
 
-    <!-- 系统级别缓存 -->
+    <!-- 系统缓存 -->
     <cache name="sysCache" maxElementsInMemory="1000" eternal="false"
-        timeToIdleSeconds="120" timeToLiveSeconds="120" overflowToDisk="true">
+        timeToIdleSeconds="120" timeToLiveSeconds="120" overflowToDisk="true"
+        maxElementsOnDisk="10000" diskExpiryThreadIntervalSeconds="120"
+        memoryStoreEvictionPolicy="LRU">
+    </cache>
+
+    <!-- User用户缓存 -->
+    <cache name="userCache" maxElementsInMemory="200" eternal="false"
+        timeToIdleSeconds="120" timeToLiveSeconds="120" overflowToDisk="true"
+        maxElementsOnDisk="5000" diskExpiryThreadIntervalSeconds="120"
+        memoryStoreEvictionPolicy="LRU">
+    </cache>
+
+    <!-- Role角色缓存 -->
+    <cache name="roleCache" maxElementsInMemory="100" eternal="false"
+        timeToIdleSeconds="120" timeToLiveSeconds="120" overflowToDisk="true"
+        maxElementsOnDisk="5000" diskExpiryThreadIntervalSeconds="120"
+        memoryStoreEvictionPolicy="LRU">
+    </cache>
+
+    <!-- Auth权限缓存 -->
+    <cache name="authCache" maxElementsInMemory="500" eternal="false"
+        timeToIdleSeconds="120" timeToLiveSeconds="120" overflowToDisk="true"
+        maxElementsOnDisk="5000" diskExpiryThreadIntervalSeconds="120"
+        memoryStoreEvictionPolicy="LRU">
     </cache>
 
 </ehcache>

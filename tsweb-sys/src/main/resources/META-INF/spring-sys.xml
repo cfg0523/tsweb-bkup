@@ -15,15 +15,9 @@
     
     <!-- 配置EhCache缓存管理器 -->
     <bean id="sysCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
-        <property name="configLocation" value="classpath:ehcache-sys.xml"/>
+        <property name="configLocation" value="classpath:META-INF/ehcache-sys.xml"/>
     </bean>
 
-    <!-- 将ehcache-sys.xml文件中定义的sysCache配置到Spring容器中 -->
-    <bean id="sysCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
-        <property name="cacheManager" ref="sysCacheManager" />
-        <property name="cacheName" value="sysCache" />
-    </bean>
-    
     <!-- 启用缓存的注解配置 -->
     <cache:annotation-driven cache-manager="sysCacheManager"/>
 

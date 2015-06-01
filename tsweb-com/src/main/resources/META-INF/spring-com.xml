@@ -11,7 +11,7 @@
             expression="org.springframework.stereotype.Controller" />
     </context:component-scan>
 
-    <context:property-placeholder location="classpath:tsweb-*.properties" />
+    <context:property-placeholder location="classpath:META-INF/tsweb-*.properties" />
     <context:annotation-config />
 
     <!-- 抽象数据源 -->
@@ -37,20 +37,15 @@
     <!-- 本地数据库的SqlSessionFactory -->
     <bean id="localSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="localDataSource" />
-        <property name="mapperLocations" value="classpath:mapper/sys/*.xml" />
+        <property name="mapperLocations" value="classpath:META-INF/mapper-sys-*.xml" />
         <property name="typeAliasesPackage" value="com.techsen.tsweb.sys.domain" />
-    </bean>
-
-    <!-- 本地数据库的SqlSessionTemplate -->
-    <bean id="localSqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
-        <constructor-arg index="0" ref="localSqlSessionFactory" />
-        <constructor-arg index="1" value="BATCH" />
     </bean>
 
     <!-- 配置Mapper扫描 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.techsen.tsweb.**.dao" />
+        <property name="basePackage" value="com.techsen.tsweb" />
         <property name="sqlSessionFactoryBeanName" value="localSqlSessionFactory" />
+        <property name="annotationClass" value="com.techsen.tsweb.core.annotation.LocalMyBatisDao"/>
     </bean>
 
 </beans>

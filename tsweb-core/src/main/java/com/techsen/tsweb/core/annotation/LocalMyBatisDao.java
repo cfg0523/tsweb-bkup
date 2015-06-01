@@ -8,8 +8,8 @@ import java.lang.annotation.Target;
 import org.springframework.stereotype.Component;
 
 /**
- * 和本地数据库相关联的Dao标识
  * 标识MyBatis的DAO,方便{@link org.mybatis.spring.mapper.MapperScannerConfigurer}的扫描
+ * 通过这个标识来标识DAO，来绑定不同的SqlSessionFactory
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)

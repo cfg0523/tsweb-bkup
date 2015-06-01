@@ -15,7 +15,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.techsen.tsweb.sys.domain.Auth;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:spring-*.xml")
+@ContextConfiguration(locations = "classpath:META-INF/spring-*.xml")
 public class AuthDaoTest {
     @Resource
     private AuthDao authDao;

@@ -38,13 +38,6 @@ public class LocalRealm extends AuthorizingRealm {
     private AuthService authService;
 
     /**
-     * 设置Realm的名称
-     */
-    public void setName(String name) {
-        this.setName("localRealm");
-    }
-
-    /**
      * 处理用户授权
      */
     @Override

@@ -330,7 +330,7 @@
                             <configuration>
                                 <autocommit>true</autocommit>
                                 <srcFiles>
-                                    <srcFile>src/main/resources/tsweb.sql</srcFile>
+                                    <srcFile>src/main/resources/META-INF/tsweb.sql</srcFile>
                                 </srcFiles>
                             </configuration>
                         </execution>

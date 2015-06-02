@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.techsen.tsweb.sys.domain.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:META-INF/spring-*.xml")
+@ContextConfiguration(locations = "classpath*:META-INF/spring-*.xml")
 public class UserDaoTest {
     @Resource
     private UserDao userDao;

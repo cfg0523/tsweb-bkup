@@ -11,7 +11,7 @@
             expression="org.springframework.stereotype.Controller" />
     </context:component-scan>
 
-    <context:property-placeholder location="classpath:META-INF/tsweb-*.properties" />
+    <context:property-placeholder location="classpath*:META-INF/tsweb-*.properties" />
     <context:annotation-config />
 
     <!-- 抽象数据源 -->
@@ -37,7 +37,7 @@
     <!-- 本地数据库的SqlSessionFactory -->
     <bean id="localSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="localDataSource" />
-        <property name="mapperLocations" value="classpath:META-INF/mapper-sys-*.xml" />
+        <property name="mapperLocations" value="classpath*:META-INF/mapper-sys-*.xml" />
         <property name="typeAliasesPackage" value="com.techsen.tsweb.sys.domain" />
     </bean>
 

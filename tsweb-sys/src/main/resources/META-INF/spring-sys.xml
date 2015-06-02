@@ -9,13 +9,13 @@
         http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-4.0.xsd">
     
     <!-- 配置EhCache缓存管理器 -->
-    <bean id="ehCacheCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+    <bean id="ehcacheCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
         <property name="configLocation" value="classpath:META-INF/ehcache-sys.xml"/>
     </bean>
     
     <!-- 配置Spring的缓存管理器 -->
     <bean id="springCacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
-        <property name="cacheManager" ref="ehCacheCacheManager"/>
+        <property name="cacheManager" ref="ehcacheCacheManager"/>
     </bean>
     
     <!-- 启用Spring缓存的注解配置 -->
@@ -27,8 +27,8 @@
     </bean>
 
     <!-- 创建一个实现了Shiro功能的EhCache缓存管理器的包装类 -->
-    <bean id="shiroCacheManager" class="com.techsen.tsweb.sys.util.EhCacheCacheManagerWrapper">
-        <property name="cacheManager" ref="ehCacheCacheManager"/>
+    <bean id="shiroCacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+        <property name="cacheManager" ref="ehcacheCacheManager"/>
     </bean>
 
     <!-- 配置Shiro的安全管理器 -->

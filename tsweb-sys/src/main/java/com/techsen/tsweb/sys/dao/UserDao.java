@@ -6,9 +6,8 @@ import com.techsen.tsweb.sys.domain.User;
 
 @LocalMyBatisDao
 public interface UserDao extends Dao<User> {
-
     /**
-     * 根据username查找用户
+     * 根据用户的用户Id或username获取用户信息
      */
-    User getUserByUsername(String username);
+    User getUserByUser(User user);
 }

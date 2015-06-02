@@ -1,14 +1,10 @@
 package com.techsen.tsweb.sys.dao;
 
-import java.util.List;
-
 import com.techsen.tsweb.core.annotation.LocalMyBatisDao;
 import com.techsen.tsweb.core.dao.Dao;
 import com.techsen.tsweb.sys.domain.Auth;
 
 @LocalMyBatisDao
 public interface AuthDao extends Dao<Auth>{
-    Auth getAuthByName(String authName);
-    List<Auth> getAuthsByUserId(String userId);
-    List<Auth> getAuthsByRoleId(String roleId);
+    
 }

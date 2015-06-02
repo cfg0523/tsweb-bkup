@@ -46,16 +46,16 @@ public class LocalRealm extends AuthorizingRealm {
         SimpleAuthorizationInfo authzInfo = new SimpleAuthorizationInfo();
 
         String username = (String) this.getAvailablePrincipal(principals);
-        User user = this.userService.getUserByUsername(username);
+        User user = this.userService.getUserByUser(username);
 
-        List<Role> roles = this.roleService.getRolesByUserId(user.getId());
+        List<Role> roles = this.roleService.getUserByUser(user.getId());
         if (isValid(roles)) {
             for (Role role : roles) {
                 authzInfo.addRole(role.getRoleName());
             }
         }
 
-        List<Auth> auths = this.authService.getAuthsByUserId(user.getId());
+        List<Auth> auths = this.authService.getUserByUser(user.getId());
         if (isValid(auths)) {
             for (Auth auth : auths) {
                 authzInfo.addStringPermission(auth.getAuthName());
@@ -74,7 +74,7 @@ public class LocalRealm extends AuthorizingRealm {
         String username = token.getUsername();
         String password = String.valueOf(token.getPassword());
 
-        User user = this.userService.getUserByUsername(username);
+        User user = this.userService.getUserByUser(username);
 
         if (user != null) {
             if (user.getPassword().equals(password)) {

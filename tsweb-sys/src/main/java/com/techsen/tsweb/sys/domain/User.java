@@ -17,6 +17,11 @@ public class User extends BaseEntity<User> {
      * 用户所拥有的角色
      */
     private List<Role> roles;
+    
+    /**
+     * 用户所拥有的权限
+     */
+    private List<Auth> auths;
 
     public User() {}
     
@@ -49,6 +54,15 @@ public class User extends BaseEntity<User> {
 
     public User setRoles(List<Role> roles) {
         this.roles = roles;
+        return this;
+    }
+
+    public List<Auth> getAuths() {
+        return auths;
+    }
+
+    public User setAuths(List<Auth> auths) {
+        this.auths = auths;
         return this;
     }
 }

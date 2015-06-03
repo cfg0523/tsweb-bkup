@@ -10,4 +10,5 @@ public interface UserDao extends Dao<User> {
      * 根据用户Id或username获取User
      */
     User getUserByUser(User user);
+    
 }

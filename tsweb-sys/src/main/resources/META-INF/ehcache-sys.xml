@@ -11,4 +11,25 @@
         memoryStoreEvictionPolicy="LRU">
     </defaultCache>
 
+    <!-- User Cache -->
+    <cache name="userCache" maxElementsInMemory="100" eternal="false"
+        timeToIdleSeconds="120" timeToLiveSeconds="120" overflowToDisk="true"
+        maxElementsOnDisk="500" diskExpiryThreadIntervalSeconds="120"
+        memoryStoreEvictionPolicy="LRU">
+    </cache>
+    
+    <!-- Role Cache -->
+    <cache name="roleCache" maxElementsInMemory="100" eternal="false"
+        timeToIdleSeconds="120" timeToLiveSeconds="120" overflowToDisk="true"
+        maxElementsOnDisk="200" diskExpiryThreadIntervalSeconds="120"
+        memoryStoreEvictionPolicy="LRU">
+    </cache>
+    
+    <!-- Auth Cache -->
+    <cache name="authCache" maxElementsInMemory="300" eternal="false"
+        timeToIdleSeconds="120" timeToLiveSeconds="120" overflowToDisk="true"
+        maxElementsOnDisk="600" diskExpiryThreadIntervalSeconds="120"
+        memoryStoreEvictionPolicy="LRU">
+    </cache>
+
 </ehcache>

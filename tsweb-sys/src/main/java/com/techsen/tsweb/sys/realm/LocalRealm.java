@@ -18,12 +18,12 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
-import com.techsen.tsweb.sys.dao.AuthDao;
-import com.techsen.tsweb.sys.dao.RoleDao;
-import com.techsen.tsweb.sys.dao.UserDao;
 import com.techsen.tsweb.sys.domain.Auth;
 import com.techsen.tsweb.sys.domain.Role;
 import com.techsen.tsweb.sys.domain.User;
+import com.techsen.tsweb.sys.service.AuthService;
+import com.techsen.tsweb.sys.service.RoleService;
+import com.techsen.tsweb.sys.service.UserService;
 
 /**
  * 访问本地数据库安全数据的Realm
@@ -31,13 +31,13 @@ import com.techsen.tsweb.sys.domain.User;
 public class LocalRealm extends AuthorizingRealm {
 
     @Resource
-    private UserDao userDao;
-    
+    private UserService userService;
+
     @Resource
-    private RoleDao roleDao;
-    
+    private RoleService roleService;
+
     @Resource
-    private AuthDao authDao;
+    private AuthService authService;
 
     /**
      * 处理用户授权
@@ -48,23 +48,27 @@ public class LocalRealm extends AuthorizingRealm {
         SimpleAuthorizationInfo authzInfo = new SimpleAuthorizationInfo();
 
         String username = (String) this.getAvailablePrincipal(principals);
-        User user = this.userDao.getUserByUser(new User(username));
-        
-        // 获取用户角色
-        List<Role> roles = this.roleDao.getRolesByUser(user);
-        if (isValid(roles)) {
-            for (Role role : roles) {
-                String roleName = role.getRoleName();
-                authzInfo.addRole(roleName);
+        User user = this.userService.getUserByUser(new User(username));
+
+        if (user != null) {
+            // 获取用户角色
+            List<Role> roles = user.getRoles() != null ? user.getRoles()
+                    : this.roleService.getRolesByUser(user);
+            if (isValid(roles)) {
+                for (Role role : roles) {
+                    String roleName = role.getRoleName();
+                    authzInfo.addRole(roleName);
+                }
             }
-        }
-        
-        // 获取用户权限
-        List<Auth> auths = this.authDao.getAuthsByUser(user);
-        if (isValid(auths)) {
-            for (Auth auth : auths) {
-                String authName = auth.getAuthName();
-                authzInfo.addStringPermission(authName);
+
+            // 获取用户权限
+            List<Auth> auths = user.getAuths() != null ? user.getAuths()
+                    : this.authService.getAuthsByUser(user);
+            if (isValid(auths)) {
+                for (Auth auth : auths) {
+                    String authName = auth.getAuthName();
+                    authzInfo.addStringPermission(authName);
+                }
             }
         }
 
@@ -81,7 +85,7 @@ public class LocalRealm extends AuthorizingRealm {
         String username = token.getUsername();
         String password = String.valueOf(token.getPassword());
 
-        User user = this.userDao.getUserByUser(new User(username));
+        User user = this.userService.getUserByUser(new User(username));
 
         if (user != null) {
             if (user.getPassword().equals(password)) {

@@ -1,9 +1,5 @@
 package com.techsen.tsweb.sys.realm;
 
-import static com.techsen.tsweb.core.util.ValidUtil.isValid;
-
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.apache.shiro.authc.AuthenticationException;
@@ -18,12 +14,10 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
-import com.techsen.tsweb.sys.domain.Auth;
-import com.techsen.tsweb.sys.domain.Role;
+import com.techsen.tsweb.sys.dao.AuthDao;
+import com.techsen.tsweb.sys.dao.RoleDao;
+import com.techsen.tsweb.sys.dao.UserDao;
 import com.techsen.tsweb.sys.domain.User;
-import com.techsen.tsweb.sys.service.AuthService;
-import com.techsen.tsweb.sys.service.RoleService;
-import com.techsen.tsweb.sys.service.UserService;
 
 /**
  * 访问本地数据库安全数据的Realm
@@ -31,11 +25,11 @@ import com.techsen.tsweb.sys.service.UserService;
 public class LocalRealm extends AuthorizingRealm {
 
     @Resource
-    private UserService userService;
+    private UserDao userDao;
     @Resource
-    private RoleService roleService;
+    private RoleDao roleDao;
     @Resource
-    private AuthService authService;
+    private AuthDao authDao;
 
     /**
      * 处理用户授权
@@ -46,21 +40,8 @@ public class LocalRealm extends AuthorizingRealm {
         SimpleAuthorizationInfo authzInfo = new SimpleAuthorizationInfo();
 
         String username = (String) this.getAvailablePrincipal(principals);
-        User user = this.userService.getUserByUser(username);
+        User user = this.userDao.getUserByUser(new User(username));
 
-        List<Role> roles = this.roleService.getUserByUser(user.getId());
-        if (isValid(roles)) {
-            for (Role role : roles) {
-                authzInfo.addRole(role.getRoleName());
-            }
-        }
-
-        List<Auth> auths = this.authService.getUserByUser(user.getId());
-        if (isValid(auths)) {
-            for (Auth auth : auths) {
-                authzInfo.addStringPermission(auth.getAuthName());
-            }
-        }
         return authzInfo;
     }
 
@@ -74,7 +55,7 @@ public class LocalRealm extends AuthorizingRealm {
         String username = token.getUsername();
         String password = String.valueOf(token.getPassword());
 
-        User user = this.userService.getUserByUser(username);
+        User user = this.userDao.getUserByUser(new User(username));
 
         if (user != null) {
             if (user.getPassword().equals(password)) {

@@ -6,5 +6,8 @@ import com.techsen.tsweb.sys.domain.Auth;
 
 @LocalMyBatisDao
 public interface AuthDao extends Dao<Auth>{
-    
+    /**
+     * 根据权限Id或authName获取Auth
+     */
+    public Auth getAuthByAuth(Auth auth);
 }

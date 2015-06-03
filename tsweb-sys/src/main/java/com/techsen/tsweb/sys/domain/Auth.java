@@ -14,8 +14,9 @@ public class Auth extends BaseEntity<Auth> {
     public Auth() {
     }
 
-    public Auth(String authName) {
+    public Auth(String authName, String authDesc) {
         this.authName = authName;
+        this.authDesc = authDesc;
     }
 
     public String getAuthName() {

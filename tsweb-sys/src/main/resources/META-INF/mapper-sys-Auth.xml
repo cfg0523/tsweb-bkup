@@ -9,82 +9,77 @@
         <result property="createBy" column="auth_create_by"/>
         <result property="createDate" column="auth_create_date"/>
         <result property="updateBy" column="auth_update_by"/>
-        <result property="updateDate" column="auth_update_Date"/>
+        <result property="updateDate" column="auth_update_date"/>
         <result property="remark" column="auth_remark"/>
     </resultMap>
+
+    <sql id="AuthTable">sys_auth_mstr</sql>
 
     <sql id="AuthColumns">
         auth_id, auth_name, auth_desc, auth_create_by,
         auth_create_date, auth_update_by,
         auth_update_date,
-        remark
+        auth_remark
     </sql>
 
     <sql id="AuthProperties">
-        id, authName, authDesc, createBy,
-        createDate, updateBy,
-        updateDate,
-        remark
+        #{id}, #{authName}, #{authDesc}, #{createBy},
+        #{createDate}, #{updateBy},
+        #{updateDate},
+        #{remark}
+    </sql>
+
+    <sql id="AuthUpdateMap">
+        auth_name = #{authName},
+        auth_desc = #{authDesc},
+        auth_create_by = #{createBy},
+        auth_create_date = #{createDate},
+        auth_update_by = #{updateBy},
+        auth_update_by = #{updateDate},
+        auth_remark = #{remark}
     </sql>
 
     <insert id="addEntity" parameterType="Auth">
-        insert into sys_auth (
+        insert into <include refid="AuthTable"/> (
             <include refid="AuthColumns"/>
         ) values (
-            #{id},
-            #{authName}, #{authDesc}, #{createBy},
-            #{createDate},
-            #{updateBy}, #{updateDate},
-            #{remark}
+            <include refid="AuthProperties"/>
         );
     </insert>
 
     <delete id="deleteEntity" parameterType="string">
-        delete from sys_auth where id = #{id}
+        delete from <include refid="AuthTable"/>
+        where auth_id = #{id}
     </delete>
 
     <update id="updateEntity" parameterType="Auth">
-        update sys_auth set
-            auth_name = #{authName},
-            auth_desc = #{authDesc},
-            create_by = #{createBy},
-            create_date = #{createDate},
-            update_by = #{updateBy},
-            update_by = #{updateDate},
-            remark = #{remark}
-        where id = #{id}
+        update <include refid="AuthTable"/>
+        set <include refid="AuthUpdateMap"/>
+        where auth_id = #{id}
     </update>
 
     <select id="getEntity" parameterType="string" resultMap="AuthMap">
         select <include refid="AuthColumns"/>
-        from sys_auth
-        where id = #{id}
+        from <include refid="AuthTable"/>
+        where auth_id = #{id}
     </select>
 
-    <select id="getAuthByName" parameterType="string" resultMap="AuthMap">
+    <select id="getAuthByAuth" parameterType="Auth" resultMap="AuthMap">
         select <include refid="AuthColumns"/>
-        from sys_auth
-        where auth_name = #{authName}
-    </select>
-
-    <select id="getAuthsByUserId" parameterType="string" resultMap="AuthMap">
-        select a.*
-        from
-            sys_auth as a
-            join sys_role_auth as ra on a.id = ra.auth_id
-            join sys_role as r on ra.role_id = r.id
-            join sys_user_role as ur on r.id = ur.role_id
-            join sys_user as u on ur.user_id = u.id
-        where u.id = #{userId}
-    </select>
-    
-    <select id="getAuthsByRoleId" parameterType="string" resultMap="AuthMap">
-        select a.*
-        from
-            sys_auth as a
-            join sys_role_auth as ra on a.id = ra.auth_id
-            join sys_role as r on ra.role_id = r.id
-        where r.id = #{roleId}
+        from <include refid="AuthTable"/>
+        <where>
+            <choose>
+                <when test="id != null">
+                    auth_id = #{id}
+                </when>
+                <when test="authName != null">
+                    auth_name = #{authName}
+                </when>
+                <otherwise>
+                    1 != 0
+                </otherwise>
+            </choose>
+        </where>
     </select>
     
 </mapper>

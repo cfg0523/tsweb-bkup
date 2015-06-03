@@ -48,7 +48,8 @@
     </insert>
 
     <delete id="deleteEntity" parameterType="string">
-        delete from <include refid="UserTable"/> where user_id = #{id}
+        delete from <include refid="UserTable"/>
+        where user_id = #{id}
     </delete>
 
     <update id="updateEntity" parameterType="User">

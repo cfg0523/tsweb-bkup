@@ -16,43 +16,45 @@
     <sql id="RoleTable">sys_role_mstr</sql>
 
     <sql id="RoleColumns">
-        id, role_name, role_desc, create_by,
-        create_date, update_by,
-        update_date,
-        remark
+        role_id, role_name, role_desc, role_create_by,
+        role_create_date, role_update_by,
+        role_update_date,
+        role_remark
     </sql>
 
     <sql id="RoleProperties">
-        id, roleName, roleDesc, createBy,
-        createDate, updateBy,
-        updateDate,
-        remark
+        #{id}, #{roleName}, #{roleDesc}, #{createBy},
+        #{createDate}, #{updateBy},
+        #{updateDate},
+        #{remark}
+    </sql>
+
+    <sql id="RoleUpdateMap">
+        role_name = #{roleName},
+        role_desc = #{roleDesc},
+        role_create_by = #{createBy},
+        role_create_date = #{createDate},
+        role_update_by = #{updateBy},
+        role_update_by = #{updateDate},
+        role_remark = #{remark}
     </sql>
 
     <insert id="addEntity" parameterType="Role">
         insert into <include refid="RoleTable"/> (
             <include refid="RoleColumns"/>
         ) values (
-            #{id}, #{roleName}, #{roleDesc}, #{createBy},
-            #{createDate}, #{updateBy},
-            #{updateDate},
-            #{remark}
+            <include refid="RoleProperties"/>
         );
     </insert>
 
     <delete id="deleteEntity" parameterType="string">
-        delete from <include refid="RoleTable"/> where role_id = #{id}
+        delete from <include refid="RoleTable"/>
+        where role_id = #{id}
     </delete>
 
     <update id="updateEntity" parameterType="Role">
-        update <include refid="RoleTable"/> set
-            role_name = #{roleName},
-            role_desc = #{roleDesc},
-            role_create_by = #{createBy},
-            role_create_date = #{createDate},
-            role_update_by = #{updateBy},
-            role_update_by = #{updateDate},
-            role_remark = #{remark}
+        update <include refid="RoleTable"/>
+        set <include refid="RoleUpdateMap"/>
         where role_id = #{id}
     </update>
 
@@ -60,6 +62,24 @@
         select <include refid="RoleColumns"/>
         from <include refid="RoleTable"/>
         where role_id = #{id}
+    </select>
+
+    <select id="getRoleByRole" parameterType="Role" resultMap="RoleMap">
+        select <include refid="RoleColumns"/>
+        from <include refid="RoleTable"/>
+        <where>
+            <choose>
+                <when test="id != null">
+                    role_id = #{id}
+                </when>
+                <when test="roleName != null">
+                    role_name = #{roleName}
+                </when>
+                <otherwise>
+                    1 != 0
+                </otherwise>
+            </choose>
+        </where>
     </select>
 
 </mapper>

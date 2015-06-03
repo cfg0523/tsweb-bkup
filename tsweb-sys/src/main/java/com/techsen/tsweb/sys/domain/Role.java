@@ -20,8 +20,9 @@ public class Role extends BaseEntity<Role> {
 
     public Role() {}
 
-    public Role(String roleName) {
+    public Role(String roleName, String roleDesc) {
         this.roleName = roleName;
+        this.roleDesc = roleDesc;
     }
 
     public String getRoleName() {

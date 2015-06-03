@@ -6,5 +6,8 @@ import com.techsen.tsweb.sys.domain.Role;
 
 @LocalMyBatisDao
 public interface RoleDao extends Dao<Role> {
-    
+    /**
+     * 根据角色Id或roleName获取Role
+     */
+    public Role getRoleByRole(Role role);
 }

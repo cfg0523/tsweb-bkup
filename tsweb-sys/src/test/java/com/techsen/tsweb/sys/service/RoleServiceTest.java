@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.cache.CacheManager;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -21,6 +22,12 @@ public class RoleServiceTest {
     @Resource
     private RoleService roleService;
 
+    @Resource
+    private UserService userService;
+
+    @Resource
+    private CacheManager cacheManager;
+
     @Test
     public void testGetRolesByUser() {
         List<Role> roles = this.roleService.getRolesByUser(new User("hayden"));
@@ -34,7 +41,7 @@ public class RoleServiceTest {
             }
         }
         System.out.println();
-        
+
         roles = this.roleService.getRolesByUser(new User("hayden"));
         System.out.println();
         for (Role role : roles) {

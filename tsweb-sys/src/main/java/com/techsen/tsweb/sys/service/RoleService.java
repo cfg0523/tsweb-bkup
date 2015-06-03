@@ -11,5 +11,4 @@ public interface RoleService {
      * 根据用户id或username获取Roles
      */
     public List<Role> getRolesByUser(User user);
-    
 }

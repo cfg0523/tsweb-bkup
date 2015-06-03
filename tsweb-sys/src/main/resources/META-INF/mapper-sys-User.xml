@@ -39,6 +39,22 @@
         user_remark = #{remark}
     </sql>
 
+    <sql id="UserWhereCondition">
+        <where>
+            <choose>
+                <when test="id != null">
+                    user_id = #{id}
+                </when>
+                <when test="username != null">
+                    user_name = #{username}
+                </when>
+                <otherwise>
+                    1 != 0
+                </otherwise>
+            </choose>
+        </where>
+    </sql>
+
     <insert id="addEntity" parameterType="User">
         insert into <include refid="UserTable"/> (
             <include refid="UserColumns"/>
@@ -67,19 +83,7 @@
     <select id="getUserByUser" parameterType="User" resultMap="UserMap">
         select <include refid="UserColumns"/>
         from <include refid="UserTable"/>
-        <where>
-            <choose>
-                <when test="id != null">
-                    user_id = #{id}
-                </when>
-                <when test="username != null">
-                    user_name = #{username}
-                </when>
-                <otherwise>
-                    1 != 0
-                </otherwise>
-            </choose>
-        </where>
+        <include refid="UserWhereCondition"/>
     </select>
 
 </mapper>

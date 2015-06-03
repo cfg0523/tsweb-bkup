@@ -1,5 +1,7 @@
 package com.techsen.tsweb.sys.dao;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.junit.After;
@@ -12,6 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.techsen.tsweb.core.util.UUIDUtil;
 import com.techsen.tsweb.sys.domain.Auth;
+import com.techsen.tsweb.sys.domain.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath*:META-INF/spring-*.xml")
@@ -71,4 +74,13 @@ public class AuthDaoTest {
         Assert.assertEquals(auth1.getAuthDesc(), auth2.getAuthDesc());
     }
     
+    @Test
+    public void testGetAuthsByUser() {
+        List<Auth> auths = this.authDao.getAuthsByUser(new User("hayden"));
+        System.out.println();
+        for (Auth auth : auths) {
+            System.out.println(auth);
+        }
+        System.out.println();
+    }
 }

@@ -1,5 +1,9 @@
 package com.techsen.tsweb.sys.realm;
 
+import static com.techsen.tsweb.core.util.ValidUtil.isValid;
+
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.apache.shiro.authc.AuthenticationException;
@@ -17,6 +21,8 @@ import org.apache.shiro.subject.PrincipalCollection;
 import com.techsen.tsweb.sys.dao.AuthDao;
 import com.techsen.tsweb.sys.dao.RoleDao;
 import com.techsen.tsweb.sys.dao.UserDao;
+import com.techsen.tsweb.sys.domain.Auth;
+import com.techsen.tsweb.sys.domain.Role;
 import com.techsen.tsweb.sys.domain.User;
 
 /**
@@ -26,8 +32,10 @@ public class LocalRealm extends AuthorizingRealm {
 
     @Resource
     private UserDao userDao;
+    
     @Resource
     private RoleDao roleDao;
+    
     @Resource
     private AuthDao authDao;
 
@@ -41,6 +49,24 @@ public class LocalRealm extends AuthorizingRealm {
 
         String username = (String) this.getAvailablePrincipal(principals);
         User user = this.userDao.getUserByUser(new User(username));
+        
+        // 获取用户角色
+        List<Role> roles = this.roleDao.getRolesByUser(user);
+        if (isValid(roles)) {
+            for (Role role : roles) {
+                String roleName = role.getRoleName();
+                authzInfo.addRole(roleName);
+            }
+        }
+        
+        // 获取用户权限
+        List<Auth> auths = this.authDao.getAuthsByUser(user);
+        if (isValid(auths)) {
+            for (Auth auth : auths) {
+                String authName = auth.getAuthName();
+                authzInfo.addStringPermission(authName);
+            }
+        }
 
         return authzInfo;
     }

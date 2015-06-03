@@ -13,8 +13,10 @@
         <result property="remark" column="role_remark"/>
     </resultMap>
 
+    <sql id="UserTable">sys_user_mstr</sql>
+    <sql id="UserRoleTable">sys_userrole_det</sql>
     <sql id="RoleTable">sys_role_mstr</sql>
-
+    
     <sql id="RoleColumns">
         role_id, role_name, role_desc, role_create_by,
         role_create_date, role_update_by,
@@ -37,6 +39,22 @@
         role_update_by = #{updateBy},
         role_update_by = #{updateDate},
         role_remark = #{remark}
+    </sql>
+
+    <sql id="RoleWhereCondition">
+        <where>
+            <choose>
+                <when test="id != null">
+                    role_id = #{id}
+                </when>
+                <when test="roleName != null">
+                    role_name = #{roleName}
+                </when>
+                <otherwise>
+                    1 != 0
+                </otherwise>
+            </choose>
+        </where>
     </sql>
 
     <insert id="addEntity" parameterType="Role">
@@ -67,19 +85,15 @@
     <select id="getRoleByRole" parameterType="Role" resultMap="RoleMap">
         select <include refid="RoleColumns"/>
         from <include refid="RoleTable"/>
-        <where>
-            <choose>
-                <when test="id != null">
-                    role_id = #{id}
-                </when>
-                <when test="roleName != null">
-                    role_name = #{roleName}
-                </when>
-                <otherwise>
-                    1 != 0
-                </otherwise>
-            </choose>
-        </where>
+        <include refid="RoleWhereCondition"/>
+    </select>
+
+    <select id="getRolesByUser" parameterType="User" resultMap="RoleMap">
+        select <include refid="RoleColumns"/>
+        from <include refid="UserTable"/>
+        join <include refid="UserRoleTable"/> on user_id = userrole_uid
+        join <include refid="RoleTable"/> on userrole_rid = role_id
+        <include refid="com.techsen.tsweb.sys.dao.UserDao.UserWhereCondition"/>
     </select>
 
 </mapper>

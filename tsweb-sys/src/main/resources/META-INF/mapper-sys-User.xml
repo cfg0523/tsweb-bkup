@@ -32,8 +32,8 @@
     <sql id="UserUpdateMap">
         user_name = #{username},
         user_pwd = #{password},
-        user_create_by = #{createBy},
-        user_create_date = #{createDate},
+        <!-- user_create_by = #{createBy}, -->
+        <!-- user_create_date = #{createDate}, -->
         user_update_by = #{updateBy},
         user_update_by = #{updateDate},
         user_remark = #{remark}

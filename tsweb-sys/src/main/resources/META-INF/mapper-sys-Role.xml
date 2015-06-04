@@ -34,8 +34,8 @@
     <sql id="RoleUpdateMap">
         role_name = #{roleName},
         role_desc = #{roleDesc},
-        role_create_by = #{createBy},
-        role_create_date = #{createDate},
+        <!-- role_create_by = #{createBy}, -->
+        <!-- role_create_date = #{createDate}, -->
         role_update_by = #{updateBy},
         role_update_by = #{updateDate},
         role_remark = #{remark}

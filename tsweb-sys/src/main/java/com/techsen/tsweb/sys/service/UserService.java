@@ -9,4 +9,18 @@ public interface UserService {
      */
     public User getUserByUser(User user);
     
+    /**
+     * 新增用户
+     */
+    public void addUser(User user);
+    
+    /**
+     * 修改用户
+     */
+    public void updateUser(User user);
+    
+    /**
+     * 删除用户
+     */
+    public void deleteUser(User user);
 }

@@ -47,4 +47,28 @@ public class UserServiceImpl implements UserService {
         return result;
     }
 
+    /**
+     * 新增用户
+     */
+    @Override
+    public void addUser(User user) {
+        this.userDao.addEntity(user);
+    }
+
+    /**
+     * 修改用户
+     */
+    @Override
+    public void updateUser(User user) {
+        this.userDao.updateEntity(user);
+    }
+
+    /**
+     * 删除用户
+     */
+    @Override
+    public void deleteUser(User user) {
+        this.userDao.deleteEntity(user);
+    }
+    
 }

@@ -36,8 +36,8 @@
     <sql id="AuthUpdateMap">
         auth_name = #{authName},
         auth_desc = #{authDesc},
-        auth_create_by = #{createBy},
-        auth_create_date = #{createDate},
+        <!-- auth_create_by = #{createBy}, -->
+        <!-- auth_create_date = #{createDate}, -->
         auth_update_by = #{updateBy},
         auth_update_by = #{updateDate},
         auth_remark = #{remark}

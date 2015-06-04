@@ -1,8 +1,15 @@
 package com.techsen.tsweb.sys.util;
 
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.mgt.SecurityManager;
 
-public class UserUtil {
+import com.techsen.tsweb.core.util.SpringContextUtil;
+
+public class SubjectUtil {
+    
+    static {
+        SecurityUtils.setSecurityManager(SpringContextUtil.getBean(SecurityManager.class));
+    }
     
     /**
      * 获取登录用户的唯一标识<br/>

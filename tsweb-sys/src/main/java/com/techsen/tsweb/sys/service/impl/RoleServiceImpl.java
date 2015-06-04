@@ -29,8 +29,8 @@ public class RoleServiceImpl implements RoleService {
      */
     @Override
     @Caching(cacheable = {
-            @Cacheable(value = SysConst.CACHE_ROLE, key = "#user.id", condition = "#user.id != null"),
-            @Cacheable(value = SysConst.CACHE_ROLE, key = "#user.username", condition = "#user.username != null") })
+            @Cacheable(value = SysConst.CACHE_ROLE, key = "#this.methodName.concat(':' + #user.id)", condition = "#user.id != null"),
+            @Cacheable(value = SysConst.CACHE_ROLE, key = "#this.methodName.concat(':' + #user.username)", condition = "#user.username != null") })
     public List<Role> getRolesByUser(User user) {
         return this.roleDao.getRolesByUser(user);
     }

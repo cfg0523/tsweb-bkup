@@ -30,8 +30,8 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     @Caching(cacheable = {
-            @Cacheable(value = SysConst.CACHE_USER, key = "#user.id", condition="#user.id != null"),
-            @Cacheable(value = SysConst.CACHE_USER, key = "#user.username", condition="#user.username != null") })
+            @Cacheable(value = SysConst.CACHE_USER, key = "#this.methodName.concat(':' + #user.id)", condition="#user.id != null"),
+            @Cacheable(value = SysConst.CACHE_USER, key = "#this.methodName.concat(':' + #user.username)", condition="#user.username != null") })
     public User getUserByUser(User user) {
         User result = this.userDao.getUserByUser(user);
 

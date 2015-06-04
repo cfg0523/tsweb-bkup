@@ -42,12 +42,12 @@ public class UserServiceTest {
     
     @Test
     public void testCache() {
-        User user = this.userService.getUserByUser(new User("hayden"));
+        this.userService.getUserByUser(new User("hayden"));
         System.out.println();
-        System.out.println("user --> " + user);
         Cache cache = (Cache) cacheManager.getCache(SysConst.CACHE_USER).getNativeCache();
         for (Object key : cache.getKeys()) {
-            System.out.println(key + " --> " + cache.get(key).getObjectValue());
+            System.out.println("cacheKey: " + key);
+            System.out.println("cacheValue: " + cache.get(key).getObjectValue());
         }
         System.out.println();
     }

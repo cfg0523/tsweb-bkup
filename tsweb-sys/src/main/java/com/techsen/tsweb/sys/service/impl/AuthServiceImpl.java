@@ -25,8 +25,8 @@ public class AuthServiceImpl implements AuthService {
      */
     @Override
     @Caching(cacheable = {
-            @Cacheable(value = SysConst.CACHE_AUTH, key = "#user.id", condition = "#user.id != null"),
-            @Cacheable(value = SysConst.CACHE_AUTH, key = "#user.username", condition = "#user.username != null") })
+            @Cacheable(value = SysConst.CACHE_AUTH, key = "#this.methodName.concat(':' + #user.id)", condition = "#user.id != null"),
+            @Cacheable(value = SysConst.CACHE_AUTH, key = "#this.methodName.concat(':' + #user.username)", condition = "#user.username != null") })
     public List<Auth> getAuthsByUser(User user) {
         return this.authDao.getAuthsByUser(user);
     }

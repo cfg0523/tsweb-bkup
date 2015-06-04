@@ -47,8 +47,8 @@ public class LocalRealm extends AuthorizingRealm {
             PrincipalCollection principals) {
         SimpleAuthorizationInfo authzInfo = new SimpleAuthorizationInfo();
 
-        String username = (String) this.getAvailablePrincipal(principals);
-        User user = this.userService.getUserByUser(new User(username));
+        String userId = (String) this.getAvailablePrincipal(principals);
+        User user = this.userService.getUserByUser(new User().setId(userId));
 
         if (user != null) {
             // 获取用户角色
@@ -86,11 +86,10 @@ public class LocalRealm extends AuthorizingRealm {
         String password = String.valueOf(token.getPassword());
 
         User user = this.userService.getUserByUser(new User(username));
-
         if (user != null) {
             if (user.getPassword().equals(password)) {
-                return new SimpleAuthenticationInfo(username, password,
-                        this.getName());
+                return new SimpleAuthenticationInfo(user.getId(), username
+                        + ":" + password, this.getName());
             } else {
                 throw new CredentialsException("用户名或密码错误");
             }

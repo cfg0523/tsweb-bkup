@@ -22,8 +22,6 @@ public abstract class BaseEntity<T> extends BaseObject<T> {
      * 默认构造方法
      */
     public BaseEntity() {
-        //设置对象创建的时间
-        this.createDate = new Date();
     }
 
     /**

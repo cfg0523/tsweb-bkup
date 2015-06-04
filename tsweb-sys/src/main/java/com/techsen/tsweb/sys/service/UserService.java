@@ -8,4 +8,5 @@ public interface UserService {
      * 根据用户Id或username获取User
      */
     public User getUserByUser(User user);
+    
 }

@@ -17,10 +17,19 @@ import com.techsen.tsweb.core.domain.BaseEntity;
 @SuppressWarnings("unchecked")
 public class NewAddAndUpdateEntityAspect {
 
+    public NewAddAndUpdateEntityAspect() {
+        System.out.println();
+        System.out.println("-------------------");
+        System.out.println("init NewAddAndUpdateEntityAspect");
+        System.out.println("-------------------");
+        System.out.println();
+    }
+
     /**
      * 在新增之前设置被新增对象的creatBy和createDate
      */
     public <T> void beforeNewAddEntity(JoinPoint jp) {
+        System.out.println("-------------before newAdd-----------------");
         if (isValid(jp.getArgs())) {
             for (Object arg : jp.getArgs()) {
                 if (arg instanceof BaseEntity) {
@@ -30,12 +39,14 @@ public class NewAddAndUpdateEntityAspect {
                 }
             }
         }
+        System.out.println("-------------after  newAdd-----------------");
     }
 
     /**
      * 在修改之前设置被修改对象的updateBy和updateDate
      */
     public <T> void beforeUpdateEntity(JoinPoint jp) {
+        System.out.println("-------------before update-----------------");
         if (isValid(jp.getArgs())) {
             for (Object arg : jp.getArgs()) {
                 if (arg instanceof BaseEntity) {
@@ -45,5 +56,6 @@ public class NewAddAndUpdateEntityAspect {
                 }
             }
         }
+        System.out.println("-------------after  update-----------------");
     }
 }

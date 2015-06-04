@@ -46,11 +46,18 @@ public class UserServiceTest {
         System.out.println();
         Cache cache = (Cache) cacheManager.getCache(SysConst.CACHE_USER)
                 .getNativeCache();
+        System.out.println("cache: " + cache);
+        System.out.println("cache size: " + cache.getKeys().size());
         for (Object key : cache.getKeys()) {
             System.out.println("key: " + key);
             System.out.println("value: " + cache.get(key).getObjectValue());
         }
         System.out.println();
+        this.userService.getUser(new User("hayden"));
+        
+        User tmp = new User("test-user", "test-user").setId("testuser");
+        this.userService.addUser(tmp);
+        this.userService.deleteUser(tmp);
     }
 
     @Test
@@ -75,5 +82,14 @@ public class UserServiceTest {
         System.out.println(this.userService.getUser(user));
         System.out.println();
         this.userService.deleteUser(user);
+    }
+
+    @Test
+    public void testGetUser() {
+        User user = this.userService.getUser(new User().setUsername("hayden"));
+        user.setPassword("hayden-pwd");
+        System.out.println();
+        this.userService.getUser(user.setId(null));
+        System.out.println();
     }
 }

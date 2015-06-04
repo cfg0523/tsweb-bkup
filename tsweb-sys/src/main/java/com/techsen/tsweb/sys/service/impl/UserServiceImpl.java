@@ -2,6 +2,7 @@ package com.techsen.tsweb.sys.service.impl;
 
 import javax.annotation.Resource;
 
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
@@ -33,8 +34,7 @@ public class UserServiceImpl implements UserService {
             @Cacheable(value = SysConst.CACHE_USER, key = "#this.methodName.concat(':' + #user.id)", condition = "#user.id != null"),
             @Cacheable(value = SysConst.CACHE_USER, key = "#this.methodName.concat(':' + #user.username)", condition = "#user.username != null") })
     public User getUser(User user) {
-        User result = this.userDao.getEntity(user);
-        return result;
+        return this.userDao.getEntity(user);
     }
 
     /**
@@ -49,6 +49,9 @@ public class UserServiceImpl implements UserService {
      * 修改用户
      */
     @Override
+    @Caching(evict = {
+            @CacheEvict(value = SysConst.CACHE_USER, key = "#this.toString()", condition = "#user.id != null"),
+            @CacheEvict(value = SysConst.CACHE_USER, key = "#this.toString()", condition = "#user.username != null") })
     public void updateUser(User user) {
         this.userDao.updateEntity(user);
     }

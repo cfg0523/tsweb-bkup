@@ -1,4 +1,4 @@
-package com.techsen.tsweb.sys.interceptor;
+package com.techsen.tsweb.sys.aspect;
 
 import static com.techsen.tsweb.core.util.ValidUtil.isValid;
 import static com.techsen.tsweb.sys.util.SubjectUtil.getPrincipal;

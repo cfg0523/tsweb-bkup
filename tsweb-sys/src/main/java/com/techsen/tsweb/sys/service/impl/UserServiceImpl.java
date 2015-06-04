@@ -30,20 +30,10 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     @Caching(cacheable = {
-            @Cacheable(value = SysConst.CACHE_USER, key = "#this.methodName.concat(':' + #user.id)", condition="#user.id != null"),
-            @Cacheable(value = SysConst.CACHE_USER, key = "#this.methodName.concat(':' + #user.username)", condition="#user.username != null") })
+            @Cacheable(value = SysConst.CACHE_USER, key = "#this.methodName.concat(':' + #user.id)", condition = "#user.id != null"),
+            @Cacheable(value = SysConst.CACHE_USER, key = "#this.methodName.concat(':' + #user.username)", condition = "#user.username != null") })
     public User getUserByUser(User user) {
         User result = this.userDao.getUserByUser(user);
-
-        // 抓取关联对象集合
-        if (result != null) {
-            // 抓取roles
-            result.setRoles(this.roleDao.getRolesByUser(result));
-
-            // 抓取auths
-            result.setAuths(this.authDao.getAuthsByUser(result));
-        }
-
         return result;
     }
 
@@ -70,5 +60,5 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(User user) {
         this.userDao.deleteEntity(user);
     }
-    
+
 }

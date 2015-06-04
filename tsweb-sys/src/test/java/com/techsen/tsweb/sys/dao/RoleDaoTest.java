@@ -42,7 +42,7 @@ public class RoleDaoTest {
         Role tmp = this.role.clone();
         tmp.setRoleDesc("test-role");
         this.roleDao.updateEntity(tmp);
-        tmp = this.roleDao.getEntity(tmp.getId());
+        tmp = this.roleDao.getEntity(tmp);
         
         System.out.println();
         System.out.println("tmp Role: " + tmp);
@@ -55,7 +55,7 @@ public class RoleDaoTest {
     public void testGetRoleByRole() {
         Role tmp = new Role();
         tmp.setId(this.role.getId());
-        Role role1 = this.roleDao.getRoleByRole(tmp);
+        Role role1 = this.roleDao.getEntity(tmp);
         
         System.out.println();
         System.out.println("role1 Role: " + tmp);
@@ -63,7 +63,7 @@ public class RoleDaoTest {
         
         tmp.setId(null);
         tmp.setRoleName(this.role.getRoleName());
-        Role role2 = this.roleDao.getRoleByRole(tmp);
+        Role role2 = this.roleDao.getEntity(tmp);
         
         System.out.println();
         System.out.println("role2 Role: " + tmp);

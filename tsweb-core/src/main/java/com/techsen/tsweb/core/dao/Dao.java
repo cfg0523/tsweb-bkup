@@ -8,9 +8,9 @@ import com.techsen.tsweb.core.domain.BaseEntity;
 public interface Dao<T extends BaseEntity<T>> {
 
     /**
-     * 根据id查找一个实体
+     * 根据id或实体对象的唯一键查找一个实体
      */
-    T getEntity(String id);
+    T getEntity(T entity);
 
     /**
      * 新增一个Entity对象

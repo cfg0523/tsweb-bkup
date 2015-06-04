@@ -48,7 +48,7 @@ public class LocalRealm extends AuthorizingRealm {
         SimpleAuthorizationInfo authzInfo = new SimpleAuthorizationInfo();
 
         String userId = (String) this.getAvailablePrincipal(principals);
-        User user = this.userService.getUserByUser(new User().setId(userId));
+        User user = this.userService.getUser(new User().setId(userId));
 
         if (user != null) {
             // 获取用户角色
@@ -85,7 +85,7 @@ public class LocalRealm extends AuthorizingRealm {
         String username = token.getUsername();
         String password = String.valueOf(token.getPassword());
 
-        User user = this.userService.getUserByUser(new User(username));
+        User user = this.userService.getUser(new User(username));
         if (user != null) {
             if (user.getPassword().equals(password)) {
                 return new SimpleAuthenticationInfo(user.getId(), username

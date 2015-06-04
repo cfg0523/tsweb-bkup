@@ -25,14 +25,14 @@ public class UserServiceTest {
 
     @Test
     public void testGetUserByUser() {
-        User user = this.userService.getUserByUser(new User("hayden"));
+        User user = this.userService.getUser(new User("hayden"));
         System.out.println();
         System.out.println(user);
         System.out.println(user.getRoles());
         System.out.println(user.getAuths());
         System.out.println();
 
-        user = this.userService.getUserByUser(new User("hayden"));
+        user = this.userService.getUser(new User("hayden"));
         System.out.println();
         System.out.println(user);
         System.out.println(user.getRoles());
@@ -42,7 +42,7 @@ public class UserServiceTest {
 
     @Test
     public void testCache() {
-        this.userService.getUserByUser(new User("hayden"));
+        this.userService.getUser(new User("hayden"));
         System.out.println();
         Cache cache = (Cache) cacheManager.getCache(SysConst.CACHE_USER)
                 .getNativeCache();
@@ -59,7 +59,7 @@ public class UserServiceTest {
         System.out.println();
         System.out.println(user);
         this.userService.addUser(user);
-        System.out.println(this.userService.getUserByUser(user));
+        System.out.println(this.userService.getUser(user));
         System.out.println();
         this.userService.deleteUser(user);
     }
@@ -72,7 +72,7 @@ public class UserServiceTest {
         System.out.println(user);
         user.setPassword("testUser-pwd");
         this.userService.updateUser(user);
-        System.out.println(this.userService.getUserByUser(user));
+        System.out.println(this.userService.getUser(user));
         System.out.println();
         this.userService.deleteUser(user);
     }

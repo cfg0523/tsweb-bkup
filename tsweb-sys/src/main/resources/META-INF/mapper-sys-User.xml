@@ -74,13 +74,7 @@
         where user_id = #{id}
     </update>
 
-    <select id="getEntity" parameterType="string" resultMap="UserMap">
-        select <include refid="UserColumns"/>
-        from <include refid="UserTable"/>
-        where user_id = #{id}
-    </select>
-
-    <select id="getUserByUser" parameterType="User" resultMap="UserMap">
+    <select id="getEntity" parameterType="User" resultMap="UserMap">
         select <include refid="UserColumns"/>
         from <include refid="UserTable"/>
         <include refid="UserWhereCondition"/>

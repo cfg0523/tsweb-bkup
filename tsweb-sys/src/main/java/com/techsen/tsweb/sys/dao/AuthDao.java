@@ -10,11 +10,6 @@ import com.techsen.tsweb.sys.domain.User;
 @LocalMyBatisDao
 public interface AuthDao extends Dao<Auth>{
     /**
-     * 根据权限Id或authName获取Auth
-     */
-    public Auth getAuthByAuth(Auth auth);
-    
-    /**
      * 根据用户Id或userName获取Roles
      */
     public List<Auth> getAuthsByUser(User user);

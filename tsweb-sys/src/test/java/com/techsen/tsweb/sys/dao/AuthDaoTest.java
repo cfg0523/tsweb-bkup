@@ -42,7 +42,7 @@ public class AuthDaoTest {
         Auth tmp = this.auth.clone();
         tmp.setAuthDesc("test-auth");
         this.authDao.updateEntity(tmp);
-        tmp = this.authDao.getEntity(tmp.getId());
+        tmp = this.authDao.getEntity(tmp);
         
         System.out.println();
         System.out.println("tmp Auth: " + tmp);
@@ -55,7 +55,7 @@ public class AuthDaoTest {
     public void testGetRoleByRole() {
         Auth tmp = new Auth();
         tmp.setId(this.auth.getId());
-        Auth auth1 = this.authDao.getAuthByAuth(tmp);
+        Auth auth1 = this.authDao.getEntity(tmp);
         
         System.out.println();
         System.out.println("auth1 Auth: " + tmp);
@@ -63,7 +63,7 @@ public class AuthDaoTest {
         
         tmp.setId(null);
         tmp.setAuthName(this.auth.getAuthName());
-        Auth auth2 = this.authDao.getAuthByAuth(tmp);
+        Auth auth2 = this.authDao.getEntity(tmp);
         
         System.out.println();
         System.out.println("auth2 Auth: " + tmp);

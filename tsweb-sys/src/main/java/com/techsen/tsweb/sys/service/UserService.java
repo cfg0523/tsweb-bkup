@@ -7,7 +7,7 @@ public interface UserService {
     /**
      * 根据用户Id或username获取User
      */
-    public User getUserByUser(User user);
+    public User getUser(User user);
     
     /**
      * 新增用户

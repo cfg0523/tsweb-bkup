@@ -39,7 +39,7 @@ public class UserDaoTest {
         User tmp = this.user.clone();
         tmp.setPassword("hayden");
         this.userDao.updateEntity(tmp);
-        tmp = this.userDao.getEntity(tmp.getId());
+        tmp = this.userDao.getEntity(tmp);
         
         System.out.println();
         System.out.println("tmp User: " + tmp);
@@ -49,10 +49,10 @@ public class UserDaoTest {
     }
     
     @Test
-    public void testGetUserByUser() {
+    public void testGetEntity() {
         User tmp = new User();
         tmp.setId(this.user.getId());
-        User user1 = this.userDao.getUserByUser(tmp);
+        User user1 = this.userDao.getEntity(tmp);
         
         System.out.println();
         System.out.println("user1 User: " + user1);
@@ -60,7 +60,7 @@ public class UserDaoTest {
         
         tmp.setId(null);
         tmp.setUsername(this.user.getUsername());
-        User user2 = this.userDao.getUserByUser(tmp);
+        User user2 = this.userDao.getEntity(tmp);
 
         System.out.println();
         System.out.println("user2 User: " + user2);

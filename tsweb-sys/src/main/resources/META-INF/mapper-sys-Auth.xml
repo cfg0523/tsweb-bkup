@@ -78,13 +78,7 @@
         where auth_id = #{id}
     </update>
 
-    <select id="getEntity" parameterType="string" resultMap="AuthMap">
-        select <include refid="AuthColumns"/>
-        from <include refid="AuthTable"/>
-        where auth_id = #{id}
-    </select>
-
-    <select id="getAuthByAuth" parameterType="Auth" resultMap="AuthMap">
+    <select id="getEntity" parameterType="Auth" resultMap="AuthMap">
         select <include refid="AuthColumns"/>
         from <include refid="AuthTable"/>
         <include refid="AuthWhereCondition"/>

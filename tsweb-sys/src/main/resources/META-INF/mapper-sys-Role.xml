@@ -76,13 +76,7 @@
         where role_id = #{id}
     </update>
 
-    <select id="getEntity" parameterType="string" resultMap="RoleMap">
-        select <include refid="RoleColumns"/>
-        from <include refid="RoleTable"/>
-        where role_id = #{id}
-    </select>
-
-    <select id="getRoleByRole" parameterType="Role" resultMap="RoleMap">
+    <select id="getEntity" parameterType="Role" resultMap="RoleMap">
         select <include refid="RoleColumns"/>
         from <include refid="RoleTable"/>
         <include refid="RoleWhereCondition"/>

@@ -52,8 +52,7 @@ public class LocalRealm extends AuthorizingRealm {
 
         if (user != null) {
             // 获取用户角色
-            List<Role> roles = user.getRoles() != null ? user.getRoles()
-                    : this.roleService.getRolesByUser(user);
+            List<Role> roles = this.roleService.getRolesByUser(user);
             if (isValid(roles)) {
                 for (Role role : roles) {
                     String roleName = role.getRoleName();
@@ -62,8 +61,7 @@ public class LocalRealm extends AuthorizingRealm {
             }
 
             // 获取用户权限
-            List<Auth> auths = user.getAuths() != null ? user.getAuths()
-                    : this.authService.getAuthsByUser(user);
+            List<Auth> auths = this.authService.getAuthsByUser(user);
             if (isValid(auths)) {
                 for (Auth auth : auths) {
                     String authName = auth.getAuthName();

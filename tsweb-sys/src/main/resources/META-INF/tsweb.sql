@@ -69,6 +69,7 @@ insert into sys_auth_mstr values ('A7', 'menu:*', '对菜单操作有所有权�
  */
 drop table if exists sys_userrole_det;
 create table sys_userrole_det (
+    userrole_id varchar(32) comment '用户角色ID',
     userrole_uid varchar(32) comment '用户ID',
     userrole_rid varchar(32) comment '角色ID',
     userrole_create_by varchar(32) comment '创建人ID',
@@ -76,19 +77,21 @@ create table sys_userrole_det (
     userrole_update_by varchar(32) comment '修改人ID',
     userrole_update_date datetime comment '修改时间',
     userrole_remark varchar(256) comment '备注',
-    primary key(userrole_uid, userrole_rid)
+    primary key(userrole_id),
+    unique key(userrole_uid, userrole_rid)
 ) comment '用户角色表';
-insert into sys_userrole_det values ('U1', 'R1', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
-insert into sys_userrole_det values ('U2', 'R2', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
-insert into sys_userrole_det values ('U3', 'R2', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
-insert into sys_userrole_det values ('U4', 'R3', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
-insert into sys_userrole_det values ('U5', 'R3', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
+insert into sys_userrole_det values ('UR1', 'U1', 'R1', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
+insert into sys_userrole_det values ('UR2', 'U2', 'R2', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
+insert into sys_userrole_det values ('UR3', 'U3', 'R2', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
+insert into sys_userrole_det values ('UR4', 'U4', 'R3', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
+insert into sys_userrole_det values ('UR5', 'U5', 'R3', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
 
 /**
  * sys_roleauth_det
  */
 drop table if exists sys_roleauth_det;
 create table sys_roleauth_det (
+    roleauth_id varchar(32) comment '角色权限ID',
     roleauth_rid varchar(32) comment '角色ID',
     roleauth_aid varchar(32) comment '权限ID',
     roleauth_create_by varchar(32) comment '创建人ID',
@@ -96,10 +99,11 @@ create table sys_roleauth_det (
     roleauth_update_by varchar(32) comment '修改人ID',
     roleauth_update_date datetime comment '修改时间',
     roleauth_remark varchar(256) comment '备注',
-    primary key(roleauth_rid, roleauth_aid)
+    primary key(roleauth_id),
+    unique key(roleauth_rid, roleauth_aid)
 ) comment '角色权限表';
-insert into sys_roleauth_det values ('R1', 'A1', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
-insert into sys_roleauth_det values ('R2', 'A2', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
-insert into sys_roleauth_det values ('R3', 'A3', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
-insert into sys_roleauth_det values ('R3', 'A4', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
-insert into sys_roleauth_det values ('R3', 'A5', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
+insert into sys_roleauth_det values ('RA1', 'R1', 'A1', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
+insert into sys_roleauth_det values ('RA2', 'R2', 'A2', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
+insert into sys_roleauth_det values ('RA3', 'R3', 'A3', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
+insert into sys_roleauth_det values ('RA4', 'R3', 'A4', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
+insert into sys_roleauth_det values ('RA5', 'R3', 'A5', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');

@@ -1,5 +1,6 @@
 package com.techsen.tsweb.sys.aspect;
 
+import static com.techsen.tsweb.core.util.UUIDUtil.uuid;
 import static com.techsen.tsweb.core.util.ValidUtil.isValid;
 import static com.techsen.tsweb.sys.util.SubjectUtil.getPrincipal;
 
@@ -26,8 +27,11 @@ public class NewAddAndUpdateEntityAspect {
             for (Object arg : jp.getArgs()) {
                 if (arg instanceof BaseEntity) {
                     BaseEntity<T> entity = (BaseEntity<T>) arg;
-                    entity.setCreateBy(getPrincipal());
-                    entity.setCreateDate(new Date());
+                    String uuid = uuid();
+                    System.out.println("----setId: " + uuid + "----");
+                    entity.setId(uuid); // 设置实体的id
+                    entity.setCreateBy(getPrincipal()); // 设置创建者id
+                    entity.setCreateDate(new Date()); // 设置创建时间
                 }
             }
         }

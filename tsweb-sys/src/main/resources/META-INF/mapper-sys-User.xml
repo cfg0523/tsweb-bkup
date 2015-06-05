@@ -14,6 +14,8 @@
     </resultMap>
 
     <sql id="UserTable">sys_user_mstr</sql>
+    <sql id="UserRoleTable">sys_userrole_det</sql>
+    <sql id="RoleTable">sys_role_mstr</sql>
 
     <sql id="UserColumns">
         user_id, user_name, user_pwd, user_create_by,
@@ -79,5 +81,12 @@
         from <include refid="UserTable"/>
         <include refid="UserWhereCondition"/>
     </select>
+
+    <delete id="deleteRolesByUser" parameterType="User">
+        delete <include refid="UserRoleTable"/>
+        from <include refid="UserRoleTable"/>
+        join <include refid="UserTable"/> on userrole_uid = user_id
+        <include refid="UserWhereCondition"/>
+    </delete>
 
 </mapper>

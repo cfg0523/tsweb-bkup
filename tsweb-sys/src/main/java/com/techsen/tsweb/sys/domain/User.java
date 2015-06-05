@@ -1,7 +1,5 @@
 package com.techsen.tsweb.sys.domain;
 
-import java.util.List;
-
 import com.techsen.tsweb.core.domain.BaseEntity;
 
 /**
@@ -13,16 +11,6 @@ public class User extends BaseEntity<User> {
     private String username;
     private String password;
     
-    /**
-     * 用户所拥有的角色
-     */
-    private List<Role> roles;
-    
-    /**
-     * 用户所拥有的权限
-     */
-    private List<Auth> auths;
-
     public User() {}
     
     public User(String username) {
@@ -52,21 +40,4 @@ public class User extends BaseEntity<User> {
         return this;
     }
 
-    public List<Role> getRoles() {
-        return roles;
-    }
-
-    public User setRoles(List<Role> roles) {
-        this.roles = roles;
-        return this;
-    }
-
-    public List<Auth> getAuths() {
-        return auths;
-    }
-
-    public User setAuths(List<Auth> auths) {
-        this.auths = auths;
-        return this;
-    }
 }

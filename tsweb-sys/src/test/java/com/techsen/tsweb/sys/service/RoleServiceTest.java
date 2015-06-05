@@ -10,8 +10,6 @@ import org.springframework.cache.CacheManager;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.techsen.tsweb.core.util.ValidUtil;
-import com.techsen.tsweb.sys.domain.Auth;
 import com.techsen.tsweb.sys.domain.Role;
 import com.techsen.tsweb.sys.domain.User;
 
@@ -34,11 +32,6 @@ public class RoleServiceTest {
         System.out.println();
         for (Role role : roles) {
             System.out.println(role);
-            if (ValidUtil.isValid(role.getAuths())) {
-                for (Auth auth : role.getAuths()) {
-                    System.out.println(auth);
-                }
-            }
         }
         System.out.println();
 
@@ -46,11 +39,6 @@ public class RoleServiceTest {
         System.out.println();
         for (Role role : roles) {
             System.out.println(role);
-            if (ValidUtil.isValid(role.getAuths())) {
-                for (Auth auth : role.getAuths()) {
-                    System.out.println(auth);
-                }
-            }
         }
         System.out.println();
     }

@@ -25,21 +25,12 @@ public class UserServiceTest {
         User user = this.userService.getUser(new User("hayden"));
         System.out.println();
         System.out.println(user);
-        System.out.println(user.getRoles());
-        System.out.println(user.getAuths());
-        System.out.println();
-
-        user = this.userService.getUser(new User("hayden"));
-        System.out.println();
-        System.out.println(user);
-        System.out.println(user.getRoles());
-        System.out.println(user.getAuths());
         System.out.println();
     }
 
     @Test
     public void testAddUser() {
-        User user = new User("testUser", "testUser").setId("testid");
+        User user = new User("testUser", "testUser");
         System.out.println();
         System.out.println(user);
         this.userService.addUser(user);
@@ -50,7 +41,7 @@ public class UserServiceTest {
 
     @Test
     public void testUpdateUser() {
-        User user = new User("testUser", "testUser").setId("testid");
+        User user = new User("testUser", "testUser");
         this.userService.addUser(user);
         System.out.println();
         System.out.println(user);

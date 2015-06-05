@@ -51,7 +51,10 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public void deleteUser(User user) {
+        // 删除用户对象
         this.userDao.deleteEntity(user);
+        // 删除用户所拥有的角色对象
+        this.userDao.deleteRolesByUser(user);
     }
 
 }

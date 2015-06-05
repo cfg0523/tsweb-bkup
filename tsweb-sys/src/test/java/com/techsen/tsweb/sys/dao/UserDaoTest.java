@@ -71,4 +71,8 @@ public class UserDaoTest {
         Assert.assertEquals(user1.getPassword(), user2.getPassword());
     }
     
+    @Test
+    public void testDeleteUserRoleByUser() {
+        this.userDao.deleteRolesByUser(new User("hayden"));
+    }
 }

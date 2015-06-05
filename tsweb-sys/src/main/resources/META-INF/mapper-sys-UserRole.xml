@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.techsen.tsweb.sys.dao.UserRoleDao">
+    <resultMap type="UserRole" id="UserRoleMap">
+        <result property="id" column="userrole_id"/>
+        <result property="user.id" column="userrole_uid"/>
+        <result property="role.id" column="userrole_rid"/>
+        <result property="createBy" column="userrole_create_by"/>
+        <result property="createDate" column="userrole_create_date"/>
+        <result property="updateBy" column="userrole_update_by"/>
+        <result property="updateDate" column="userrole_update_date"/>
+        <result property="remark" column="userrole_remark"/>
+        <association property="user" javaType="User" resultMap="com.techsen.tsweb.sys.dao.UserDao.UserMap"/>
+        <association property="role" javaType="Role" resultMap="com.techsen.tsweb.sys.dao.RoleDao.RoleMap"/>
+    </resultMap>
+
+    <sql id="UserTable">sys_user_mstr</sql>
+    <sql id="UserRoleTable">sys_userrole_det</sql>
+    <sql id="RoleTable">sys_role_mstr</sql>
+
+    <sql id="UserRoleColumns">
+        userrole_id, userrole_uid, userrole_rid,
+        userrole_create_by, userrole_create_date,
+        userrole_update_by, userrole_update_date,
+        userrole_remark
+    </sql>
+
+    <sql id="UserRoleProperties">
+        #{id}, #{user.id}, #{role.id},
+        #{createBy}, #{createDate},
+        #{updateBy}, #{updateDate},
+        #{remark}
+    </sql>
+    
+    <sql id="UserRoleUpdateMap">
+        userrole_uid = #{user.id},
+        userrole_rid = #{role.id},
+        <!-- userrole_create_by = #{createBy}, -->
+        <!-- userrole_create_date = #{createDate}, -->
+        userrole_update_by = #{updateBy},
+        userrole_update_by = #{updateDate},
+        userrole_remark = #{remark}
+    </sql>
+
+    <sql id="UserRoleWhereCondition">
+        <where>
+            <choose>
+                <when test="id != null">
+                    userrole_id = #{id}
+                </when>
+                <when test="user.id != null and role.id != null">
+                    userrole_uid = #{user.id}
+                    and userrole_rid = #{role.id}
+                </when>
+                <otherwise>
+                    1 != 0
+                </otherwise>
+            </choose>
+        </where>
+    </sql>
+
+    <insert id="addEntity" parameterType="UserRole">
+        insert into <include refid="UserRoleTable"/> (
+            <include refid="UserRoleColumns"/>
+        ) values (
+            <include refid="UserRoleProperties"/>
+        );
+    </insert>
+
+    <delete id="deleteEntity" parameterType="UserRole">
+        delete from <include refid="UserRoleTable"/>
+        where userrole_id = #{id}
+    </delete>
+
+    <update id="updateEntity" parameterType="UserRole">
+        update <include refid="UserRoleTable"/>
+        set <include refid="UserRoleUpdateMap"/>
+        where userrole_id = #{id}
+    </update>
+
+    <select id="getEntity" parameterType="UserRole" resultMap="UserRoleMap">
+        select <include refid="UserRoleColumns"/>,
+        <include refid="com.techsen.tsweb.sys.dao.UserDao.UserColumns"/>,
+        <include refid="com.techsen.tsweb.sys.dao.RoleDao.RoleColumns"/>
+        from <include refid="UserRoleTable"/>
+        join <include refid="UserTable"/> on userrole_uid = user_id
+        join <include refid="RoleTable"/> on userrole_rid = role_id
+        <include refid="UserRoleWhereCondition"/>
+    </select>
+
+</mapper>

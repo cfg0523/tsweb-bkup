@@ -65,7 +65,7 @@
         );
     </insert>
 
-    <delete id="deleteEntity" parameterType="string">
+    <delete id="deleteEntity" parameterType="User">
         delete from <include refid="RoleTable"/>
         where role_id = #{id}
     </delete>

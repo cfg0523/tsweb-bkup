@@ -74,7 +74,7 @@
 
     <!-- 拦截Service的新增、修改操作，设置被新增对象的creatBy和createDate，设置被修改对象的updateBy和updateDate -->
     <!-- 暂时存在一个Bug，设置了AOP之后，配置的缓存注解失效 -->
-    <!-- <bean id="newAddAndUpdateEntityAspect"
+    <bean id="newAddAndUpdateEntityAspect"
         class="com.techsen.tsweb.sys.aspect.NewAddAndUpdateEntityAspect" />
     <aop:config>
         <aop:pointcut id="newAddEntityPointCut"
@@ -87,5 +87,5 @@
             <aop:before method="beforeUpdateEntity"
                 pointcut-ref="updateEntityPointCut" />
         </aop:aspect>
-    </aop:config> -->
+    </aop:config>
 </beans>

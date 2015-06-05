@@ -17,14 +17,6 @@ import com.techsen.tsweb.core.domain.BaseEntity;
 @SuppressWarnings("unchecked")
 public class NewAddAndUpdateEntityAspect {
 
-    public NewAddAndUpdateEntityAspect() {
-        System.out.println();
-        System.out.println("-------------------");
-        System.out.println("init NewAddAndUpdateEntityAspect");
-        System.out.println("-------------------");
-        System.out.println();
-    }
-
     /**
      * 在新增之前设置被新增对象的creatBy和createDate
      */

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.techsen.tsweb.sys.dao.RoleAuthDao">
+    <resultMap type="RoleAuth" id="RoleAuthMap">
+        <result property="id" column="roleauth_id"/>
+        <result property="role.id" column="roleauth_rid"/>
+        <result property="auth.id" column="roleauth_aid"/>
+        <result property="createBy" column="roleauth_create_by"/>
+        <result property="createDate" column="roleauth_create_date"/>
+        <result property="updateBy" column="roleauth_update_by"/>
+        <result property="updateDate" column="roleauth_update_date"/>
+        <result property="remark" column="roleauth_remark"/>
+        <association property="role" javaType="Role" resultMap="com.techsen.tsweb.sys.dao.RoleDao.RoleMap"/>
+        <association property="auth" javaType="Auth" resultMap="com.techsen.tsweb.sys.dao.AuthDao.AuthMap"/>
+    </resultMap>
+
+    <sql id="RoleTable">sys_role_mstr</sql>
+    <sql id="RoleAuthTable">sys_roleauth_det</sql>
+    <sql id="AuthTable">sys_auth_mstr</sql>
+
+    <sql id="RoleAuthColumns">
+        roleauth_id, roleauth_rid, roleauth_aid,
+        roleauth_create_by, roleauth_create_date,
+        roleauth_update_by, roleauth_update_date,
+        roleauth_remark
+    </sql>
+
+    <sql id="RoleAuthProperties">
+        #{id}, #{role.id}, #{auth.id},
+        #{createBy}, #{createDate},
+        #{updateBy}, #{updateDate},
+        #{remark}
+    </sql>
+    
+    <sql id="RoleAuthUpdateMap">
+        roleauth_rid = #{role.id},
+        roleauth_aid = #{auth.id},
+        <!-- roleauth_create_by = #{createBy}, -->
+        <!-- roleauth_create_date = #{createDate}, -->
+        roleauth_update_by = #{updateBy},
+        roleauth_update_by = #{updateDate},
+        roleauth_remark = #{remark}
+    </sql>
+
+    <sql id="RoleAuthWhereCondition">
+        <where>
+            <choose>
+                <when test="id != null">
+                    roleauth_id = #{id}
+                </when>
+                <when test="role.id != null and auth.id != null">
+                    roleauth_rid = #{role.id}
+                    and roleauth_aid = #{auth.id}
+                </when>
+                <otherwise>
+                    1 != 0
+                </otherwise>
+            </choose>
+        </where>
+    </sql>
+
+    <insert id="addEntity" parameterType="RoleAuth">
+        insert into <include refid="RoleAuthTable"/> (
+            <include refid="RoleAuthColumns"/>
+        ) values (
+            <include refid="RoleAuthProperties"/>
+        );
+    </insert>
+
+    <delete id="deleteEntity" parameterType="RoleAuth">
+        delete from <include refid="RoleAuthTable"/>
+        where roleauth_id = #{id}
+    </delete>
+
+    <update id="updateEntity" parameterType="RoleAuth">
+        update <include refid="RoleAuthTable"/>
+        set <include refid="RoleAuthUpdateMap"/>
+        where roleauth_id = #{id}
+    </update>
+
+    <select id="getEntity" parameterType="RoleAuth" resultMap="RoleAuthMap">
+        select <include refid="RoleAuthColumns"/>,
+        <include refid="com.techsen.tsweb.sys.dao.RoleDao.RoleColumns"/>,
+        <include refid="com.techsen.tsweb.sys.dao.AuthDao.AuthColumns"/>
+        from <include refid="RoleAuthTable"/>
+        join <include refid="RoleTable"/> on roleauth_rid = role_id
+        join <include refid="AuthTable"/> on roleauth_aid = auth_id
+        <include refid="RoleAuthWhereCondition"/>
+    </select>
+
+</mapper>

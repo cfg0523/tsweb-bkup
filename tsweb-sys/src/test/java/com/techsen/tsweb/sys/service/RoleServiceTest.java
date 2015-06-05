@@ -4,8 +4,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import net.sf.ehcache.Cache;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.cache.CacheManager;
@@ -16,7 +14,6 @@ import com.techsen.tsweb.core.util.ValidUtil;
 import com.techsen.tsweb.sys.domain.Auth;
 import com.techsen.tsweb.sys.domain.Role;
 import com.techsen.tsweb.sys.domain.User;
-import com.techsen.tsweb.sys.util.SysConst;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath*:META-INF/spring-*.xml")
@@ -58,16 +55,4 @@ public class RoleServiceTest {
         System.out.println();
     }
 
-    @Test
-    public void testCache() {
-        this.roleService.getRolesByUser(new User("hayden"));
-        System.out.println();
-        Cache cache = (Cache) cacheManager.getCache(SysConst.CACHE_ROLE).getNativeCache();
-        for (Object key : cache.getKeys()) {
-            System.out.println("cacheKey: " + key);
-            System.out.println("cacheValue: " + cache.get(key).getObjectValue());
-        }
-        System.out.println();
-    }
-    
 }

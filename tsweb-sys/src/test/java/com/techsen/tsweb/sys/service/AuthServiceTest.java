@@ -4,8 +4,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import net.sf.ehcache.Cache;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.cache.CacheManager;
@@ -14,7 +12,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.techsen.tsweb.sys.domain.Auth;
 import com.techsen.tsweb.sys.domain.User;
-import com.techsen.tsweb.sys.util.SysConst;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath*:META-INF/spring-*.xml")
@@ -43,15 +40,4 @@ public class AuthServiceTest {
         System.out.println();
     }
 
-    @Test
-    public void testCache() {
-        this.authService.getAuthsByUser(new User("hayden"));
-        System.out.println();
-        Cache cache = (Cache) cacheManager.getCache(SysConst.CACHE_AUTH).getNativeCache();
-        for (Object key : cache.getKeys()) {
-            System.out.println("cacheKey: " + key);
-            System.out.println("cacheValue: " + cache.get(key).getObjectValue());
-        }
-        System.out.println();
-    }
 }

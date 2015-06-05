@@ -62,7 +62,7 @@
             <include refid="UserColumns"/>
         ) values (
             <include refid="UserProperties"/>
-        );
+        )
     </insert>
 
     <delete id="deleteEntity" parameterType="string">

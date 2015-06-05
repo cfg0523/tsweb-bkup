@@ -65,7 +65,7 @@
             <include refid="UserRoleColumns"/>
         ) values (
             <include refid="UserRoleProperties"/>
-        );
+        )
     </insert>
 
     <delete id="deleteEntity" parameterType="UserRole">

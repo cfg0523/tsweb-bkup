@@ -64,7 +64,7 @@
             <include refid="AuthColumns"/>
         ) values (
             <include refid="AuthProperties"/>
-        );
+        )
     </insert>
 
     <delete id="deleteEntity" parameterType="User">

@@ -3,7 +3,7 @@
 
 <mapper namespace="com.techsen.tsweb.sys.dao.AuthDao">
     <resultMap type="Auth" id="AuthMap">
-        <result property="id" column="auth_id"/>
+        <id property="id" column="auth_id"/>
         <result property="authName" column="auth_name"/>
         <result property="authDesc" column="auth_desc"/>
         <result property="createBy" column="auth_create_by"/>

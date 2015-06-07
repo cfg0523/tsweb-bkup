@@ -3,7 +3,7 @@
 
 <mapper namespace="com.techsen.tsweb.sys.dao.UserDao">
     <resultMap type="User" id="UserMap">
-        <result property="id" column="user_id"/>
+        <id property="id" column="user_id"/>
         <result property="username" column="user_name"/>
         <result property="password" column="user_pwd"/>
         <result property="createBy" column="user_create_by"/>

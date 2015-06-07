@@ -3,7 +3,7 @@
 
 <mapper namespace="com.techsen.tsweb.sys.dao.RoleAuthDao">
     <resultMap type="RoleAuth" id="RoleAuthMap">
-        <result property="id" column="roleauth_id"/>
+        <id property="id" column="roleauth_id"/>
         <result property="role.id" column="roleauth_rid"/>
         <result property="auth.id" column="roleauth_aid"/>
         <result property="createBy" column="roleauth_create_by"/>

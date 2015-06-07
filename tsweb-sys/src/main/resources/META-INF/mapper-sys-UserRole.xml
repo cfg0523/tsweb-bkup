@@ -3,7 +3,7 @@
 
 <mapper namespace="com.techsen.tsweb.sys.dao.UserRoleDao">
     <resultMap type="UserRole" id="UserRoleMap">
-        <result property="id" column="userrole_id"/>
+        <id property="id" column="userrole_id"/>
         <result property="user.id" column="userrole_uid"/>
         <result property="role.id" column="userrole_rid"/>
         <result property="createBy" column="userrole_create_by"/>

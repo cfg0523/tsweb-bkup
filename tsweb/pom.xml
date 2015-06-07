@@ -291,8 +291,8 @@
         </testResources>
         <pluginManagement>
             <plugins>
-                <!-- This plugin's configuration is used to store Eclipse m2e settings 
-                    only. It has no influence on the Maven build itself. -->
+                <!-- This plugin's configuration is used to store Eclipse 
+                    m2e settings only. It has no influence on the Maven build itself. -->
                 <plugin>
                     <groupId>org.eclipse.m2e</groupId>
                     <artifactId>lifecycle-mapping</artifactId>
@@ -310,7 +310,7 @@
                                         </goals>
                                     </pluginExecutionFilter>
                                     <action>
-                                        <ignore/>
+                                        <ignore />
                                     </action>
                                 </pluginExecution>
                             </pluginExecutions>
@@ -451,7 +451,7 @@
                         <webAppConfig>
                             <!-- 排除Duplicate fragment name: spring_web错误 -->
                             <allowDuplicateFragmentNames>true</allowDuplicateFragmentNames>
-                            <contextPath>/tsweb</contextPath>
+                            <contextPath>/${project.artifactId}</contextPath>
                         </webAppConfig>
                     </configuration>
                     <executions>

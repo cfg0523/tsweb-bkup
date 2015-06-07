@@ -86,8 +86,8 @@ public class LocalRealm extends AuthorizingRealm {
         User user = this.userService.getUser(new User(username));
         if (user != null) {
             if (user.getPassword().equals(password)) {
-                return new SimpleAuthenticationInfo(user.getId(), username
-                        + ":" + password, this.getName());
+                return new SimpleAuthenticationInfo(user.getId(), password,
+                        this.getName());
             } else {
                 throw new CredentialsException("用户名或密码错误");
             }

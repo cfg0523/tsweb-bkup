@@ -107,6 +107,9 @@
                         <overlay>
                             <groupId>${project.groupId}</groupId>
                             <artifactId>tsweb-com</artifactId>
+                            <excludes>
+                                <exclude>WEB-INF/classes/</exclude>
+                            </excludes>
                         </overlay>
                     </overlays>
                 </configuration>

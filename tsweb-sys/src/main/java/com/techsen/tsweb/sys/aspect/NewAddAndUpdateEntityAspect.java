@@ -47,8 +47,8 @@ public class NewAddAndUpdateEntityAspect {
             for (Object arg : jp.getArgs()) {
                 if (arg instanceof BaseEntity) {
                     BaseEntity<T> entity = (BaseEntity<T>) arg;
-                    entity.setUpdateBy(getPrincipal());
-                    entity.setUpdateDate(new Date());
+                    entity.setUpdateBy(getPrincipal()); // 设置修改者id
+                    entity.setUpdateDate(new Date()); // 设置修改时间
                 }
             }
         }

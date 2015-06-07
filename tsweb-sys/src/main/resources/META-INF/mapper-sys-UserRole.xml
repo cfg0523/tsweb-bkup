@@ -54,7 +54,7 @@
                     and userrole_rid = #{role.id}
                 </when>
                 <otherwise>
-                    1 != 0
+                    1 == 0
                 </otherwise>
             </choose>
         </where>

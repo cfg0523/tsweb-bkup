@@ -51,7 +51,7 @@
                     user_name = #{username}
                 </when>
                 <otherwise>
-                    1 != 0
+                    1 == 0
                 </otherwise>
             </choose>
         </where>

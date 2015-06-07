@@ -51,7 +51,7 @@
                     role_name = #{roleName}
                 </when>
                 <otherwise>
-                    1 != 0
+                    1 == 0
                 </otherwise>
             </choose>
         </where>

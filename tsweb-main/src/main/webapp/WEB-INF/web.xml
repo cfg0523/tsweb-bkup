@@ -67,4 +67,22 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
+    <!-- 配置SiteMesh3过滤器 -->
+    <filter>
+        <filter-name>sitemeshFilter</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+        <init-param>
+            <param-name>configFile</param-name>
+            <param-value>/</param-value>
+        </init-param>
+        <init-param>
+            <param-name>targetFilterLifecycle</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>sitemeshFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
 </web-app>

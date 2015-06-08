@@ -35,6 +35,11 @@
             <groupId>jstl</groupId>
             <artifactId>jstl</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.sitemesh</groupId>
+            <artifactId>sitemesh</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

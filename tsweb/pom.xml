@@ -43,6 +43,8 @@
         <cglib.version>3.0</cglib.version>
         <aspectjweaver.version>1.8.5</aspectjweaver.version>
         <aspectjrt.version>1.8.5</aspectjrt.version>
+        
+        <sitemesh.version>3.0.0</sitemesh.version>
     </properties>
 
     <modules>
@@ -260,6 +262,12 @@
                 <artifactId>aspectjrt</artifactId>
                 <version>${aspectjrt.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.sitemesh</groupId>
+                <artifactId>sitemesh</artifactId>
+                <version>${sitemesh.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -291,8 +299,8 @@
         </testResources>
         <pluginManagement>
             <plugins>
-                <!-- This plugin's configuration is used to store Eclipse 
-                    m2e settings only. It has no influence on the Maven build itself. -->
+                <!-- This plugin's configuration is used to store Eclipse m2e settings 
+                    only. It has no influence on the Maven build itself. -->
                 <plugin>
                     <groupId>org.eclipse.m2e</groupId>
                     <artifactId>lifecycle-mapping</artifactId>
@@ -310,7 +318,7 @@
                                         </goals>
                                     </pluginExecutionFilter>
                                     <action>
-                                        <ignore />
+                                        <ignore/>
                                     </action>
                                 </pluginExecution>
                             </pluginExecutions>

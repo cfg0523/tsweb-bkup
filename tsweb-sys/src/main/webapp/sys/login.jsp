@@ -9,7 +9,7 @@
 <body>
 	<form action="<c:url value='/sys/login'/>" method="post">
 		Username: <input type="text" name="username" value="hayden" /><br />
-		Password: <input type="text" name="password" value="qiannianhu" /><br />
+		Password: <input type="text" name="password" value="hayden" /><br />
 		<input type="submit" name="submit" value="Submit" />
 	</form>
 </body>

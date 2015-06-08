@@ -27,9 +27,12 @@ public class NewAddAndUpdateEntityAspect {
             for (Object arg : jp.getArgs()) {
                 if (arg instanceof BaseEntity) {
                     BaseEntity<T> entity = (BaseEntity<T>) arg;
-                    String uuid = uuid();
-                    System.out.println("----setId: " + uuid + "----");
-                    entity.setId(uuid); // 设置实体的id
+                    if (!isValid(entity.getId())) {
+                        // 如果entity没有设置Id，那么生成一个32位的uuid作为id
+                        String uuid = uuid();
+                        entity.setId(uuid); // 设置实体的id
+                        System.out.println("----setId: " + uuid + "----");
+                    }
                     entity.setCreateBy(getPrincipal()); // 设置创建者id
                     entity.setCreateDate(new Date()); // 设置创建时间
                 }

@@ -8,31 +8,31 @@ import com.techsen.tsweb.core.domain.BaseEntity;
 public class Auth extends BaseEntity<Auth> {
     private static final long serialVersionUID = 1651997840821737066L;
 
-    private String authName;
-    private String authDesc;
+    private String name;
+    private String desc;
 
     public Auth() {
     }
 
-    public Auth(String authName, String authDesc) {
-        this.authName = authName;
-        this.authDesc = authDesc;
+    public Auth(String name, String desc) {
+        this.name = name;
+        this.desc = desc;
     }
 
-    public String getAuthName() {
-        return authName;
+    public String getName() {
+        return name;
     }
 
-    public void setAuthName(String authName) {
-        this.authName = authName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getAuthDesc() {
-        return authDesc;
+    public String getDesc() {
+        return desc;
     }
 
-    public void setAuthDesc(String authDesc) {
-        this.authDesc = authDesc;
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
     
 }

@@ -40,7 +40,7 @@ public class RoleDaoTest {
     @Test
     public void testUpdateEntity() {
         Role tmp = this.role.clone();
-        tmp.setRoleDesc("test-role");
+        tmp.setDesc("test-role");
         this.roleDao.updateEntity(tmp);
         tmp = this.roleDao.getEntity(tmp);
         
@@ -48,7 +48,7 @@ public class RoleDaoTest {
         System.out.println("tmp Role: " + tmp);
         System.out.println();
         
-        Assert.assertEquals("test-role", tmp.getRoleDesc());
+        Assert.assertEquals("test-role", tmp.getDesc());
     }
     
     @Test
@@ -62,7 +62,7 @@ public class RoleDaoTest {
         System.out.println();
         
         tmp.setId(null);
-        tmp.setRoleName(this.role.getRoleName());
+        tmp.setName(this.role.getName());
         Role role2 = this.roleDao.getEntity(tmp);
         
         System.out.println();
@@ -70,8 +70,8 @@ public class RoleDaoTest {
         System.out.println();
         
         Assert.assertEquals(role1.getId(), role2.getId());
-        Assert.assertEquals(role1.getRoleName(), role2.getRoleName());
-        Assert.assertEquals(role1.getRoleDesc(), role2.getRoleDesc());
+        Assert.assertEquals(role1.getName(), role2.getName());
+        Assert.assertEquals(role1.getDesc(), role2.getDesc());
     }
 
     @Test

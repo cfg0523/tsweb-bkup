@@ -4,8 +4,8 @@
 <mapper namespace="com.techsen.tsweb.sys.dao.RoleDao">
     <resultMap type="Role" id="RoleMap">
         <id property="id" column="role_id"/>
-        <result property="roleName" column="role_name"/>
-        <result property="roleDesc" column="role_desc"/>
+        <result property="name" column="role_name"/>
+        <result property="desc" column="role_desc"/>
         <result property="createBy" column="role_create_by"/>
         <result property="createDate" column="role_create_date"/>
         <result property="updateBy" column="role_update_by"/>
@@ -25,15 +25,15 @@
     </sql>
 
     <sql id="RoleProperties">
-        #{id}, #{roleName}, #{roleDesc}, #{createBy},
-        #{createDate}, #{updateBy},
-        #{updateDate},
+        #{id}, #{name}, #{desc},
+        #{createBy}, #{createDate},
+        #{updateBy}, #{updateDate},
         #{remark}
     </sql>
 
     <sql id="RoleUpdateMap">
-        role_name = #{roleName},
-        role_desc = #{roleDesc},
+        role_name = #{name},
+        role_desc = #{desc},
         <!-- role_create_by = #{createBy}, -->
         <!-- role_create_date = #{createDate}, -->
         role_update_by = #{updateBy},
@@ -47,8 +47,8 @@
                 <when test="id != null">
                     role_id = #{id}
                 </when>
-                <when test="roleName != null">
-                    role_name = #{roleName}
+                <when test="name != null">
+                    role_name = #{name}
                 </when>
                 <otherwise>
                     1 == 0
@@ -67,13 +67,13 @@
 
     <delete id="deleteEntity" parameterType="User">
         delete from <include refid="RoleTable"/>
-        where role_id = #{id}
+        <include refid="RoleWhereCondition"/>
     </delete>
 
     <update id="updateEntity" parameterType="Role">
         update <include refid="RoleTable"/>
         set <include refid="RoleUpdateMap"/>
-        where role_id = #{id}
+        <include refid="RoleWhereCondition"/>
     </update>
 
     <select id="getEntity" parameterType="Role" resultMap="RoleMap">

@@ -40,7 +40,7 @@ public class AuthDaoTest {
     @Test
     public void testUpdateEntity() {
         Auth tmp = this.auth.clone();
-        tmp.setAuthDesc("test-auth");
+        tmp.setDesc("test-auth");
         this.authDao.updateEntity(tmp);
         tmp = this.authDao.getEntity(tmp);
         
@@ -48,11 +48,11 @@ public class AuthDaoTest {
         System.out.println("tmp Auth: " + tmp);
         System.out.println();
         
-        Assert.assertEquals("test-auth", tmp.getAuthDesc());
+        Assert.assertEquals("test-auth", tmp.getDesc());
     }
 
     @Test
-    public void testGetRoleByRole() {
+    public void testGetAuthByAuth() {
         Auth tmp = new Auth();
         tmp.setId(this.auth.getId());
         Auth auth1 = this.authDao.getEntity(tmp);
@@ -62,7 +62,7 @@ public class AuthDaoTest {
         System.out.println();
         
         tmp.setId(null);
-        tmp.setAuthName(this.auth.getAuthName());
+        tmp.setName(this.auth.getName());
         Auth auth2 = this.authDao.getEntity(tmp);
         
         System.out.println();
@@ -70,8 +70,8 @@ public class AuthDaoTest {
         System.out.println();
         
         Assert.assertEquals(auth1.getId(), auth2.getId());
-        Assert.assertEquals(auth1.getAuthName(), auth2.getAuthName());
-        Assert.assertEquals(auth1.getAuthDesc(), auth2.getAuthDesc());
+        Assert.assertEquals(auth1.getName(), auth2.getName());
+        Assert.assertEquals(auth1.getDesc(), auth2.getDesc());
     }
     
     @Test

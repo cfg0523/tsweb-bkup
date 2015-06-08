@@ -8,31 +8,31 @@ import com.techsen.tsweb.core.domain.BaseEntity;
 public class Role extends BaseEntity<Role> {
     private static final long serialVersionUID = -7838821087064025453L;
 
-    private String roleName;
-    private String roleDesc;
+    private String name;
+    private String desc;
     
     public Role() {}
 
-    public Role(String roleName, String roleDesc) {
-        this.roleName = roleName;
-        this.roleDesc = roleDesc;
+    public Role(String name, String desc) {
+        this.name = name;
+        this.desc = desc;
     }
 
-    public String getRoleName() {
-        return roleName;
+    public String getName() {
+        return name;
     }
 
-    public Role setRoleName(String roleName) {
-        this.roleName = roleName;
+    public Role setName(String name) {
+        this.name = name;
         return this;
     }
 
-    public String getRoleDesc() {
-        return roleDesc;
+    public String getDesc() {
+        return desc;
     }
 
-    public Role setRoleDesc(String roleDesc) {
-        this.roleDesc = roleDesc;
+    public Role setDesc(String desc) {
+        this.desc = desc;
         return this;
     }
 

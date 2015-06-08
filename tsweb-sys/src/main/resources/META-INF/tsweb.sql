@@ -107,3 +107,27 @@ insert into sys_roleauth_det values ('RA2', 'R2', 'A2', 'U1', '2015-01-01 00:00:
 insert into sys_roleauth_det values ('RA3', 'R3', 'A3', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
 insert into sys_roleauth_det values ('RA4', 'R3', 'A4', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
 insert into sys_roleauth_det values ('RA5', 'R3', 'A5', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
+
+/**
+ * sys_menu_mstr
+ */
+drop table if exists sys_menu_mstr;
+create table sys_menu_mstr (
+    menu_id varchar(32) comment '菜单ID',
+    menu_path varchar(64) not null comment '菜单路径',
+    menu_name varchar(32) comment '菜单名',
+    menu_auth varchar(32) comment '访问菜单所需的权限',
+    menu_parent varchar(32) comment '父菜单',
+    menu_create_by varchar(32) comment '创建人ID',
+    menu_create_date datetime comment '创建时间',
+    menu_update_by varchar(32) comment '修改人ID',
+    menu_update_date datetime comment '修改时间',
+    menu_remark varchar(256) comment '备注',
+    primary key(menu_id),
+    unique key(menu_path)
+) comment '菜单表';
+insert into sys_menu_mstr values ('M0', '', '系统管理', '', '', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
+insert into sys_menu_mstr values ('M1', '/sys/user', '用户管理', 'sys:user:list', 'M0', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
+insert into sys_menu_mstr values ('M2', '/sys/role', '角色管理', 'sys:role:list', 'M0', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
+insert into sys_menu_mstr values ('M3', '/sys/auth', '权限管理', 'sys:auth:list', 'M0', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
+insert into sys_menu_mstr values ('M4', '/sys/menu', '菜单管理', 'sys:menu:list', 'M0', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');

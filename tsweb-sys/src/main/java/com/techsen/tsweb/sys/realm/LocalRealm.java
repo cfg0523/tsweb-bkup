@@ -55,7 +55,7 @@ public class LocalRealm extends AuthorizingRealm {
             List<Role> roles = this.roleService.getRolesByUser(user);
             if (isValid(roles)) {
                 for (Role role : roles) {
-                    String roleName = role.getRoleName();
+                    String roleName = role.getName();
                     authzInfo.addRole(roleName);
                 }
             }
@@ -64,7 +64,7 @@ public class LocalRealm extends AuthorizingRealm {
             List<Auth> auths = this.authService.getAuthsByUser(user);
             if (isValid(auths)) {
                 for (Auth auth : auths) {
-                    String authName = auth.getAuthName();
+                    String authName = auth.getName();
                     authzInfo.addStringPermission(authName);
                 }
             }

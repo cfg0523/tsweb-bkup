@@ -4,8 +4,8 @@
 <mapper namespace="com.techsen.tsweb.sys.dao.AuthDao">
     <resultMap type="Auth" id="AuthMap">
         <id property="id" column="auth_id"/>
-        <result property="authName" column="auth_name"/>
-        <result property="authDesc" column="auth_desc"/>
+        <result property="name" column="auth_name"/>
+        <result property="desc" column="auth_desc"/>
         <result property="createBy" column="auth_create_by"/>
         <result property="createDate" column="auth_create_date"/>
         <result property="updateBy" column="auth_update_by"/>
@@ -20,22 +20,22 @@
     <sql id="AuthTable">sys_auth_mstr</sql>
 
     <sql id="AuthColumns">
-        auth_id, auth_name, auth_desc, auth_create_by,
-        auth_create_date, auth_update_by,
-        auth_update_date,
+        auth_id, auth_name, auth_desc,
+        auth_create_by, auth_create_date,
+        auth_update_by, auth_update_date,
         auth_remark
     </sql>
 
     <sql id="AuthProperties">
-        #{id}, #{authName}, #{authDesc}, #{createBy},
-        #{createDate}, #{updateBy},
-        #{updateDate},
+        #{id}, #{name}, #{desc},
+        #{createBy}, #{createDate},
+        #{updateBy}, #{updateDate},
         #{remark}
     </sql>
 
     <sql id="AuthUpdateMap">
-        auth_name = #{authName},
-        auth_desc = #{authDesc},
+        auth_name = #{name},
+        auth_desc = #{desc},
         <!-- auth_create_by = #{createBy}, -->
         <!-- auth_create_date = #{createDate}, -->
         auth_update_by = #{updateBy},
@@ -49,8 +49,8 @@
                 <when test="id != null">
                     auth_id = #{id}
                 </when>
-                <when test="authName != null">
-                    auth_name = #{authName}
+                <when test="name != null">
+                    auth_name = #{name}
                 </when>
                 <otherwise>
                     1 == 0
@@ -69,13 +69,13 @@
 
     <delete id="deleteEntity" parameterType="User">
         delete from <include refid="AuthTable"/>
-        where auth_id = #{id}
+        <include refid="AuthWhereCondition"/>
     </delete>
 
     <update id="updateEntity" parameterType="Auth">
         update <include refid="AuthTable"/>
         set <include refid="AuthUpdateMap"/>
-        where auth_id = #{id}
+        <include refid="AuthWhereCondition"/>
     </update>
 
     <select id="getEntity" parameterType="Auth" resultMap="AuthMap">

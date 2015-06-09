@@ -49,9 +49,7 @@
 
     <modules>
         <module>../tsweb-core</module>
-        <module>../tsweb-com</module>
         <module>../tsweb-sys</module>
-        <module>../tsweb-main</module>
     </modules>
 
     <dependencyManagement>
@@ -63,18 +61,6 @@
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>tsweb-com</artifactId>
-                <version>${project.version}</version>
-                <type>war</type>
-            </dependency>
-            <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>tsweb-com</artifactId>
-                <version>${project.version}</version>
-                <classifier>classes</classifier>
-            </dependency>
-            <dependency>
-                <groupId>${project.groupId}</groupId>
                 <artifactId>tsweb-sys</artifactId>
                 <version>${project.version}</version>
                 <type>war</type>
@@ -82,18 +68,6 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>tsweb-sys</artifactId>
-                <version>${project.version}</version>
-                <classifier>classes</classifier>
-            </dependency>
-            <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>tsweb-main</artifactId>
-                <version>${project.version}</version>
-                <type>war</type>
-            </dependency>
-            <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>tsweb-main</artifactId>
                 <version>${project.version}</version>
                 <classifier>classes</classifier>
             </dependency>

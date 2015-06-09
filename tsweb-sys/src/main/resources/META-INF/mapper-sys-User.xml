@@ -5,7 +5,7 @@
     <resultMap type="User" id="UserMap">
         <id property="id" column="user_id"/>
         <result property="username" column="user_name"/>
-        <result property="password" column="user_pwd"/>
+        <result property="password" column="user_password"/>
         <result property="createBy" column="user_create_by"/>
         <result property="createDate" column="user_create_date"/>
         <result property="updateBy" column="user_update_by"/>
@@ -18,9 +18,9 @@
     <sql id="RoleTable">sys_role_mstr</sql>
 
     <sql id="UserColumns">
-        user_id, user_name, user_pwd, user_create_by,
-        user_create_date, user_update_by,
-        user_update_date,
+        user_id, user_name, user_password,
+        user_create_by, user_create_date,
+        user_update_by, user_update_date,
         user_remark
     </sql>
 
@@ -33,7 +33,7 @@
     
     <sql id="UserUpdateMap">
         user_name = #{username},
-        user_pwd = #{password},
+        user_password = #{password},
         <!-- user_create_by = #{createBy}, -->
         <!-- user_create_date = #{createDate}, -->
         user_update_by = #{updateBy},
@@ -85,7 +85,7 @@
     <delete id="deleteRolesByUser" parameterType="User">
         delete <include refid="UserRoleTable"/>
         from <include refid="UserRoleTable"/>
-        join <include refid="UserTable"/> on userrole_uid = user_id
+        join <include refid="UserTable"/> on userrole_user_id = user_id
         <include refid="UserWhereCondition"/>
     </delete>
 

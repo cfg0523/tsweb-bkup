@@ -4,8 +4,8 @@
 <mapper namespace="com.techsen.tsweb.sys.dao.UserRoleDao">
     <resultMap type="UserRole" id="UserRoleMap">
         <id property="id" column="userrole_id"/>
-        <result property="user.id" column="userrole_uid"/>
-        <result property="role.id" column="userrole_rid"/>
+        <result property="user.id" column="userrole_user_id"/>
+        <result property="role.id" column="userrole_role_id"/>
         <result property="createBy" column="userrole_create_by"/>
         <result property="createDate" column="userrole_create_date"/>
         <result property="updateBy" column="userrole_update_by"/>
@@ -20,7 +20,7 @@
     <sql id="RoleTable">sys_role_mstr</sql>
 
     <sql id="UserRoleColumns">
-        userrole_id, userrole_uid, userrole_rid,
+        userrole_id, userrole_user_id, userrole_role_id,
         userrole_create_by, userrole_create_date,
         userrole_update_by, userrole_update_date,
         userrole_remark
@@ -34,8 +34,8 @@
     </sql>
     
     <sql id="UserRoleUpdateMap">
-        userrole_uid = #{user.id},
-        userrole_rid = #{role.id},
+        userrole_user_id = #{user.id},
+        userrole_role_id = #{role.id},
         <!-- userrole_create_by = #{createBy}, -->
         <!-- userrole_create_date = #{createDate}, -->
         userrole_update_by = #{updateBy},
@@ -50,8 +50,8 @@
                     userrole_id = #{id}
                 </when>
                 <when test="user.id != null and role.id != null">
-                    userrole_uid = #{user.id}
-                    and userrole_rid = #{role.id}
+                    userrole_user_id = #{user.id}
+                    and userrole_role_id = #{role.id}
                 </when>
                 <otherwise>
                     1 == 0
@@ -84,8 +84,8 @@
         <include refid="com.techsen.tsweb.sys.dao.UserDao.UserColumns"/>,
         <include refid="com.techsen.tsweb.sys.dao.RoleDao.RoleColumns"/>
         from <include refid="UserRoleTable"/>
-        join <include refid="UserTable"/> on userrole_uid = user_id
-        join <include refid="RoleTable"/> on userrole_rid = role_id
+        join <include refid="UserTable"/> on userrole_user_id = user_id
+        join <include refid="RoleTable"/> on userrole_role_id = role_id
         <include refid="UserRoleWhereCondition"/>
     </select>
 

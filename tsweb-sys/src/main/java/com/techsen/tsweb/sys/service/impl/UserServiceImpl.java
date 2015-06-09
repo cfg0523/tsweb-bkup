@@ -4,7 +4,6 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.techsen.tsweb.sys.dao.AuthDao;
 import com.techsen.tsweb.sys.dao.RoleDao;
 import com.techsen.tsweb.sys.dao.UserDao;
 import com.techsen.tsweb.sys.domain.User;
@@ -18,9 +17,6 @@ public class UserServiceImpl implements UserService {
 
     @Resource
     private RoleDao roleDao;
-
-    @Resource
-    private AuthDao authDao;
 
     /**
      * 根据用户Id或username获取用户信息

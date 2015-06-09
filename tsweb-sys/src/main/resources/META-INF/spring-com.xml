@@ -54,8 +54,4 @@
             value="com.techsen.tsweb.core.annotation.LocalMyBatisDao"/>
     </bean>
 
-    <!-- 配置SiteMesh3过滤器 -->
-    <bean id="sitemeshFilter" class="org.sitemesh.config.ConfigurableSiteMeshFilter">
-    </bean>
-
 </beans>

@@ -18,10 +18,8 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
-import com.techsen.tsweb.sys.domain.Auth;
 import com.techsen.tsweb.sys.domain.Role;
 import com.techsen.tsweb.sys.domain.User;
-import com.techsen.tsweb.sys.service.AuthService;
 import com.techsen.tsweb.sys.service.RoleService;
 import com.techsen.tsweb.sys.service.UserService;
 
@@ -35,9 +33,6 @@ public class LocalRealm extends AuthorizingRealm {
 
     @Resource
     private RoleService roleService;
-
-    @Resource
-    private AuthService authService;
 
     /**
      * 处理用户授权
@@ -57,15 +52,6 @@ public class LocalRealm extends AuthorizingRealm {
                 for (Role role : roles) {
                     String roleName = role.getName();
                     authzInfo.addRole(roleName);
-                }
-            }
-
-            // 获取用户权限
-            List<Auth> auths = this.authService.getAuthsByUser(user);
-            if (isValid(auths)) {
-                for (Auth auth : auths) {
-                    String authName = auth.getName();
-                    authzInfo.addStringPermission(authName);
                 }
             }
         }

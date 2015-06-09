@@ -1,11 +1,12 @@
 /**
  * sys_user_mstr
+ * Principal: User
  */
 drop table if exists sys_user_mstr;
 create table sys_user_mstr (
     user_id varchar(32),
     user_name varchar(32) not null comment '用户英文名',
-    user_pwd varchar(32) not null comment '密码',
+    user_password varchar(32) not null comment '密码',
     user_create_by varchar(32) comment '创建人ID',
     user_create_date datetime comment '创建时间',
     user_update_by varchar(32) comment '修改人ID',
@@ -14,14 +15,15 @@ create table sys_user_mstr (
     primary key(user_id),
     unique key(user_name)
 ) comment '用户表';
-insert into sys_user_mstr values ('U1', 'admin', 'admin', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
-insert into sys_user_mstr values ('U2', 'giny', 'giny', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
-insert into sys_user_mstr values ('U3', 'syxie', 'syxie', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
-insert into sys_user_mstr values ('U4', 'hayden', 'hayden', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
-insert into sys_user_mstr values ('U5', 'yilia', 'yilia', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
+insert into sys_user_mstr values ('U1', 'hayden', 'hayden', '', null, '', null, '');
+insert into sys_user_mstr values ('U2', 'fantasy', 'fantasy', '', null, '', null, '');
+insert into sys_user_mstr values ('U3', 'giny', 'giny', '', null, '', null, '');
+insert into sys_user_mstr values ('U4', 'yilia', 'yilia', '', null, '', null, '');
+insert into sys_user_mstr values ('U5', 'tracy', 'tracy', '', null, '', null, '');
 
 /**
  * sys_role_mstr
+ * Principal: Role
  */
 drop table if exists sys_role_mstr;
 create table sys_role_mstr (
@@ -36,33 +38,9 @@ create table sys_role_mstr (
     primary key(role_id),
     unique key(role_name)
 ) comment '角色表';
-insert into sys_role_mstr values ('R1', 'superuser', '超级管理员', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
-insert into sys_role_mstr values ('R2', 'manager', '经理', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
-insert into sys_role_mstr values ('R3', 'staff', '职员', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
-
-/**
- * sys_auth_mstr
- */
-drop table if exists sys_auth_mstr;
-create table sys_auth_mstr (
-    auth_id varchar(32),
-    auth_name varchar(32) not null comment '权限名',
-    auth_desc varchar(32) comment '权限描述',
-    auth_create_by varchar(32) comment '创建人ID',
-    auth_create_date datetime comment '创建时间',
-    auth_update_by varchar(32) comment '修改人ID',
-    auth_update_date datetime comment '修改时间',
-    auth_remark varchar(256) comment '备注',
-    primary key(auth_id),
-    unique key(auth_name)
-) comment '权限表';
-insert into sys_auth_mstr values ('A1', '*:*', '所有的权限', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
-insert into sys_auth_mstr values ('A2', 'user:*', '对用户操作有所有权限', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
-insert into sys_auth_mstr values ('A3', 'user:view', '查看用户', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
-insert into sys_auth_mstr values ('A4', 'user:add', '添加用户', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
-insert into sys_auth_mstr values ('A5', 'user:update', '修改用户', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
-insert into sys_auth_mstr values ('A6', 'user:delete', '删除用户', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
-insert into sys_auth_mstr values ('A7', 'menu:*', '对菜单操作有所有权限', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
+insert into sys_role_mstr values ('R1', 'programmer', '程序员', '', null, '', null, '');
+insert into sys_role_mstr values ('R2', 'manager', '经理', '', null, '', null, '');
+insert into sys_role_mstr values ('R3', 'staff', '职员', '', null, '', null, '');
 
 /**
  * sys_userrole_det
@@ -70,64 +48,118 @@ insert into sys_auth_mstr values ('A7', 'menu:*', '对菜单操作有所有权�
 drop table if exists sys_userrole_det;
 create table sys_userrole_det (
     userrole_id varchar(32) comment '用户角色ID',
-    userrole_uid varchar(32) comment '用户ID',
-    userrole_rid varchar(32) comment '角色ID',
+    userrole_user_id varchar(32) not null comment '用户ID',
+    userrole_role_id varchar(32) not null comment '角色ID',
     userrole_create_by varchar(32) comment '创建人ID',
     userrole_create_date datetime comment '创建时间',
     userrole_update_by varchar(32) comment '修改人ID',
     userrole_update_date datetime comment '修改时间',
     userrole_remark varchar(256) comment '备注',
     primary key(userrole_id),
-    unique key(userrole_uid, userrole_rid)
+    unique key(userrole_user_id, userrole_role_id)
 ) comment '用户角色表';
-insert into sys_userrole_det values ('UR1', 'U1', 'R1', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
-insert into sys_userrole_det values ('UR2', 'U2', 'R2', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
-insert into sys_userrole_det values ('UR3', 'U3', 'R2', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
-insert into sys_userrole_det values ('UR4', 'U4', 'R3', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
-insert into sys_userrole_det values ('UR5', 'U5', 'R3', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
-
-/**
- * sys_roleauth_det
- */
-drop table if exists sys_roleauth_det;
-create table sys_roleauth_det (
-    roleauth_id varchar(32) comment '角色权限ID',
-    roleauth_rid varchar(32) comment '角色ID',
-    roleauth_aid varchar(32) comment '权限ID',
-    roleauth_create_by varchar(32) comment '创建人ID',
-    roleauth_create_date datetime comment '创建时间',
-    roleauth_update_by varchar(32) comment '修改人ID',
-    roleauth_update_date datetime comment '修改时间',
-    roleauth_remark varchar(256) comment '备注',
-    primary key(roleauth_id),
-    unique key(roleauth_rid, roleauth_aid)
-) comment '角色权限表';
-insert into sys_roleauth_det values ('RA1', 'R1', 'A1', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
-insert into sys_roleauth_det values ('RA2', 'R2', 'A2', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
-insert into sys_roleauth_det values ('RA3', 'R3', 'A3', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
-insert into sys_roleauth_det values ('RA4', 'R3', 'A4', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
-insert into sys_roleauth_det values ('RA5', 'R3', 'A5', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
+insert into sys_userrole_det values ('UR1', 'U1', 'R1', '', null, '', null, '');
+insert into sys_userrole_det values ('UR2', 'U1', 'R3', '', null, '', null, '');
+insert into sys_userrole_det values ('UR3', 'U2', 'R1', '', null, '', null, '');
+insert into sys_userrole_det values ('UR4', 'U2', 'R3', '', null, '', null, '');
+insert into sys_userrole_det values ('UR5', 'U3', 'R2', '', null, '', null, '');
+insert into sys_userrole_det values ('UR6', 'U4', 'R3', '', null, '', null, '');
+insert into sys_userrole_det values ('UR7', 'U5', 'R3', '', null, '', null, '');
 
 /**
  * sys_menu_mstr
+ * Resource: Menu
  */
 drop table if exists sys_menu_mstr;
 create table sys_menu_mstr (
     menu_id varchar(32) comment '菜单ID',
-    menu_path varchar(64) not null comment '菜单路径',
-    menu_name varchar(32) comment '菜单名',
-    menu_auth varchar(32) comment '访问菜单所需的权限',
-    menu_parent varchar(32) comment '父菜单',
+    menu_name varchar(32) not null comment '菜单资源名',
+    menu_desc varchar(32) comment '菜单描述',
+    menu_path varchar(32) comment '菜单路径',
+    menu_parent_id varchar(32) comment '父级菜单ID',
+    menu_acl_bit int comment '菜单访问控制位',
     menu_create_by varchar(32) comment '创建人ID',
     menu_create_date datetime comment '创建时间',
     menu_update_by varchar(32) comment '修改人ID',
     menu_update_date datetime comment '修改时间',
     menu_remark varchar(256) comment '备注',
     primary key(menu_id),
-    unique key(menu_path)
-) comment '菜单表';
-insert into sys_menu_mstr values ('M0', '', '系统管理', '', '', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
-insert into sys_menu_mstr values ('M1', '/sys/user', '用户管理', 'sys:user:list', 'M0', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
-insert into sys_menu_mstr values ('M2', '/sys/role', '角色管理', 'sys:role:list', 'M0', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
-insert into sys_menu_mstr values ('M3', '/sys/auth', '权限管理', 'sys:auth:list', 'M0', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
-insert into sys_menu_mstr values ('M4', '/sys/menu', '菜单管理', 'sys:menu:list', 'M0', 'U1', '2015-01-01 00:00:00', 'U1', '2015-01-01 00:00:00', '');
+    unique key(menu_name)
+) comment '菜单资源表';
+insert into sys_menu_mstr values ('M1', 'menu:sys', '系统管理', '', '', 1, '', null, '', null, '');
+insert into sys_menu_mstr values ('M2', 'menu:user', '用户管理', '/menu/user', 'M1', 1, '', null, '', null, '');
+insert into sys_menu_mstr values ('M3', 'menu:role', '角色管理', '/menu/role', 'M1', 1, '', null, '', null, '');
+insert into sys_menu_mstr values ('M4', 'menu:menu', '菜单管理', '/menu/menu', 'M1', 1, '', null, '', null, '');
+insert into sys_menu_mstr values ('M5', 'menu:component', '组件管理', '/menu/component', 'M1', 1, '', null, '', null, '');
+
+/**
+ * sys_component_mstr
+ * Resource: Component
+ */
+drop table if exists sys_component_mstr;
+create table sys_component_mstr (
+    component_id varchar(32) comment '组件资源ID',
+    component_name varchar(32) not null comment '组件资源名',
+    component_type varchar(32) not null comment '组件资源类型',
+    component_desc varchar(32) comment '组件资源功能描述',
+    component_class varchar(64) comment '组件资源类名',
+    component_create_by varchar(32) comment '创建人ID',
+    component_create_date datetime comment '创建时间',
+    component_update_by varchar(32) comment '修改人ID',
+    component_update_date datetime comment '修改时间',
+    component_remark varchar(256) comment '备注',
+    primary key(component_id),
+    unique key(component_name)
+) comment '组件资源表';
+
+/**
+ * sys_method_det
+ * Resource: Method
+ */
+drop table if exists sys_method_det;
+create table sys_method_det (
+    method_id varchar(32) comment '方法ID',
+    method_component_id varchar(32) not null comment '方法所属组件的ID',
+    method_name varchar(32) not null comment '方法名',
+    method_diff varchar(32) comment '同名方法区分字段',
+    method_desc varchar(32) comment '方法描述',
+    method_acl_bit int comment '方法访问控制码',
+    method_create_by varchar(32) comment '创建人ID',
+    method_create_date datetime comment '创建时间',
+    method_update_by varchar(32) comment '修改人ID',
+    method_update_date datetime comment '修改时间',
+    method_remark varchar(256) comment '备注',
+    primary key(method_id),
+    unique key(method_component_id, method_name, method_diff)
+) comment '方法表';
+
+
+/**
+ * sys_acl_det;
+ */
+drop table if exists sys_acl_det;
+create table sys_acl_det (
+    acl_id varchar(32) comment '访问控制ID',
+    acl_principal_id varchar(32) not null comment '访问控制Principal的ID',
+    acl_principal_type varchar(32) not null comment '访问控制Principal的类型',
+    acl_resource_id varchar(32) not null comment '访问控制Resource的ID',
+    acl_resource_type varchar(32) not null comment '访问控制Resource的类型',
+    acl_code int comment '访问控制码',
+    acl_create_by varchar(32) comment '创建人ID',
+    acl_create_date datetime comment '创建时间',
+    acl_update_by varchar(32) comment '修改人ID',
+    acl_update_date datetime comment '修改时间',
+    acl_remark varchar(256) comment '备注',
+    primary key(acl_id),
+    unique key(acl_principal_id, acl_principal_type, acl_resource_id, acl_resource_type)
+) comment '访问控制表';
+insert into sys_acl_det values ('ACL1', 'R1', 'role', 'M1', 'menu', 1, '', null, '', null, '');
+insert into sys_acl_det values ('ACL2', 'R1', 'role', 'M4', 'menu', 1, '', null, '', null, '');
+insert into sys_acl_det values ('ACL3', 'R1', 'role', 'M5', 'menu', 1, '', null, '', null, '');
+insert into sys_acl_det values ('ACL4', 'R2', 'role', 'M1', 'menu', 1, '', null, '', null, '');
+insert into sys_acl_det values ('ACL5', 'R2', 'role', 'M2', 'menu', 1, '', null, '', null, '');
+insert into sys_acl_det values ('ACL6', 'R2', 'role', 'M3', 'menu', 1, '', null, '', null, '');
+insert into sys_acl_det values ('ACL7', 'R3', 'role', 'M1', 'menu', 1, '', null, '', null, '');
+insert into sys_acl_det values ('ACL8', 'R3', 'role', 'M2', 'menu', 1, '', null, '', null, '');
+insert into sys_acl_det values ('ACL9', 'R3', 'role', 'M3', 'menu', 1, '', null, '', null, '');
+insert into sys_acl_det values ('ACL10', 'U3', 'user', 'M4', 'menu', 1, '', null, '', null, '');

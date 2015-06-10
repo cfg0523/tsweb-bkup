@@ -1,5 +1,7 @@
 package com.techsen.tsweb.sys.dao;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.junit.After;
@@ -19,13 +21,13 @@ import com.techsen.tsweb.sys.domain.UserRole;
 public class UserRoleDaoTest {
     
     @Resource
+    private UserRoleDao userRoleDao;
+    
+    @Resource
     private UserDao userDao;
     
     @Resource
     private RoleDao roleDao;
-    
-    @Resource
-    private UserRoleDao userRoleDao;
     
     private UserRole userRole;
     private User user;
@@ -33,9 +35,9 @@ public class UserRoleDaoTest {
     
     @Before
     public void init() {
-        this.user = new User("tmpUser", "tmpPwd").setId("tmpuser");
-        this.role = new Role("tmpRole", "tmpDesc").setId("tmprole");
-        this.userRole = new UserRole(user, role).setId("tmpuserrole");
+        this.user = new User("admin", "admin").setId("U0");
+        this.role = new Role("superuser", "superuser").setId("R0");
+        this.userRole = new UserRole(user, role).setId("UR0");
         
         this.userDao.addEntity(this.user);
         this.roleDao.addEntity(this.role);
@@ -45,44 +47,56 @@ public class UserRoleDaoTest {
     @After
     public void clear() {
         this.userRoleDao.deleteEntity(this.userRole);
-        this.userDao.deleteEntity(this.user);
         this.roleDao.deleteEntity(this.role);
+        this.userDao.deleteEntity(this.user);
     }
     
     @Test
-    public void testGetEntity() {
-        UserRole userRole = this.userRoleDao.getEntity(this.userRole);
+    public void testGetRolesByUser() {
+        List<Role> roles = this.userRoleDao.getRolesByUser(this.user);
 
-        Assert.assertEquals(this.userRole, userRole);
-        Assert.assertEquals(this.user, userRole.getUser());
-        Assert.assertEquals(this.role, userRole.getRole());
-        
-        System.out.println();
-        System.out.println(userRole);
-        System.out.println(userRole.getUser());
-        System.out.println(userRole.getRole());
-        System.out.println();
+        Assert.assertNotNull(roles);
+        Assert.assertEquals(1, roles.size());
+        Assert.assertEquals(this.role.getId(), roles.get(0).getId());
+        Assert.assertEquals(this.role.getName(), roles.get(0).getName());
+        Assert.assertEquals(this.role.getDesc(), roles.get(0).getDesc());
     }
     
     @Test
-    public void testUpdateEntity() {
-        UserRole tmpUserRole = this.userRole.clone();
-        User tmpUser = tmpUserRole.getUser().setId("U1");
-        Role tmpRole = tmpUserRole.getRole().setId("R2");
+    public void testDeleteRolesByUser() {
+        List<Role> roles = this.userRoleDao.getRolesByUser(this.user);
+        Assert.assertNotNull(roles);
+        Assert.assertEquals(1, roles.size());
         
-        this.userRoleDao.updateEntity(tmpUserRole);
-        tmpUserRole = this.userRoleDao.getEntity(tmpUserRole);
-        User expectUser = this.userDao.getEntity(tmpUser);
-        Role expectRole = this.roleDao.getEntity(tmpRole);
+        this.userRoleDao.deleteRolesByUser(this.user);
         
-        Assert.assertEquals(this.userRole, tmpUserRole);
-        Assert.assertEquals(expectUser, tmpUserRole.getUser());
-        Assert.assertEquals(expectRole, tmpUserRole.getRole());
-        
-        System.out.println();
-        System.out.println(tmpUserRole);
-        System.out.println(tmpUserRole.getUser());
-        System.out.println(tmpUserRole.getRole());
-        System.out.println();
+        roles = this.userRoleDao.getRolesByUser(this.user);
+        Assert.assertNotNull(roles);
+        Assert.assertEquals(0, roles.size());
     }
+    
+    @Test
+    public void testGetUsersByRole() {
+        List<User> users = this.userRoleDao.getUsersByRole(this.role);
+        
+        Assert.assertNotNull(users);
+        Assert.assertEquals(1, users.size());
+        Assert.assertEquals(this.user.getId(), users.get(0).getId());
+        Assert.assertEquals(this.user.getUsername(), users.get(0).getUsername());
+        Assert.assertEquals(this.user.getPassword(), users.get(0).getPassword());
+    }
+    
+    @Test
+    public void testDeleteUsersByRole() {
+        List<User> users = this.userRoleDao.getUsersByRole(this.role);
+        Assert.assertNotNull(users);
+        Assert.assertEquals(1, users.size());
+        
+        this.userRoleDao.deleteUsersByRole(this.role);
+        
+        users = this.userRoleDao.getUsersByRole(this.role);
+        Assert.assertNotNull(users);
+        Assert.assertEquals(0, users.size());
+    }
+    
 }

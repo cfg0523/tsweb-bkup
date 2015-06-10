@@ -20,7 +20,6 @@ import org.apache.shiro.subject.PrincipalCollection;
 
 import com.techsen.tsweb.sys.domain.Role;
 import com.techsen.tsweb.sys.domain.User;
-import com.techsen.tsweb.sys.service.RoleService;
 import com.techsen.tsweb.sys.service.UserService;
 
 /**
@@ -30,9 +29,6 @@ public class LocalRealm extends AuthorizingRealm {
 
     @Resource
     private UserService userService;
-
-    @Resource
-    private RoleService roleService;
 
     /**
      * 处理用户授权
@@ -47,7 +43,7 @@ public class LocalRealm extends AuthorizingRealm {
 
         if (user != null) {
             // 获取用户角色
-            List<Role> roles = this.roleService.getRolesByUser(user);
+            List<Role> roles = this.userService.getRolesByUser(user);
             if (isValid(roles)) {
                 for (Role role : roles) {
                     String roleName = role.getName();

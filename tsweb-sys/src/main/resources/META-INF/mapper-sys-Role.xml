@@ -37,7 +37,7 @@
         <!-- role_create_by = #{createBy}, -->
         <!-- role_create_date = #{createDate}, -->
         role_update_by = #{updateBy},
-        role_update_by = #{updateDate},
+        role_update_date = #{updateDate},
         role_remark = #{remark}
     </sql>
 
@@ -80,14 +80,6 @@
         select <include refid="RoleColumns"/>
         from <include refid="RoleTable"/>
         <include refid="RoleWhereCondition"/>
-    </select>
-
-    <select id="getRolesByUser" parameterType="User" resultMap="RoleMap">
-        select <include refid="RoleColumns"/>
-        from <include refid="UserTable"/>
-        join <include refid="UserRoleTable"/> on user_id = userrole_user_id
-        join <include refid="RoleTable"/> on userrole_role_id = role_id
-        <include refid="com.techsen.tsweb.sys.dao.UserDao.UserWhereCondition"/>
     </select>
 
 </mapper>

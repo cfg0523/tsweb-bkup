@@ -10,13 +10,12 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.techsen.tsweb.core.util.UUIDUtil;
 import com.techsen.tsweb.sys.domain.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath*:META-INF/spring-*.xml")
 public class UserDaoTest {
-
+    
     @Resource
     private UserDao userDao;
     
@@ -24,8 +23,7 @@ public class UserDaoTest {
     
     @Before
     public void init() {
-        this.user = new User("cfg0523", "cfg0523");
-        this.user.setId(UUIDUtil.uuid());
+        this.user = new User("admin", "admin").setId("U0");
         this.userDao.addEntity(this.user);
     }
     
@@ -36,43 +34,13 @@ public class UserDaoTest {
     
     @Test
     public void testUpdateEntity() {
-        User tmp = this.user.clone();
-        tmp.setPassword("hayden");
+        User tmp = this.user.clone().setId(null).setPassword("password");
         this.userDao.updateEntity(tmp);
         tmp = this.userDao.getEntity(tmp);
         
-        System.out.println();
-        System.out.println("tmp User: " + tmp);
-        System.out.println();
-        
-        Assert.assertEquals("hayden", tmp.getPassword());
+        Assert.assertEquals(this.user.getId(), tmp.getId());
+        Assert.assertEquals(this.user.getUsername(), tmp.getUsername());
+        Assert.assertEquals("password", tmp.getPassword());
     }
     
-    @Test
-    public void testGetEntity() {
-        User tmp = new User();
-        tmp.setId(this.user.getId());
-        User user1 = this.userDao.getEntity(tmp);
-        
-        System.out.println();
-        System.out.println("user1 User: " + user1);
-        System.out.println();
-        
-        tmp.setId(null);
-        tmp.setUsername(this.user.getUsername());
-        User user2 = this.userDao.getEntity(tmp);
-
-        System.out.println();
-        System.out.println("user2 User: " + user2);
-        System.out.println();
-        
-        Assert.assertEquals(user1.getId(), user2.getId());
-        Assert.assertEquals(user1.getUsername(), user2.getUsername());
-        Assert.assertEquals(user1.getPassword(), user2.getPassword());
-    }
-    
-    @Test
-    public void testDeleteUserRoleByUser() {
-        this.userDao.deleteRolesByUser(new User("hayden"));
-    }
 }

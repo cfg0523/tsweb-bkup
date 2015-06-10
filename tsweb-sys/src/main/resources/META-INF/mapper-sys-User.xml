@@ -37,7 +37,7 @@
         <!-- user_create_by = #{createBy}, -->
         <!-- user_create_date = #{createDate}, -->
         user_update_by = #{updateBy},
-        user_update_by = #{updateDate},
+        user_update_date = #{updateDate},
         user_remark = #{remark}
     </sql>
 
@@ -81,12 +81,5 @@
         from <include refid="UserTable"/>
         <include refid="UserWhereCondition"/>
     </select>
-
-    <delete id="deleteRolesByUser" parameterType="User">
-        delete <include refid="UserRoleTable"/>
-        from <include refid="UserRoleTable"/>
-        join <include refid="UserTable"/> on userrole_user_id = user_id
-        <include refid="UserWhereCondition"/>
-    </delete>
 
 </mapper>

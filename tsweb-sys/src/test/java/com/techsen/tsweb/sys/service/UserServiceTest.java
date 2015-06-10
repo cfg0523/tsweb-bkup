@@ -1,14 +1,20 @@
 package com.techsen.tsweb.sys.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.cache.CacheManager;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.techsen.tsweb.sys.domain.Role;
 import com.techsen.tsweb.sys.domain.User;
+import com.techsen.tsweb.sys.domain.UserRole;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath*:META-INF/spring-*.xml")
@@ -18,46 +24,88 @@ public class UserServiceTest {
     private UserService userService;
 
     @Resource
-    private CacheManager cacheManager;
+    private RoleService roleService;
 
-    @Test
-    public void testGetUserByUser() {
-        User user = this.userService.getUser(new User("hayden"));
-        System.out.println();
-        System.out.println(user);
-        System.out.println();
+    private User user;
+    private Role role;
+    private UserRole userRole;
+
+    @Before
+    public void init() {
+        this.user = new User("admin", "admin");
+        this.userService.addUser(this.user);
+        User tmpUser = this.userService.getUser(this.user);
+
+        Assert.assertNotNull(tmpUser);
+        Assert.assertNotNull(tmpUser.getId());
+
+        this.role = new Role("superuser", "superuser");
+        this.roleService.addRole(this.role);
+        Role tmpRole = this.roleService.getRole(this.role);
+
+        Assert.assertNotNull(tmpRole);
+        Assert.assertNotNull(tmpRole.getId());
+
+        this.userRole = new UserRole(tmpUser, tmpRole);
+        UserRole tmpUserRole = this.userService.addRole(this.userRole);
+
+        Assert.assertNotNull(tmpUserRole);
+        Assert.assertNotNull(tmpUserRole.getId());
     }
 
-    @Test
-    public void testAddUser() {
-        User user = new User("testUser", "testUser");
-        System.out.println();
-        System.out.println(user);
-        this.userService.addUser(user);
-        System.out.println(this.userService.getUser(user));
-        System.out.println();
-        this.userService.deleteUser(user);
+    @After
+    public void clear() {
+        this.userService.deleteRole(this.userRole);
+        this.roleService.deleteRole(this.role);
+        this.userService.deleteUser(this.user);
     }
 
     @Test
     public void testUpdateUser() {
-        User user = new User("testUser", "testUser");
-        this.userService.addUser(user);
+        User tmp = this.user.clone();
+        this.userService.updateUser(tmp);
+        tmp = this.userService.getUser(tmp);
+
         System.out.println();
-        System.out.println(user);
-        user.setPassword("testUser-pwd");
-        this.userService.updateUser(user);
-        System.out.println(this.userService.getUser(user));
+        System.out.println("tmp: " + tmp);
         System.out.println();
-        this.userService.deleteUser(user);
+        
+        Assert.assertNotNull(tmp);
+        Assert.assertNotNull(tmp.getUpdateDate());
     }
 
     @Test
-    public void testGetUser() {
-        User user = this.userService.getUser(new User().setUsername("hayden"));
-        user.setPassword("hayden-pwd");
-        System.out.println();
-        this.userService.getUser(user.setId(null));
-        System.out.println();
+    public void testDeleteUser() {
+        List<Role> roles = this.userService.getRolesByUser(this.user);
+        Assert.assertNotNull(roles);
+        Assert.assertEquals(1, roles.size());
+
+        this.userService.deleteUser(this.user);
+        
+        roles = this.userService.getRolesByUser(this.user);
+        Assert.assertNotNull(roles);
+        Assert.assertEquals(0, roles.size());
+    }
+
+    @Test
+    public void testAddRoleAndDeleteRole() {
+        Role tmpRole = new Role("tmpRole", "tmpRole");
+        this.roleService.addRole(tmpRole);
+        tmpRole = this.roleService.getRole(tmpRole);
+        Assert.assertNotNull(tmpRole);
+        Assert.assertNotNull(tmpRole.getId());
+        
+        UserRole tmpUserRole = new UserRole(this.user, tmpRole);
+        this.userService.addRole(tmpUserRole);
+        
+        List<Role> roles = this.userService.getRolesByUser(this.user);
+        Assert.assertNotNull(roles);
+        Assert.assertEquals(2, roles.size());
+        
+        this.roleService.deleteRole(tmpRole);
+        
+        roles = this.userService.getRolesByUser(this.user);
+        Assert.assertNotNull(roles);
+        Assert.assertEquals(1, roles.size());
     }
 }

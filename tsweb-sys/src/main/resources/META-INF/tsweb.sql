@@ -76,6 +76,7 @@ create table sys_menu_mstr (
     menu_name varchar(32) not null comment '菜单资源名',
     menu_desc varchar(32) comment '菜单描述',
     menu_path varchar(32) comment '菜单路径',
+    menu_type varchar(32) comment '菜单类别',
     menu_parent_id varchar(32) comment '父级菜单ID',
     menu_acl_bit int comment '菜单访问控制位',
     menu_create_by varchar(32) comment '创建人ID',
@@ -86,11 +87,11 @@ create table sys_menu_mstr (
     primary key(menu_id),
     unique key(menu_name)
 ) comment '菜单资源表';
-insert into sys_menu_mstr values ('M1', 'menu:sys', '系统管理', '', '', 1, '', null, '', null, '');
-insert into sys_menu_mstr values ('M2', 'menu:user', '用户管理', '/menu/user', 'M1', 1, '', null, '', null, '');
-insert into sys_menu_mstr values ('M3', 'menu:role', '角色管理', '/menu/role', 'M1', 1, '', null, '', null, '');
-insert into sys_menu_mstr values ('M4', 'menu:menu', '菜单管理', '/menu/menu', 'M1', 1, '', null, '', null, '');
-insert into sys_menu_mstr values ('M5', 'menu:component', '组件管理', '/menu/component', 'M1', 1, '', null, '', null, '');
+insert into sys_menu_mstr values ('M1', 'menu:sys', '系统管理', '', 'nav', '', 1, '', null, '', null, '');
+insert into sys_menu_mstr values ('M2', 'menu:user', '用户管理', '/menu/user', 'nav', 'M1', 1, '', null, '', null, '');
+insert into sys_menu_mstr values ('M3', 'menu:role', '角色管理', '/menu/role', 'nav', 'M1', 1, '', null, '', null, '');
+insert into sys_menu_mstr values ('M4', 'menu:menu', '菜单管理', '/menu/menu', 'nav', 'M1', 1, '', null, '', null, '');
+insert into sys_menu_mstr values ('M5', 'menu:component', '组件管理', '/menu/component', 'nav', 'M1', 1, '', null, '', null, '');
 
 /**
  * sys_component_mstr

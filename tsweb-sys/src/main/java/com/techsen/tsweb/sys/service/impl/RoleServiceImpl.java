@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.techsen.tsweb.sys.dao.RoleDao;
 import com.techsen.tsweb.sys.dao.UserDao;
+import com.techsen.tsweb.sys.dao.UserRoleDao;
 import com.techsen.tsweb.sys.domain.Role;
 import com.techsen.tsweb.sys.domain.User;
 import com.techsen.tsweb.sys.service.RoleService;
@@ -20,13 +21,16 @@ public class RoleServiceImpl implements RoleService {
 
     @Resource
     private UserDao userDao;
+
+    @Resource
+    private UserRoleDao userRoleDao;
     
     /**
      * 根据用户id或username获取Roles
      */
     @Override
     public List<Role> getRolesByUser(User user) {
-        return this.roleDao.getRolesByUser(user);
+        return this.userRoleDao.getRolesByUser(user);
     }
 
 }

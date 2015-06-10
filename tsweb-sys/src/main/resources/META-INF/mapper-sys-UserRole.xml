@@ -89,4 +89,19 @@
         <include refid="UserRoleWhereCondition"/>
     </select>
 
+    <delete id="deleteRolesByUser" parameterType="User">
+        delete <include refid="UserRoleTable"/>
+        from <include refid="UserRoleTable"/>
+        join <include refid="UserTable"/> on userrole_user_id = user_id
+        <include refid="com.techsen.tsweb.sys.dao.UserDao.UserWhereCondition"/>
+    </delete>
+
+    <select id="getRolesByUser" parameterType="User" resultMap="RoleMap">
+        select <include refid="RoleColumns"/>
+        from <include refid="UserTable"/>
+        join <include refid="UserRoleTable"/> on user_id = userrole_user_id
+        join <include refid="RoleTable"/> on userrole_role_id = role_id
+        <include refid="com.techsen.tsweb.sys.dao.UserDao.UserWhereCondition"/>
+    </select>
+
 </mapper>

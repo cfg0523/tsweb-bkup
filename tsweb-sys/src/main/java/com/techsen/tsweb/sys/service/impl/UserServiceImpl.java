@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.techsen.tsweb.sys.dao.RoleDao;
 import com.techsen.tsweb.sys.dao.UserDao;
+import com.techsen.tsweb.sys.dao.UserRoleDao;
 import com.techsen.tsweb.sys.domain.User;
 import com.techsen.tsweb.sys.service.UserService;
 
@@ -18,6 +19,9 @@ public class UserServiceImpl implements UserService {
     @Resource
     private RoleDao roleDao;
 
+    @Resource
+    private UserRoleDao userRoleDao;
+    
     /**
      * 根据用户Id或username获取用户信息
      */
@@ -50,7 +54,7 @@ public class UserServiceImpl implements UserService {
         // 删除用户对象
         this.userDao.deleteEntity(user);
         // 删除用户所拥有的角色对象
-        this.userDao.deleteRolesByUser(user);
+        this.userRoleDao.deleteRolesByUser(user);
     }
 
 }

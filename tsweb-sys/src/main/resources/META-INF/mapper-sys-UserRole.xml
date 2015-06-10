@@ -39,7 +39,7 @@
         <!-- userrole_create_by = #{createBy}, -->
         <!-- userrole_create_date = #{createDate}, -->
         userrole_update_by = #{updateBy},
-        userrole_update_by = #{updateDate},
+        userrole_update_date = #{updateDate},
         userrole_remark = #{remark}
     </sql>
 
@@ -89,6 +89,14 @@
         <include refid="UserRoleWhereCondition"/>
     </select>
 
+    <select id="getRolesByUser" parameterType="User" resultMap="com.techsen.tsweb.sys.dao.RoleDao.RoleMap">
+        select <include refid="com.techsen.tsweb.sys.dao.RoleDao.RoleColumns"/>
+        from <include refid="UserTable"/>
+        join <include refid="UserRoleTable"/> on user_id = userrole_user_id
+        join <include refid="RoleTable"/> on userrole_role_id = role_id
+        <include refid="com.techsen.tsweb.sys.dao.UserDao.UserWhereCondition"/>
+    </select>
+
     <delete id="deleteRolesByUser" parameterType="User">
         delete <include refid="UserRoleTable"/>
         from <include refid="UserRoleTable"/>
@@ -96,12 +104,19 @@
         <include refid="com.techsen.tsweb.sys.dao.UserDao.UserWhereCondition"/>
     </delete>
 
-    <select id="getRolesByUser" parameterType="User" resultMap="RoleMap">
-        select <include refid="RoleColumns"/>
-        from <include refid="UserTable"/>
-        join <include refid="UserRoleTable"/> on user_id = userrole_user_id
-        join <include refid="RoleTable"/> on userrole_role_id = role_id
-        <include refid="com.techsen.tsweb.sys.dao.UserDao.UserWhereCondition"/>
+    <select id="getUsersByRole" parameterType="Role" resultMap="com.techsen.tsweb.sys.dao.UserDao.UserMap">
+        select <include refid="com.techsen.tsweb.sys.dao.UserDao.UserColumns"/>
+        from <include refid="RoleTable"/>
+        join <include refid="UserRoleTable"/> on role_id = userrole_role_id
+        join <include refid="UserTable"/> on userrole_user_id = user_id
+        <include refid="com.techsen.tsweb.sys.dao.RoleDao.RoleWhereCondition"/>
     </select>
+
+    <delete id="deleteUsersByRole" parameterType="Role">
+        delete <include refid="UserRoleTable"/>
+        from <include refid="UserRoleTable"/>
+        join <include refid="RoleTable"/> on userrole_role_id = role_id
+        <include refid="com.techsen.tsweb.sys.dao.RoleDao.RoleWhereCondition"/>
+    </delete>
 
 </mapper>

@@ -12,13 +12,22 @@ import com.techsen.tsweb.sys.domain.UserRole;
 public interface UserRoleDao extends Dao<UserRole> {
 
     /**
-     * 根据用户删除用户的角色<br/>
-     * 根据User删除User和Role的关联关系
+     * 根据用户Id或用户名获取Roles
+     */
+    public List<Role> getRolesByUser(User user);
+    
+    /**
+     * 删除用户所有的角色
      */
     public void deleteRolesByUser(User user);
     
     /**
-     * 根据用户Id或用户名获取Roles
+     * 根据角色获取用户集合
      */
-    public List<Role> getRolesByUser(User user);
+    public List<User> getUsersByRole(Role role);
+    
+    /**
+     * 根据角色删除用户关联
+     */
+    public void deleteUsersByRole(Role role);
 }

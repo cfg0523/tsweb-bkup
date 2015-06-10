@@ -37,7 +37,7 @@
         <!-- role_create_by = #{createBy}, -->
         <!-- role_create_date = #{createDate}, -->
         role_update_by = #{updateBy},
-        role_update_by = #{updateDate},
+        role_update_date = #{updateDate},
         role_remark = #{remark}
     </sql>
 

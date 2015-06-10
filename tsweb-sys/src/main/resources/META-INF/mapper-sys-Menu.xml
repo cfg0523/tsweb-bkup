@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.techsen.tsweb.sys.dao.MenuDao">
+    <resultMap type="Menu" id="MenuMap">
+        <id property="id" column="menu_id"/>
+        <result property="name" column="menu_name"/>
+        <result property="desc" column="menu_desc"/>
+        <result property="path" column="menu_path"/>
+        <result property="type" column="menu_type"/>
+        <result property="parentId" column="menu_parent_id"/>
+        <result property="aclBit" column="menu_acl_bit"/>
+        <result property="createBy" column="menu_create_by"/>
+        <result property="createDate" column="menu_create_date"/>
+        <result property="updateBy" column="menu_update_by"/>
+        <result property="updateDate" column="menu_update_date"/>
+        <result property="remark" column="menu_remark"/>
+    </resultMap>
+
+    <sql id="MenuTable">sys_menu_mstr</sql>
+
+    <sql id="MenuColumns">
+        menu_id, menu_name, menu_desc, menu_path,
+        menu_type, menu_parent_id, menu_acl_bit
+        menu_create_by, menu_create_date,
+        menu_update_by, menu_update_date,
+        menu_remark
+    </sql>
+
+    <sql id="MenuProperties">
+        #{id}, #{name}, #{desc}, #{path},
+        #{type}, #{parentId}, #{aclBit},
+        #{createBy}, #{createDate},
+        #{updateBy}, #{updateDate},
+        #{remark}
+    </sql>
+    
+    <sql id="MenuUpdateMap">
+        menu_name = #{name},
+        menu_desc = #{desc},
+        menu_path = #{path},
+        menu_type = #{type},
+        menu_parent_id = #{parentId},
+        menu_acl_bit = #{aclBit},
+        <!-- menu_create_by = #{createBy}, -->
+        <!-- menu_create_date = #{createDate}, -->
+        menu_update_by = #{updateBy},
+        menu_update_date = #{updateDate},
+        menu_remark = #{remark}
+    </sql>
+
+    <sql id="MenuWhereCondition">
+        <where>
+            <choose>
+                <when test="id != null">
+                    menu_id = #{id}
+                </when>
+                <when test="name != null">
+                    menu_name = #{name}
+                </when>
+                <otherwise>
+                    1 == 0
+                </otherwise>
+            </choose>
+        </where>
+    </sql>
+
+    <insert id="addEntity" parameterType="Menu">
+        insert into <include refid="MenuTable"/> (
+            <include refid="MenuColumns"/>
+        ) values (
+            <include refid="MenuProperties"/>
+        )
+    </insert>
+
+    <delete id="deleteEntity" parameterType="string">
+        delete from <include refid="MenuTable"/>
+        <include refid="MenuWhereCondition"/>
+    </delete>
+
+    <update id="updateEntity" parameterType="Menu">
+        update <include refid="MenuTable"/>
+        set <include refid="MenuUpdateMap"/>
+        <include refid="MenuWhereCondition"/>
+    </update>
+
+    <select id="getEntity" parameterType="Menu" resultMap="MenuMap">
+        select <include refid="MenuColumns"/>
+        from <include refid="MenuTable"/>
+        <include refid="MenuWhereCondition"/>
+    </select>
+
+</mapper>

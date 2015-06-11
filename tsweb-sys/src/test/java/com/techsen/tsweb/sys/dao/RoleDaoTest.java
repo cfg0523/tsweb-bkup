@@ -33,6 +33,14 @@ public class RoleDaoTest {
     }
     
     @Test
+    public void testGetById() {
+        Role tmp = this.roleDao.getById(this.role.getId());
+        System.out.println();
+        System.out.println(tmp);
+        System.out.println();
+    }
+    
+    @Test
     public void testUpdateEntity() {
         Role tmp = this.role.clone().setId(null).setDesc("superuserdesc");
         this.roleDao.updateEntity(tmp);

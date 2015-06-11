@@ -13,7 +13,7 @@ public class Menu extends BaseEntity<Menu> {
     private String desc; // 菜单描述
     private String path; // 菜单路径
     private String type; // 菜单类别
-    private String parentId; // 父菜单ID
+    private Menu parent; // 父级菜单
     private int aclBit = 0x01; // 菜单访问控制位
 
     public Menu() {
@@ -51,12 +51,12 @@ public class Menu extends BaseEntity<Menu> {
         return this;
     }
 
-    public String getParentId() {
-        return parentId;
+    public Menu getParent() {
+        return parent;
     }
 
-    public Menu setParentId(String parentId) {
-        this.parentId = parentId;
+    public Menu setParent(Menu parent) {
+        this.parent = parent;
         return this;
     }
 

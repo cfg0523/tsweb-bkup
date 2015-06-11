@@ -8,20 +8,21 @@
         <result property="desc" column="menu_desc"/>
         <result property="path" column="menu_path"/>
         <result property="type" column="menu_type"/>
-        <result property="parentId" column="menu_parent_id"/>
         <result property="aclBit" column="menu_acl_bit"/>
         <result property="createBy" column="menu_create_by"/>
         <result property="createDate" column="menu_create_date"/>
         <result property="updateBy" column="menu_update_by"/>
         <result property="updateDate" column="menu_update_date"/>
         <result property="remark" column="menu_remark"/>
+        
+        <association property="parent" column="menu_parent_id" javaType="Menu" select="getById"/>
     </resultMap>
 
     <sql id="MenuTable">sys_menu_mstr</sql>
 
     <sql id="MenuColumns">
         menu_id, menu_name, menu_desc, menu_path,
-        menu_type, menu_parent_id, menu_acl_bit
+        menu_type, menu_parent_id, menu_acl_bit,
         menu_create_by, menu_create_date,
         menu_update_by, menu_update_date,
         menu_remark
@@ -29,7 +30,7 @@
 
     <sql id="MenuProperties">
         #{id}, #{name}, #{desc}, #{path},
-        #{type}, #{parentId}, #{aclBit},
+        #{type}, #{parent.id}, #{aclBit},
         #{createBy}, #{createDate},
         #{updateBy}, #{updateDate},
         #{remark}
@@ -40,7 +41,7 @@
         menu_desc = #{desc},
         menu_path = #{path},
         menu_type = #{type},
-        menu_parent_id = #{parentId},
+        menu_parent_id = #{parent.id},
         menu_acl_bit = #{aclBit},
         <!-- menu_create_by = #{createBy}, -->
         <!-- menu_create_date = #{createDate}, -->
@@ -88,6 +89,12 @@
         select <include refid="MenuColumns"/>
         from <include refid="MenuTable"/>
         <include refid="MenuWhereCondition"/>
+    </select>
+    
+    <select id="getById" parameterType="string" resultMap="MenuMap">
+        select <include refid="MenuColumns"/>
+        from <include refid="MenuTable"/>
+        <where> menu_id = #{id} </where>
     </select>
 
 </mapper>

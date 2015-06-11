@@ -8,6 +8,11 @@ import com.techsen.tsweb.core.domain.BaseEntity;
 public interface Dao<T extends BaseEntity<T>> {
 
     /**
+     * 根据id查找一个实体
+     */
+    T getById(String id);
+    
+    /**
      * 根据id或实体对象的唯一键查找一个实体
      */
     T getEntity(T entity);

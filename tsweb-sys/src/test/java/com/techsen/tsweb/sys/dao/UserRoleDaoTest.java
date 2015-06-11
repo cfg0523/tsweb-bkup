@@ -44,6 +44,16 @@ public class UserRoleDaoTest {
         this.userRoleDao.addEntity(this.userRole);
     }
     
+    @Test
+    public void testGetById() {
+        UserRole tmp = this.userRoleDao.getById(this.userRole.getId());
+        System.out.println();
+        System.out.println(tmp);
+        System.out.println(tmp.getUser());
+        System.out.println(tmp.getRole());
+        System.out.println();
+    }
+    
     @After
     public void clear() {
         this.userRoleDao.deleteEntity(this.userRole);

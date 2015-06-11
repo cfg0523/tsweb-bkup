@@ -89,6 +89,16 @@
         <include refid="UserRoleWhereCondition"/>
     </select>
 
+    <select id="getById" parameterType="string" resultMap="UserRoleMap">
+        select <include refid="UserRoleColumns"/>,
+        <include refid="com.techsen.tsweb.sys.dao.UserDao.UserColumns"/>,
+        <include refid="com.techsen.tsweb.sys.dao.RoleDao.RoleColumns"/>
+        from <include refid="UserRoleTable"/>
+        join <include refid="UserTable"/> on userrole_user_id = user_id
+        join <include refid="RoleTable"/> on userrole_role_id = role_id
+        <where> userrole_id = #{id} </where>
+    </select>
+
     <select id="getRolesByUser" parameterType="User" resultMap="com.techsen.tsweb.sys.dao.RoleDao.RoleMap">
         select <include refid="com.techsen.tsweb.sys.dao.RoleDao.RoleColumns"/>
         from <include refid="UserTable"/>

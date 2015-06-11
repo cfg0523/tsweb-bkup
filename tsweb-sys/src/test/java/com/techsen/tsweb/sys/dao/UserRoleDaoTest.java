@@ -73,6 +73,15 @@ public class UserRoleDaoTest {
     }
     
     @Test
+    public void testGetRolesByUserId() {
+        List<Role> roles = this.userRoleDao.getRolesByUserId(this.user.getId());
+        
+        System.out.println();
+        System.out.println(roles);
+        System.out.println();
+    }
+    
+    @Test
     public void testDeleteRolesByUser() {
         List<Role> roles = this.userRoleDao.getRolesByUser(this.user);
         Assert.assertNotNull(roles);

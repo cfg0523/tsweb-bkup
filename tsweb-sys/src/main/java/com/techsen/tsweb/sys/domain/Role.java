@@ -1,5 +1,7 @@
 package com.techsen.tsweb.sys.domain;
 
+import java.util.List;
+
 import com.techsen.tsweb.core.domain.BaseEntity;
 
 /**
@@ -10,6 +12,11 @@ public class Role extends BaseEntity<Role> {
 
     private String name;
     private String desc;
+    
+    /**
+     * 角色所包含的用户集合
+     */
+    private List<User> users;
     
     public Role() {}
 
@@ -33,6 +40,15 @@ public class Role extends BaseEntity<Role> {
 
     public Role setDesc(String desc) {
         this.desc = desc;
+        return this;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public Role setUsers(List<User> users) {
+        this.users = users;
         return this;
     }
 

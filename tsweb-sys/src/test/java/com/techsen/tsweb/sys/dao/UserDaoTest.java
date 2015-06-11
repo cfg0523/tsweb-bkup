@@ -37,6 +37,7 @@ public class UserDaoTest {
         User tmp = this.userDao.getById(this.user.getId());
         System.out.println();
         System.out.println(tmp);
+        System.out.println(tmp.getRoles());
         System.out.println();
     }
     

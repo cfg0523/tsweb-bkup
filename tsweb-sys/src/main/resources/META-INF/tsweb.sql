@@ -103,7 +103,7 @@ create table sys_component_mstr (
     component_name varchar(32) not null comment '组件资源名',
     component_type varchar(32) not null comment '组件资源类型',
     component_desc varchar(32) comment '组件资源功能描述',
-    component_class varchar(64) comment '组件资源类名',
+    component_java_class varchar(64) comment '组件资源类名',
     component_create_by varchar(32) comment '创建人ID',
     component_create_date datetime comment '创建时间',
     component_update_by varchar(32) comment '修改人ID',
@@ -114,24 +114,24 @@ create table sys_component_mstr (
 ) comment '组件资源表';
 
 /**
- * sys_method_det
- * Resource: Method
+ * sys_operation_det
+ * Resource: Operation
  */
-drop table if exists sys_method_det;
-create table sys_method_det (
-    method_id varchar(32) comment '方法ID',
-    method_component_id varchar(32) not null comment '方法所属组件的ID',
-    method_name varchar(32) not null comment '方法名',
-    method_diff varchar(32) comment '同名方法区分字段',
-    method_desc varchar(32) comment '方法描述',
-    method_acl_bit int comment '方法访问控制码',
-    method_create_by varchar(32) comment '创建人ID',
-    method_create_date datetime comment '创建时间',
-    method_update_by varchar(32) comment '修改人ID',
-    method_update_date datetime comment '修改时间',
-    method_remark varchar(256) comment '备注',
-    primary key(method_id),
-    unique key(method_component_id, method_name, method_diff)
+drop table if exists sys_operation_det;
+create table sys_operation_det (
+    operation_id varchar(32) comment '方法ID',
+    operation_component_id varchar(32) not null comment '方法所属组件的ID',
+    operation_name varchar(32) not null comment '方法名',
+    operation_diff varchar(32) comment '同名方法区分字段',
+    operation_desc varchar(32) comment '方法描述',
+    operation_acl_bit int comment '方法访问控制码',
+    operation_create_by varchar(32) comment '创建人ID',
+    operation_create_date datetime comment '创建时间',
+    operation_update_by varchar(32) comment '修改人ID',
+    operation_update_date datetime comment '修改时间',
+    operation_remark varchar(256) comment '备注',
+    primary key(operation_id),
+    unique key(operation_component_id, operation_name, operation_diff)
 ) comment '方法表';
 
 

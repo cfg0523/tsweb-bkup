@@ -67,7 +67,7 @@
         )
     </insert>
 
-    <delete id="deleteEntity" parameterType="string">
+    <delete id="deleteEntity" parameterType="User">
         delete from <include refid="UserTable"/>
         <include refid="UserWhereCondition"/>
     </delete>

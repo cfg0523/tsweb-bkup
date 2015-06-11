@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.techsen.tsweb.sys.dao.ComponentDao">
+    <resultMap type="Component" id="ComponentMap">
+        <id property="id" column="component_id"/>
+        <result property="name" column="component_name"/>
+        <result property="type" column="component_type"/>
+        <result property="desc" column="component_desc"/>
+        <result property="javaClass" column="component_java_class"/>
+        <result property="createBy" column="component_create_by"/>
+        <result property="createDate" column="component_create_date"/>
+        <result property="updateBy" column="component_update_by"/>
+        <result property="updateDate" column="component_update_date"/>
+        <result property="remark" column="component_remark"/>
+        
+        <collection property="operations" column="component_id" ofType="Operation" select="getOperationsByComponentId"/>
+    </resultMap>
+
+    <sql id="ComponentTable">sys_component_mstr</sql>
+    <sql id="OperationTable">sys_operation_det</sql>
+
+    <sql id="ComponentColumns">
+        component_id, component_name, component_type,
+        component_desc, component_java_class,
+        component_create_by, component_create_date,
+        component_update_by, component_update_date,
+        component_remark
+    </sql>
+
+    <sql id="ComponentProperties">
+        #{id}, #{name}, #{type},
+        #{desc}, #{javaClass},
+        #{createBy}, #{createDate},
+        #{updateBy}, #{updateDate},
+        #{remark}
+    </sql>
+    
+    <sql id="ComponentUpdateMap">
+        component_name = #{name},
+        component_type = #{type},
+        component_desc = #{desc},
+        component_java_class = #{javaClass},
+        <!-- component_create_by = #{createBy}, -->
+        <!-- component_create_date = #{createDate}, -->
+        component_update_by = #{updateBy},
+        component_update_date = #{updateDate},
+        component_remark = #{remark}
+    </sql>
+
+    <sql id="ComponentWhereCondition">
+        <where>
+            <choose>
+                <when test="id != null">
+                    component_id = #{id}
+                </when>
+                <when test="name != null">
+                    component_name = #{name}
+                </when>
+                <otherwise>
+                    1 == 0
+                </otherwise>
+            </choose>
+        </where>
+    </sql>
+
+    <insert id="addEntity" parameterType="Component">
+        insert into <include refid="ComponentTable"/> (
+            <include refid="ComponentColumns"/>
+        ) values (
+            <include refid="ComponentProperties"/>
+        )
+    </insert>
+
+    <delete id="deleteEntity" parameterType="Component">
+        delete from <include refid="ComponentTable"/>
+        <include refid="ComponentWhereCondition"/>
+    </delete>
+
+    <update id="updateEntity" parameterType="Component">
+        update <include refid="ComponentTable"/>
+        set <include refid="ComponentUpdateMap"/>
+        <include refid="ComponentWhereCondition"/>
+    </update>
+
+    <select id="getEntity" parameterType="Component" resultMap="ComponentMap">
+        select <include refid="ComponentColumns"/>
+        from <include refid="ComponentTable"/>
+        <include refid="ComponentWhereCondition"/>
+    </select>
+    
+    <select id="getById" parameterType="string" resultMap="ComponentMap">
+        select <include refid="ComponentColumns"/>
+        from <include refid="ComponentTable"/>
+        <where> component_id = #{id} </where>
+    </select>
+
+    <select id="getOperationsByComponentId" parameterType="string" resultMap="Operation">
+        select <include refid="com.techsen.tsweb.sys.dao.OperationDao.OperationColumns"/>
+        from <include refid="OperationTable"/>
+        <where> operation_component_id = #{id} </where>
+    </select>
+
+</mapper>

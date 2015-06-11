@@ -16,6 +16,7 @@
         <result property="remark" column="menu_remark"/>
         
         <association property="parent" column="menu_parent_id" javaType="Menu" select="getById"/>
+        <collection property="subMenus" column="menu_id" ofType="Menu" select="getSubMenusByParentId"/>
     </resultMap>
 
     <sql id="MenuTable">sys_menu_mstr</sql>
@@ -95,6 +96,12 @@
         select <include refid="MenuColumns"/>
         from <include refid="MenuTable"/>
         <where> menu_id = #{id} </where>
+    </select>
+
+    <select id="getSubMenusByParentId" parameterType="string" resultMap="MenuMap">
+        select <include refid="MenuColumns"/>
+        from <include refid="MenuTable"/>
+        <where> menu_parent_id = #{id} </where>
     </select>
 
 </mapper>

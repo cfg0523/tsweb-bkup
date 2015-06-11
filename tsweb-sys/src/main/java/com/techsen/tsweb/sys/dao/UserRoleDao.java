@@ -17,6 +17,11 @@ public interface UserRoleDao extends Dao<UserRole> {
     public List<Role> getRolesByUser(User user);
     
     /**
+     * 根据用户Id获取Roles
+     */
+    public List<Role> getRolesByUserId(String userId);
+    
+    /**
      * 删除用户所有的角色
      */
     public void deleteRolesByUser(User user);
@@ -25,6 +30,11 @@ public interface UserRoleDao extends Dao<UserRole> {
      * 根据角色获取用户集合
      */
     public List<User> getUsersByRole(Role role);
+    
+    /**
+     * 根据角色Id获取用户集合
+     */
+    public List<User> getUsersByRoleId(String roleId);
     
     /**
      * 根据角色删除用户关联

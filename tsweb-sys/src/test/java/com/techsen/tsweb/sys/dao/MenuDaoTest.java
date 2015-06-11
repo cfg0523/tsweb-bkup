@@ -1,5 +1,7 @@
 package com.techsen.tsweb.sys.dao;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.junit.After;
@@ -47,6 +49,9 @@ public class MenuDaoTest {
         Assert.assertEquals(m1.getDesc(), parent.getDesc());
         Assert.assertEquals(m1.getPath(), parent.getPath());
         Assert.assertEquals(m1.getAclBit(), parent.getAclBit());
+        
+        List<Menu> subMenus = tmp.getSubMenus();
+        System.out.println(subMenus);
     }
 
     @Test

@@ -3,6 +3,7 @@ package com.techsen.tsweb.core.util;
 import static com.techsen.tsweb.core.util.CloseUtil.close;
 import static com.techsen.tsweb.core.util.Const.EMPTY_STRING;
 import static com.techsen.tsweb.core.util.ExceptionUtil.throwRuntimeException;
+import static com.techsen.tsweb.core.util.ValidUtil.isNull;
 import static com.techsen.tsweb.core.util.ValidUtil.isValid;
 
 import java.beans.PropertyDescriptor;
@@ -38,19 +39,19 @@ public class ObjectUtil {
             if (isValid(pds)) {
                 for (int i = 0; i < pds.length; i++) {
                     PropertyDescriptor pd = pds[i];
-                    Object value = pd.getReadMethod().invoke(obj);
-
                     Class<?> propType = pd.getPropertyType();
-
-                    if (CharSequence.class.isAssignableFrom(propType)
-                            || Boolean.class.isAssignableFrom(propType)
-                            || Date.class.isAssignableFrom(propType)
-                            || Number.class.isAssignableFrom(propType)
-                            || Class.class.isAssignableFrom(propType)) {
-                        if (i != 0) {
-                            sb.append(", ");
+                    if (!isNull(propType)) {
+                        if (CharSequence.class.isAssignableFrom(propType)
+                                || Boolean.class.isAssignableFrom(propType)
+                                || Date.class.isAssignableFrom(propType)
+                                || Number.class.isAssignableFrom(propType)
+                                || Class.class.isAssignableFrom(propType)) {
+                            if (i != 0) {
+                                sb.append(", ");
+                            }
+                            Object value = pd.getReadMethod().invoke(obj);
+                            sb.append(pd.getName()).append("=").append(value);
                         }
-                        sb.append(pd.getName()).append("=").append(value);
                     }
                 }
             }

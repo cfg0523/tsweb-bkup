@@ -1,5 +1,7 @@
 package com.techsen.tsweb.sys.domain;
 
+import java.util.List;
+
 import com.techsen.tsweb.core.domain.BaseEntity;
 
 /**
@@ -13,8 +15,17 @@ public class Menu extends BaseEntity<Menu> {
     private String desc; // 菜单描述
     private String path; // 菜单路径
     private String type; // 菜单类别
-    private Menu parent; // 父级菜单
     private int aclBit = 0x01; // 菜单访问控制位
+
+    /**
+     * 父级菜单
+     */
+    private Menu parent;
+    
+    /**
+     * 所有直接子菜单集合
+     */
+    private List<Menu> subMenus;
 
     public Menu() {
     }
@@ -51,15 +62,6 @@ public class Menu extends BaseEntity<Menu> {
         return this;
     }
 
-    public Menu getParent() {
-        return parent;
-    }
-
-    public Menu setParent(Menu parent) {
-        this.parent = parent;
-        return this;
-    }
-
     public String getType() {
         return type;
     }
@@ -75,6 +77,24 @@ public class Menu extends BaseEntity<Menu> {
 
     public Menu setAclBit(int aclBit) {
         this.aclBit = aclBit;
+        return this;
+    }
+
+    public Menu getParent() {
+        return parent;
+    }
+
+    public Menu setParent(Menu parent) {
+        this.parent = parent;
+        return this;
+    }
+
+    public List<Menu> getSubMenus() {
+        return subMenus;
+    }
+
+    public Menu setSubMenus(List<Menu> subMenus) {
+        this.subMenus = subMenus;
         return this;
     }
 

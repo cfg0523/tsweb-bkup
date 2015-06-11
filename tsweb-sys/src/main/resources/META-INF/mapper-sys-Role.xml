@@ -11,6 +11,8 @@
         <result property="updateBy" column="role_update_by"/>
         <result property="updateDate" column="role_update_date"/>
         <result property="remark" column="role_remark"/>
+        
+        <collection property="users" column="role_id" ofType="User" select="com.techsen.tsweb.sys.dao.UserRoleDao.getUsersByRoleId"/>
     </resultMap>
 
     <sql id="UserTable">sys_user_mstr</sql>

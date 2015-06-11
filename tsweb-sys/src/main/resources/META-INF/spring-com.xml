@@ -38,10 +38,11 @@
         <property name="targetClass" value="org.apache.ibatis.logging.LogFactory"/>
         <property name="targetMethod" value="useLog4JLogging"/>
     </bean>
-    
+
     <!-- 本地数据库的SqlSessionFactory -->
     <bean id="localSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="localDataSource"/>
+        <property name="configLocation" value="classpath:META-INF/mybatis-sys.xml"/>
         <property name="mapperLocations" value="classpath*:META-INF/mapper-sys-*.xml"/>
         <property name="typeAliasesPackage" value="com.techsen.tsweb"/>
     </bean>

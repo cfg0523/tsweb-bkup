@@ -33,6 +33,14 @@ public class UserDaoTest {
     }
     
     @Test
+    public void testGetById() {
+        User tmp = this.userDao.getById(this.user.getId());
+        System.out.println();
+        System.out.println(tmp);
+        System.out.println();
+    }
+    
+    @Test
     public void testUpdateEntity() {
         User tmp = this.user.clone().setId(null).setPassword("password");
         this.userDao.updateEntity(tmp);

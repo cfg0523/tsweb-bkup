@@ -21,7 +21,8 @@
     <sql id="OperationTable">sys_operation_det</sql>
 
     <sql id="OperationColumns">
-        operation_id, operation_name, operation_diff,
+        operation_id, operation_component_id,
+        operation_name, operation_diff,
         operation_desc, operation_acl_bit,
         operation_create_by, operation_create_date,
         operation_update_by, operation_update_date,
@@ -29,7 +30,8 @@
     </sql>
 
     <sql id="OperationProperties">
-        #{id}, #{name}, #{diff},
+        #{id}, #{component.id},
+        #{name}, #{diff},
         #{desc}, #{aclBit},
         #{createBy}, #{createDate},
         #{updateBy}, #{updateDate},
@@ -37,6 +39,7 @@
     </sql>
     
     <sql id="OperationUpdateMap">
+        operation_component_id = #{component.id},
         operation_name = #{name},
         operation_diff = #{diff},
         operation_desc = #{desc},

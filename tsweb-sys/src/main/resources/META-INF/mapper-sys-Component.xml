@@ -95,7 +95,7 @@
         <where> component_id = #{id} </where>
     </select>
 
-    <select id="getOperationsByComponentId" parameterType="string" resultMap="Operation">
+    <select id="getOperationsByComponentId" parameterType="string" resultMap="com.techsen.tsweb.sys.dao.OperationDao.OperationMap">
         select <include refid="com.techsen.tsweb.sys.dao.OperationDao.OperationColumns"/>
         from <include refid="OperationTable"/>
         <where> operation_component_id = #{id} </where>

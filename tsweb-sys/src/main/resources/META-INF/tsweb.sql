@@ -112,6 +112,7 @@ create table sys_component_mstr (
     primary key(component_id),
     unique key(component_name)
 ) comment '组件资源表';
+insert into sys_component_mstr values('C1', 'UserController', 'controller', '用户操作控制器', 'UserController', '', null, '', null, '');
 
 /**
  * sys_operation_det

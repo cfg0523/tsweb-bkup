@@ -19,6 +19,14 @@ public class Operation extends BaseEntity<Operation> {
      * 该操作所属的组件
      */
     private Component component;
+    
+    public Operation() {
+    }
+    
+    public Operation(String name, String desc) {
+        this.name = name;
+        this.desc = desc;
+    }
 
     public String getName() {
         return name;

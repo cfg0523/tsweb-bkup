@@ -15,7 +15,7 @@ public class Component extends BaseEntity<Component> {
     private String name;
     private String type;
     private String desc;
-    private String javaClass;
+    private String javaType;
 
     /**
      * 该组件所拥有的操作集合
@@ -62,12 +62,12 @@ public class Component extends BaseEntity<Component> {
         return this;
     }
 
-    public String getJavaClass() {
-        return javaClass;
+    public String getJavaType() {
+        return javaType;
     }
 
-    public Component setJavaClass(String javaClass) {
-        this.javaClass = javaClass;
+    public Component setJavaType(String javaType) {
+        this.javaType = javaType;
         return this;
     }
 

@@ -132,6 +132,7 @@ create table sys_operation_det (
     operation_update_date datetime comment '修改时间',
     operation_remark varchar(256) comment '备注',
     primary key(operation_id),
+    unique key(operation_component_id, operation_acl_bit),
     unique key(operation_component_id, operation_name, operation_diff)
 ) comment '方法表';
 insert into sys_operation_det values ('O1', 'C1', 'login', '', '用户登录', 1, '', null, '', null, '');

@@ -2,9 +2,6 @@ package com.techsen.tsweb.sys.dao;
 
 import javax.annotation.Resource;
 
-
-
-
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -43,6 +40,22 @@ public class OperationDaoTest {
         
         Assert.assertNotNull(tmp);
         Assert.assertNotNull(this.operation.getComponent());
+    }
+    
+    @Test
+    public void testUpdateEntity() {
+        Operation tmp = this.operation.clone();
+        tmp.setDesc("addUser").setComponent(new Component().setId("C1"));
+        this.operationDao.updateEntity(tmp);
+        
+        Operation tmp2 = this.operationDao.getEntity(tmp);
+        
+        Assert.assertNotNull(tmp2);
+        Assert.assertEquals(tmp.getId(), tmp2.getId());
+        Assert.assertEquals(tmp.getName(), tmp2.getName());
+        Assert.assertEquals(tmp.getDesc(), tmp2.getDesc());
+        Assert.assertNotNull(tmp2.getComponent());
+        Assert.assertEquals(tmp.getComponent().getId(), tmp2.getComponent().getId());
     }
     
 }

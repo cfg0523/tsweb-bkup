@@ -112,7 +112,7 @@ create table sys_component_mstr (
     primary key(component_id),
     unique key(component_name)
 ) comment '组件资源表';
-insert into sys_component_mstr values('C1', 'UserController', 'controller', '用户操作控制器', 'UserController', '', null, '', null, '');
+insert into sys_component_mstr values ('C1', 'LoginController', 'controller', '登录控制器', 'LoginController', '', null, '', null, '');
 
 /**
  * sys_operation_det
@@ -134,6 +134,7 @@ create table sys_operation_det (
     primary key(operation_id),
     unique key(operation_component_id, operation_name, operation_diff)
 ) comment '方法表';
+insert into sys_operation_det values ('O1', 'C1', 'login', '', '用户登录', 1, '', null, '', null, '');
 
 
 /**

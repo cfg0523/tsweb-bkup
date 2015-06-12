@@ -23,7 +23,7 @@ public class ComponentDaoTest {
     
     @Before
     public void init() {
-        this.component = new Component("loginController", "controller").setId("logincontroller");
+        this.component = new Component("userController", "controller").setId("usercontroller");
         this.componentDao.addEntity(this.component);
     }
     
@@ -40,5 +40,16 @@ public class ComponentDaoTest {
         Assert.assertEquals(0, tmp.getOperations().size());
     }
     
-    
+    @Test
+    public void testUpdateEntity() {
+        Component tmp = this.component.clone();
+        tmp.setDesc("userController");
+        this.componentDao.updateEntity(tmp);
+        Component tmp2 = this.componentDao.getEntity(tmp);
+        
+        Assert.assertNotNull(tmp);
+        Assert.assertEquals(tmp.getId(), tmp2.getId());
+        Assert.assertEquals(tmp.getName(), tmp2.getName());
+        Assert.assertEquals(tmp.getDesc(), tmp2.getDesc());
+    }
 }

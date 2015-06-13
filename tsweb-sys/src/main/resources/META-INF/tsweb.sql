@@ -103,7 +103,7 @@ create table sys_component_mstr (
     component_name varchar(32) not null comment '组件资源名',
     component_type varchar(32) not null comment '组件资源类型',
     component_desc varchar(32) comment '组件资源功能描述',
-    component_java_class varchar(64) comment '组件资源类名',
+    component_java_type varchar(64) comment '组件资源类名',
     component_create_by varchar(32) comment '创建人ID',
     component_create_date datetime comment '创建时间',
     component_update_by varchar(32) comment '修改人ID',

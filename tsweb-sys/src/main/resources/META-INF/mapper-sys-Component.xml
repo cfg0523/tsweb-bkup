@@ -7,7 +7,7 @@
         <result property="name" column="component_name"/>
         <result property="type" column="component_type"/>
         <result property="desc" column="component_desc"/>
-        <result property="javaClass" column="component_java_class"/>
+        <result property="javaType" column="component_java_type"/>
         <result property="createBy" column="component_create_by"/>
         <result property="createDate" column="component_create_date"/>
         <result property="updateBy" column="component_update_by"/>
@@ -22,7 +22,7 @@
 
     <sql id="ComponentColumns">
         component_id, component_name, component_type,
-        component_desc, component_java_class,
+        component_desc, component_java_type,
         component_create_by, component_create_date,
         component_update_by, component_update_date,
         component_remark
@@ -30,7 +30,7 @@
 
     <sql id="ComponentProperties">
         #{id}, #{name}, #{type},
-        #{desc}, #{javaClass},
+        #{desc}, #{javaType},
         #{createBy}, #{createDate},
         #{updateBy}, #{updateDate},
         #{remark}
@@ -40,7 +40,7 @@
         component_name = #{name},
         component_type = #{type},
         component_desc = #{desc},
-        component_java_class = #{javaClass},
+        component_java_type = #{javaType},
         <!-- component_create_by = #{createBy}, -->
         <!-- component_create_date = #{createDate}, -->
         component_update_by = #{updateBy},

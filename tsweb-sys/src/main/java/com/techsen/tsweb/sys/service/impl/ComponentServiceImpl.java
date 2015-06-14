@@ -1,14 +1,17 @@
 package com.techsen.tsweb.sys.service.impl;
 
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 
 import com.techsen.tsweb.sys.dao.ComponentDao;
 import com.techsen.tsweb.sys.domain.Component;
 import com.techsen.tsweb.sys.service.ComponentService;
 
-@Service
+@Service("componentService")
 public class ComponentServiceImpl implements ComponentService {
     
+    @Resource
     private ComponentDao componentDao;
 
     /**

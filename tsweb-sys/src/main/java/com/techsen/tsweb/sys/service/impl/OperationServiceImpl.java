@@ -1,11 +1,17 @@
 package com.techsen.tsweb.sys.service.impl;
 
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
 import com.techsen.tsweb.sys.dao.OperationDao;
 import com.techsen.tsweb.sys.domain.Operation;
 import com.techsen.tsweb.sys.service.OperationService;
 
+@Service("operationService")
 public class OperationServiceImpl implements OperationService {
 
+    @Resource
     private OperationDao operationDao;
 
     /**

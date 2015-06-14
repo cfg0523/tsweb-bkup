@@ -14,7 +14,8 @@
         <result property="updateDate" column="operation_update_date"/>
         <result property="remark" column="operation_remark"/>
         
-        <association property="component" column="operation_component_id" javaType="Component" select="getComponentByComponentId"/>
+        <association property="component" column="operation_component_id"
+                javaType="Component" select="getComponentByComponentId"/>
     </resultMap>
 
     <sql id="ComponentTable">sys_component_mstr</sql>
@@ -98,7 +99,8 @@
         <where> operation_id = #{id} </where>
     </select>
 
-    <select id="getComponentByComponentId" parameterType="string" resultMap="com.techsen.tsweb.sys.dao.ComponentDao.ComponentMap">
+    <select id="getComponentByComponentId" parameterType="string"
+            resultMap="com.techsen.tsweb.sys.dao.ComponentDao.ComponentMap">
         select <include refid="com.techsen.tsweb.sys.dao.ComponentDao.ComponentColumns"/>
         from <include refid="ComponentTable"/>
         <where> component_id = #{id} </where>

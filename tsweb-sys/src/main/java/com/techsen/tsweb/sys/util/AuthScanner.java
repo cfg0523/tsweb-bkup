@@ -6,12 +6,10 @@ import static com.techsen.tsweb.core.util.ValidUtil.isEmpty;
 import java.io.File;
 import java.lang.reflect.Method;
 
-import org.springframework.expression.spel.ast.OpAnd;
-
-import com.sun.corba.se.spi.orb.Operation;
 import com.techsen.tsweb.sys.annotation.AuthComponent;
 import com.techsen.tsweb.sys.annotation.AuthOperation;
 import com.techsen.tsweb.sys.domain.Component;
+import com.techsen.tsweb.sys.domain.Operation;
 
 /**
  * 权限资源扫描器
@@ -47,13 +45,23 @@ public class AuthScanner {
                 System.out.println(component);
 
                 for (Method method : clazz.getDeclaredMethods()) {
-                    AuthOperation authOperation = method.getAnnotation(AuthOperation.class);
-                    
-                    String operationName = isEmpty(authOperation.name()) ? method.getName() : authOperation.name();
-                    String diff = isEmpty(authOperation.diff()) ? null : authOperation.diff();
-                    String desc = isEmpty(authOperation.desc()) ? clazz.getName() + "." + method.getName() : authOperation.desc();
-                    int aclBit = authOperation.aclBit();
-                    
+                    AuthOperation authOperation = method
+                            .getAnnotation(AuthOperation.class);
+
+                    String operationName = isEmpty(authOperation.name()) ? method
+                            .getName() : authOperation.name();
+                    String operationDiff = isEmpty(authOperation.diff()) ? null
+                            : authOperation.diff();
+                    String operationDesc = isEmpty(authOperation.desc()) ? clazz
+                            .getName() + "." + method.getName()
+                            : authOperation.desc();
+                    int operationAclBit = authOperation.aclBit();
+
+                    Operation operation = new Operation()
+                            .setName(operationName).setDiff(operationDiff)
+                            .setDesc(operationDesc).setAclBit(operationAclBit);
+
+                    System.out.println(operation);
                 }
             }
         }

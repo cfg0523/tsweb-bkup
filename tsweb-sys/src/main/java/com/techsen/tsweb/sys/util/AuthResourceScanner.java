@@ -33,11 +33,20 @@ public class AuthResourceScanner {
         importAuthResources(classList);
     }
     
+    /**
+     * 清空组件资源表<br/>
+     * 清空组件操作资源表
+     */
     public static void deleteAllAuthResources() {
         componentService.removeAll();
         operationService.removeAll();
     }
     
+    /**
+     * 遍历给定的集合中的类，<br/>
+     * 检查有{@link com.techsen.tsweb.sys.annotation.AuthComponent}注解标注的类，导入组件资源，<br/>
+     * 检查有{@link com.techsen.tsweb.sys.annotation.AuthOperation}标注的方法，导入组件操作资源
+     */
     public static void importAuthResources(List<Class<?>> classList) {
         if (isValid(classList)) {
             for (Class<?> clazz : classList) {
@@ -72,6 +81,9 @@ public class AuthResourceScanner {
         }
     }
     
+    /**
+     * 扫描给定包下的所有类
+     */
     public static List<Class<?>> scanClass(String basePackage) {
         List<Class<?>> classList = new ArrayList<Class<?>>();
         if (isValid(basePackage)) {

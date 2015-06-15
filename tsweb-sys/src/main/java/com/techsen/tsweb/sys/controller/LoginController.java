@@ -12,6 +12,7 @@ import com.techsen.tsweb.sys.domain.User;
 @Controller
 @RequestMapping("/sys")
 public class LoginController {
+    
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(boolean error) {
         if (error) {

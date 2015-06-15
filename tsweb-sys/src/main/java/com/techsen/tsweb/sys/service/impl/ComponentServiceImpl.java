@@ -46,5 +46,13 @@ public class ComponentServiceImpl implements ComponentService {
     public void deleteComponent(Component component) {
         this.componentDao.deleteEntity(component);
     }
+
+    /**
+     * 删除所有组件
+     */
+    @Override
+    public void removeAll() {
+        this.componentDao.removeAll();
+    }
     
 }

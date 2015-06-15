@@ -112,7 +112,9 @@ create table sys_component_mstr (
     primary key(component_id),
     unique key(component_name)
 ) comment '组件资源表';
+/*
 insert into sys_component_mstr values ('C1', 'LoginController', 'controller', '登录控制器', 'LoginController', '', null, '', null, '');
+*/
 
 /**
  * sys_operation_det
@@ -135,7 +137,9 @@ create table sys_operation_det (
     unique key(operation_component_id, operation_acl_bit),
     unique key(operation_component_id, operation_name, operation_diff)
 ) comment '方法表';
+/*
 insert into sys_operation_det values ('O1', 'C1', 'login', '', '用户登录', 1, '', null, '', null, '');
+*/
 
 
 /**

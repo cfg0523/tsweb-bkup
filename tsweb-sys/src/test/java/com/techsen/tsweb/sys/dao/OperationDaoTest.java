@@ -20,18 +20,26 @@ public class OperationDaoTest {
     @Resource
     private OperationDao operationDao;
     
+    @Resource
+    private ComponentDao componentDao;
+    
+    private Component component;
     private Operation operation;
     
     @Before
     public void init() {
+        this.component = new Component("testComponent", "testComponent").setId("C0");
+        this.componentDao.addEntity(this.component);
+        
         this.operation = new Operation("addUser", "添加用户").setId("addUserOperation");
-        this.operation.setComponent(new Component().setId("C0"));
+        this.operation.setComponent(this.component);
         this.operationDao.addEntity(this.operation);
     }
     
     @After
     public void clear() {
         this.operationDao.deleteEntity(this.operation);
+        this.componentDao.deleteEntity(this.component);
     }
     
     @Test
@@ -44,8 +52,7 @@ public class OperationDaoTest {
     
     @Test
     public void testUpdateEntity() {
-        Operation tmp = this.operation.clone();
-        tmp.setDesc("addUser").setComponent(new Component().setId("C1"));
+        Operation tmp = this.operation.clone().setDesc("addUser");
         this.operationDao.updateEntity(tmp);
         
         Operation tmp2 = this.operationDao.getEntity(tmp);

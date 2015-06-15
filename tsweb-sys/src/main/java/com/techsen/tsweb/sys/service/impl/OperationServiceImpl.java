@@ -46,5 +46,13 @@ public class OperationServiceImpl implements OperationService {
     public void deleteOperation(Operation operation) {
         this.operationDao.deleteEntity(operation);
     }
+
+    /**
+     * 删除所有Operation
+     */
+    @Override
+    public void removeAll() {
+        this.operationDao.removeAll();
+    }
     
 }

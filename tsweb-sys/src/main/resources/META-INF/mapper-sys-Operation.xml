@@ -106,4 +106,7 @@
         <where> component_id = #{id} </where>
     </select>
 
+    <select id="removeAll">
+        delete from <include refid="OperationTable"/>
+    </select>
 </mapper>

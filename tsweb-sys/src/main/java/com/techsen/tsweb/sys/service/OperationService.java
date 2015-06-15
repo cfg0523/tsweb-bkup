@@ -24,4 +24,8 @@ public interface OperationService {
      */
     public void deleteOperation(Operation operation);
     
+    /**
+     * 删除所有Operation
+     */
+    public void removeAll();
 }

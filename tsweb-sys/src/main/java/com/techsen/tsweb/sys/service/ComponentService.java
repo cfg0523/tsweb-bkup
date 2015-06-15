@@ -24,4 +24,8 @@ public interface ComponentService {
      */
     public void deleteComponent(Component component);
     
+    /**
+     * 删除所有组件
+     */
+    public void removeAll();
 }

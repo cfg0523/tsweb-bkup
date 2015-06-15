@@ -13,4 +13,8 @@ public interface OperationDao extends Dao<Operation>{
      */
     public Component getComponentByComponentId(String componentId);
     
+    /**
+     * 删除所有Operation
+     */
+    public void removeAll();
 }

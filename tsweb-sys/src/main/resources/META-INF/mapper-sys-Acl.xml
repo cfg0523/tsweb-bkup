@@ -98,4 +98,13 @@
         </where>
     </select>
     
+    <select id="getAclsByUserName" parameterType="string" resultMap="AclMap">
+        select <include refid="AclColumns"/>
+        from <include refid="AclTable"/>
+        <where>
+            acl_principal_type = 'User'
+            and acl_principal_name = #{principalName}
+        </where>
+    </select>
+    
 </mapper>

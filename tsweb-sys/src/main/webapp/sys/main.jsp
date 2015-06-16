@@ -8,5 +8,18 @@
 </head>
 <body>
     User: <shiro:principal/>
+    <br/>
+    <shiro:hasPermission name="Menu:SysMenu">
+        hasPermission: Menu:SysMenu<br/>
+    </shiro:hasPermission>
+    
+    <shiro:hasRole name="Programmer">
+        hasRole: Programmer<br/>
+    </shiro:hasRole>
+    
+    <shiro:hasPermission name="Menu:MenuMenu">
+        hasPermission: Menu:MenuMenu<br/>
+    </shiro:hasPermission>
+    
 </body>
 </html>

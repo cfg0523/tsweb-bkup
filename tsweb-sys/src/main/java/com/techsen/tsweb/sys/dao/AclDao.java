@@ -11,4 +11,5 @@ public interface AclDao extends Dao<Acl> {
 
     public List<Acl> getAclsByRoleName(String roleName);
     
+    public List<Acl> getAclsByUserName(String userName);
 }

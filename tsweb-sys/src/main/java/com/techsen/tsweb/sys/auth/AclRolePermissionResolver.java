@@ -1,8 +1,6 @@
 package com.techsen.tsweb.sys.auth;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -10,7 +8,6 @@ import org.apache.shiro.authz.Permission;
 import org.apache.shiro.authz.permission.RolePermissionResolver;
 import org.springframework.stereotype.Component;
 
-import com.techsen.tsweb.sys.domain.Acl;
 import com.techsen.tsweb.sys.service.AclService;
 
 @Component("aclRolePermissionResolver")
@@ -21,11 +18,7 @@ public class AclRolePermissionResolver implements RolePermissionResolver {
     
     @Override
     public Collection<Permission> resolvePermissionsInRole(String roleName) {
-        List<Permission> retList = new ArrayList<Permission>();
-        for (Acl acl : this.aclService.getAclsByRoleName(roleName)) {
-            retList.add(acl.toAclPermission());
-        }
-        return retList;
+        return this.aclService.getAclPermissionsByRoleName(roleName);
     }
 
 }

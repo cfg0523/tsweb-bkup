@@ -3,8 +3,8 @@ package com.techsen.tsweb.sys.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.techsen.tsweb.sys.annotation.AuthComponent;
-import com.techsen.tsweb.sys.annotation.AuthOperation;
+import com.techsen.tsweb.sys.auth.annotation.AuthComponent;
+import com.techsen.tsweb.sys.auth.annotation.AuthOperation;
 
 @Controller
 @RequestMapping("/sys")

@@ -1,4 +1,4 @@
-package com.techsen.tsweb.sys.util;
+package com.techsen.tsweb.sys.auth;
 
 import static com.techsen.tsweb.core.util.ExceptionUtil.throwRuntimeException;
 import static com.techsen.tsweb.core.util.ValidUtil.isEmpty;
@@ -13,8 +13,8 @@ import java.util.List;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.techsen.tsweb.sys.annotation.AuthComponent;
-import com.techsen.tsweb.sys.annotation.AuthOperation;
+import com.techsen.tsweb.sys.auth.annotation.AuthComponent;
+import com.techsen.tsweb.sys.auth.annotation.AuthOperation;
 import com.techsen.tsweb.sys.domain.Component;
 import com.techsen.tsweb.sys.domain.Operation;
 import com.techsen.tsweb.sys.service.ComponentService;
@@ -45,8 +45,8 @@ public class AuthResourceScanner {
     
     /**
      * 遍历给定的集合中的类，<br/>
-     * 检查有{@link com.techsen.tsweb.sys.annotation.AuthComponent}注解标注的类，导入组件资源，<br/>
-     * 检查有{@link com.techsen.tsweb.sys.annotation.AuthOperation}标注的方法，导入组件操作资源
+     * 检查有{@link com.techsen.tsweb.sys.auth.annotation.AuthComponent}注解标注的类，导入组件资源，<br/>
+     * 检查有{@link com.techsen.tsweb.sys.auth.annotation.AuthOperation}标注的方法，导入组件操作资源
      */
     public static void importAuthResources(List<Class<?>> classList) {
         if (isValid(classList)) {

@@ -1,4 +1,4 @@
-package com.techsen.tsweb.sys.realm;
+package com.techsen.tsweb.sys.auth.realm;
 
 import static com.techsen.tsweb.core.util.ValidUtil.isValid;
 

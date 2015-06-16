@@ -4,9 +4,9 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.techsen.tsweb.sys.annotation.AuthComponent;
-import com.techsen.tsweb.sys.annotation.AuthComponentType;
-import com.techsen.tsweb.sys.annotation.AuthOperation;
+import com.techsen.tsweb.sys.auth.AuthComponentType;
+import com.techsen.tsweb.sys.auth.annotation.AuthComponent;
+import com.techsen.tsweb.sys.auth.annotation.AuthOperation;
 import com.techsen.tsweb.sys.dao.MenuDao;
 import com.techsen.tsweb.sys.domain.Menu;
 import com.techsen.tsweb.sys.service.MenuService;

@@ -1,4 +1,4 @@
-package com.techsen.tsweb.sys.annotation;
+package com.techsen.tsweb.sys.auth;
 
 /**
  * 权限组件资源的类型<br/>

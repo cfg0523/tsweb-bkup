@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.techsen.tsweb.sys.dao.AclDao">
+    <resultMap type="Acl" id="AclMap">
+        <id property="id" column="acl_id"/>
+        <result property="principalId" column="acl_principal_id"/>
+        <result property="principalType" column="acl_principal_type"/>
+        <result property="resourceId" column="acl_resource_id"/>
+        <result property="resourceType" column="acl_resource_type"/>
+        <result property="aclCode" column="acl_code"/>
+        <result property="createBy" column="acl_create_by"/>
+        <result property="createDate" column="acl_create_date"/>
+        <result property="updateBy" column="acl_update_by"/>
+        <result property="updateDate" column="acl_update_date"/>
+        <result property="remark" column="acl_remark"/>
+    </resultMap>
+
+    <sql id="AclTable">sys_acl_mstr</sql>
+
+    <sql id="AclColumns">
+        acl_id, acl_principal_id, acl_principal_type,
+        acl_resource_id, acl_resource_type, acl_code,
+        acl_create_by, acl_create_date,
+        acl_update_by, acl_update_date,
+        acl_remark
+    </sql>
+
+    <sql id="AclProperties">
+        #{id}, #{principalId}, #{principalType},
+        #{resourceId}, #{resourceType}, #{aclCode},
+        #{createBy}, #{createDate},
+        #{updateBy}, #{updateDate},
+        #{remark}
+    </sql>
+    
+    <sql id="AclUpdateMap">
+        acl_principal_id = #{principalId},
+        acl_principal_type = #{principalType},
+        acl_resource_id = #{resourceId},
+        acl_resource_type = #{resourceType},
+        acl_code = #{aclCode},
+        <!-- acl_create_by = #{createBy}, -->
+        <!-- acl_create_date = #{createDate}, -->
+        acl_update_by = #{updateBy},
+        acl_update_date = #{updateDate},
+        acl_remark = #{remark}
+    </sql>
+
+    <sql id="AclWhereCondition">
+        <where>
+            <choose>
+                <when test="id != null">
+                    acl_id = #{id}
+                </when>
+                <when test="principalId != null and resourceId != null">
+                    acl_principal_id = #{principalId}
+                    and acl_resource_id = #{resourceId}
+                </when>
+                <otherwise>
+                    1 == 0
+                </otherwise>
+            </choose>
+        </where>
+    </sql>
+
+    <insert id="addEntity" parameterType="Acl">
+        insert into <include refid="AclTable"/> (
+            <include refid="AclColumns"/>
+        ) values (
+            <include refid="AclProperties"/>
+        )
+    </insert>
+
+    <delete id="deleteEntity" parameterType="Acl">
+        delete from <include refid="AclTable"/>
+        <include refid="AclWhereCondition"/>
+    </delete>
+
+    <update id="updateEntity" parameterType="Acl">
+        update <include refid="AclTable"/>
+        set <include refid="AclUpdateMap"/>
+        <include refid="AclWhereCondition"/>
+    </update>
+
+    <select id="getEntity" parameterType="Acl" resultMap="AclMap">
+        select <include refid="AclColumns"/>
+        from <include refid="AclTable"/>
+        <include refid="AclWhereCondition"/>
+    </select>
+    
+</mapper>

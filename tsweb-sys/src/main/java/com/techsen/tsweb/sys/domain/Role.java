@@ -7,7 +7,7 @@ import com.techsen.tsweb.core.domain.BaseEntity;
 /**
  * 角色实体
  */
-public class Role extends BaseEntity<Role> {
+public class Role extends BaseEntity<Role> implements Principal {
     private static final long serialVersionUID = -7838821087064025453L;
 
     private String name;
@@ -50,6 +50,11 @@ public class Role extends BaseEntity<Role> {
     public Role setUsers(List<User> users) {
         this.users = users;
         return this;
+    }
+
+    @Override
+    public PrincipalType getPrincipalType() {
+        return PrincipalType.Role;
     }
 
 }

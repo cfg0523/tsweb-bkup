@@ -7,7 +7,7 @@ import com.techsen.tsweb.core.domain.BaseEntity;
 /**
  * 菜单对象
  */
-public class Menu extends BaseEntity<Menu> {
+public class Menu extends BaseEntity<Menu> implements Resource {
 
     private static final long serialVersionUID = -7771118378089691104L;
 
@@ -96,6 +96,11 @@ public class Menu extends BaseEntity<Menu> {
     public Menu setSubMenus(List<Menu> subMenus) {
         this.subMenus = subMenus;
         return this;
+    }
+
+    @Override
+    public ResourceType getResourceType() {
+        return ResourceType.Menu;
     }
 
 }

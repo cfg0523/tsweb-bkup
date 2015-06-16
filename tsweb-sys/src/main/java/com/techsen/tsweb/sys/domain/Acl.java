@@ -56,11 +56,3 @@ public class Acl extends BaseEntity<Acl> {
     }
 
 }
-
-enum PrincipalType {
-    User, Role
-}
-
-enum ResourceType {
-    Menu, Component
-}

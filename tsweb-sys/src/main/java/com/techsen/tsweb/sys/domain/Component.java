@@ -8,7 +8,7 @@ import com.techsen.tsweb.core.domain.BaseEntity;
  * 组件资源类<br/>
  * 通常是系统中的Controller资源和Service
  */
-public class Component extends BaseEntity<Component> {
+public class Component extends BaseEntity<Component> implements Resource {
 
     private static final long serialVersionUID = -1236091399373795740L;
 
@@ -77,6 +77,11 @@ public class Component extends BaseEntity<Component> {
 
     public void setOperations(List<Operation> operations) {
         this.operations = operations;
+    }
+
+    @Override
+    public ResourceType getResourceType() {
+        return ResourceType.Controller;
     }
 
 }

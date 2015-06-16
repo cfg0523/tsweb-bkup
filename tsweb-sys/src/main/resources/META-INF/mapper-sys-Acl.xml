@@ -16,7 +16,7 @@
         <result property="remark" column="acl_remark"/>
     </resultMap>
 
-    <sql id="AclTable">sys_acl_mstr</sql>
+    <sql id="AclTable">sys_acl_det</sql>
 
     <sql id="AclColumns">
         acl_id, acl_principal_id, acl_principal_type,

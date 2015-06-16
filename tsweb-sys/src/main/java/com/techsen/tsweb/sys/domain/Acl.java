@@ -19,40 +19,45 @@ public class Acl extends BaseEntity<Acl> {
         return principalId;
     }
 
-    public void setPrincipalId(String principalId) {
+    public Acl setPrincipalId(String principalId) {
         this.principalId = principalId;
+        return this;
     }
 
     public PrincipalType getPrincipalType() {
         return principalType;
     }
 
-    public void setPrincipalType(PrincipalType principalType) {
+    public Acl setPrincipalType(PrincipalType principalType) {
         this.principalType = principalType;
+        return this;
     }
 
     public String getResourceId() {
         return resourceId;
     }
 
-    public void setResourceId(String resourceId) {
+    public Acl setResourceId(String resourceId) {
         this.resourceId = resourceId;
+        return this;
     }
 
     public ResourceType getResourceType() {
         return resourceType;
     }
 
-    public void setResourceType(ResourceType resourceType) {
+    public Acl setResourceType(ResourceType resourceType) {
         this.resourceType = resourceType;
+        return this;
     }
 
     public int getAclCode() {
         return aclCode;
     }
 
-    public void setAclCode(int aclCode) {
+    public Acl setAclCode(int aclCode) {
         this.aclCode = aclCode;
+        return this;
     }
 
 }

@@ -161,13 +161,13 @@ create table sys_acl_det (
     primary key(acl_id),
     unique key(acl_principal_id, acl_principal_type, acl_resource_id, acl_resource_type)
 ) comment '访问控制表';
-insert into sys_acl_det values ('ACL1', 'R1', 'role', 'M1', 'menu', 1, '', null, '', null, '');
-insert into sys_acl_det values ('ACL2', 'R1', 'role', 'M4', 'menu', 1, '', null, '', null, '');
-insert into sys_acl_det values ('ACL3', 'R1', 'role', 'M5', 'menu', 1, '', null, '', null, '');
-insert into sys_acl_det values ('ACL4', 'R2', 'role', 'M1', 'menu', 1, '', null, '', null, '');
-insert into sys_acl_det values ('ACL5', 'R2', 'role', 'M2', 'menu', 1, '', null, '', null, '');
-insert into sys_acl_det values ('ACL6', 'R2', 'role', 'M3', 'menu', 1, '', null, '', null, '');
-insert into sys_acl_det values ('ACL7', 'R3', 'role', 'M1', 'menu', 1, '', null, '', null, '');
-insert into sys_acl_det values ('ACL8', 'R3', 'role', 'M2', 'menu', 1, '', null, '', null, '');
-insert into sys_acl_det values ('ACL9', 'R3', 'role', 'M3', 'menu', 1, '', null, '', null, '');
-insert into sys_acl_det values ('ACL10', 'U3', 'user', 'M4', 'menu', 1, '', null, '', null, '');
+insert into sys_acl_det values ('ACL1', 'R1', 'Role', 'M1', 'Menu', 1, '', null, '', null, '');
+insert into sys_acl_det values ('ACL2', 'R1', 'Role', 'M4', 'Menu', 1, '', null, '', null, '');
+insert into sys_acl_det values ('ACL3', 'R1', 'Role', 'M5', 'Menu', 1, '', null, '', null, '');
+insert into sys_acl_det values ('ACL4', 'R2', 'Role', 'M1', 'Menu', 1, '', null, '', null, '');
+insert into sys_acl_det values ('ACL5', 'R2', 'Role', 'M2', 'Menu', 1, '', null, '', null, '');
+insert into sys_acl_det values ('ACL6', 'R2', 'Role', 'M3', 'Menu', 1, '', null, '', null, '');
+insert into sys_acl_det values ('ACL7', 'R3', 'Role', 'M1', 'Menu', 1, '', null, '', null, '');
+insert into sys_acl_det values ('ACL8', 'R3', 'Role', 'M2', 'Menu', 1, '', null, '', null, '');
+insert into sys_acl_det values ('ACL9', 'R3', 'Role', 'M3', 'Menu', 1, '', null, '', null, '');
+insert into sys_acl_det values ('ACL10', 'U3', 'User', 'M4', 'Menu', 1, '', null, '', null, '');

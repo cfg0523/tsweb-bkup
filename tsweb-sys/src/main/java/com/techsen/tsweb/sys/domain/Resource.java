@@ -5,7 +5,3 @@ public interface Resource {
     public ResourceType getResourceType();
     
 }
-
-enum ResourceType {
-    Menu, Controller
-}

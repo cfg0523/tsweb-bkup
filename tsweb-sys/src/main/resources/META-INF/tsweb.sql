@@ -87,11 +87,11 @@ create table sys_menu_mstr (
     primary key(menu_id),
     unique key(menu_name)
 ) comment '菜单资源表';
-insert into sys_menu_mstr values ('M1', 'Sys', '系统管理', '', 'nav', '', 1, '', null, '', null, '');
-insert into sys_menu_mstr values ('M2', 'User', '用户管理', '/menu/user', 'nav', 'M1', 1, '', null, '', null, '');
-insert into sys_menu_mstr values ('M3', 'Role', '角色管理', '/menu/role', 'nav', 'M1', 1, '', null, '', null, '');
-insert into sys_menu_mstr values ('M4', 'Menu', '菜单管理', '/menu/menu', 'nav', 'M1', 1, '', null, '', null, '');
-insert into sys_menu_mstr values ('M5', 'Component', '组件管理', '/menu/component', 'nav', 'M1', 1, '', null, '', null, '');
+insert into sys_menu_mstr values ('M1', 'SysMenu', '系统管理', '', 'nav', '', 1, '', null, '', null, '');
+insert into sys_menu_mstr values ('M2', 'UserMenu', '用户管理', '/menu/user', 'nav', 'M1', 1, '', null, '', null, '');
+insert into sys_menu_mstr values ('M3', 'RoleMenu', '角色管理', '/menu/role', 'nav', 'M1', 1, '', null, '', null, '');
+insert into sys_menu_mstr values ('M4', 'MenuMenu', '菜单管理', '/menu/menu', 'nav', 'M1', 1, '', null, '', null, '');
+insert into sys_menu_mstr values ('M5', 'ComponentMenu', '组件管理', '/menu/component', 'nav', 'M1', 1, '', null, '', null, '');
 
 /**
  * sys_component_mstr
@@ -155,13 +155,13 @@ create table sys_acl_det (
     primary key(acl_id),
     unique key(acl_principal_name, acl_resource_name)
 ) comment '访问控制表';
-insert into sys_acl_det values ('ACL1', 'Role', 'Programmer', 'Menu', 'Sys', 1, '', null, '', null, '');
-insert into sys_acl_det values ('ACL2', 'Role', 'Programmer', 'Menu', 'Menu', 1, '', null, '', null, '');
-insert into sys_acl_det values ('ACL3', 'Role', 'Programmer', 'Menu', 'Component', 1, '', null, '', null, '');
-insert into sys_acl_det values ('ACL4', 'Role', 'Manager', 'Menu', 'Sys', 1, '', null, '', null, '');
-insert into sys_acl_det values ('ACL5', 'Role', 'Manager', 'Menu', 'User', 1, '', null, '', null, '');
-insert into sys_acl_det values ('ACL6', 'Role', 'Manager', 'Menu', 'Role', 1, '', null, '', null, '');
-insert into sys_acl_det values ('ACL7', 'Role', 'Staff', 'Menu', 'Sys', 1, '', null, '', null, '');
-insert into sys_acl_det values ('ACL8', 'Role', 'Staff', 'Menu', 'User', 1, '', null, '', null, '');
-insert into sys_acl_det values ('ACL9', 'Role', 'Staff', 'Menu', 'Role', 1, '', null, '', null, '');
-insert into sys_acl_det values ('ACL10', 'User', 'Giny', 'Menu', 'Menu', 1, '', null, '', null, '');
+insert into sys_acl_det values ('ACL1', 'Role', 'Programmer', 'Menu', 'SysMenu', 1, '', null, '', null, '');
+insert into sys_acl_det values ('ACL2', 'Role', 'Programmer', 'Menu', 'MenuMenu', 1, '', null, '', null, '');
+insert into sys_acl_det values ('ACL3', 'Role', 'Programmer', 'Menu', 'ComponentMenu', 1, '', null, '', null, '');
+insert into sys_acl_det values ('ACL4', 'Role', 'Manager', 'Menu', 'SysMenu', 1, '', null, '', null, '');
+insert into sys_acl_det values ('ACL5', 'Role', 'Manager', 'Menu', 'UserMenu', 1, '', null, '', null, '');
+insert into sys_acl_det values ('ACL6', 'Role', 'Manager', 'Menu', 'RoleMenu', 1, '', null, '', null, '');
+insert into sys_acl_det values ('ACL7', 'Role', 'Staff', 'Menu', 'SysMenu', 1, '', null, '', null, '');
+insert into sys_acl_det values ('ACL8', 'Role', 'Staff', 'Menu', 'UserMenu', 1, '', null, '', null, '');
+insert into sys_acl_det values ('ACL9', 'Role', 'Staff', 'Menu', 'RoleMenu', 1, '', null, '', null, '');
+insert into sys_acl_det values ('ACL10', 'User', 'Giny', 'Menu', 'MenuMenu', 1, '', null, '', null, '');

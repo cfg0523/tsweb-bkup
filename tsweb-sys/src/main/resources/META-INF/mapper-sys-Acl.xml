@@ -4,10 +4,10 @@
 <mapper namespace="com.techsen.tsweb.sys.dao.AclDao">
     <resultMap type="Acl" id="AclMap">
         <id property="id" column="acl_id"/>
-        <result property="principalId" column="acl_principal_id"/>
         <result property="principalType" column="acl_principal_type"/>
-        <result property="resourceId" column="acl_resource_id"/>
+        <result property="principalName" column="acl_principal_name"/>
         <result property="resourceType" column="acl_resource_type"/>
+        <result property="resourceName" column="acl_resource_name"/>
         <result property="aclCode" column="acl_code"/>
         <result property="createBy" column="acl_create_by"/>
         <result property="createDate" column="acl_create_date"/>
@@ -19,26 +19,26 @@
     <sql id="AclTable">sys_acl_det</sql>
 
     <sql id="AclColumns">
-        acl_id, acl_principal_id, acl_principal_type,
-        acl_resource_id, acl_resource_type, acl_code,
+        acl_id, acl_principal_type, acl_principal_name,
+        acl_resource_type, acl_resource_name, acl_code,
         acl_create_by, acl_create_date,
         acl_update_by, acl_update_date,
         acl_remark
     </sql>
 
     <sql id="AclProperties">
-        #{id}, #{principalId}, #{principalType},
-        #{resourceId}, #{resourceType}, #{aclCode},
+        #{id}, #{principalType}, #{principalName},
+        #{resourceType}, #{resourceName}, #{aclCode},
         #{createBy}, #{createDate},
         #{updateBy}, #{updateDate},
         #{remark}
     </sql>
     
     <sql id="AclUpdateMap">
-        acl_principal_id = #{principalId},
         acl_principal_type = #{principalType},
-        acl_resource_id = #{resourceId},
+        acl_principal_name = #{principalName},
         acl_resource_type = #{resourceType},
+        acl_resource_name = #{resourceName},
         acl_code = #{aclCode},
         <!-- acl_create_by = #{createBy}, -->
         <!-- acl_create_date = #{createDate}, -->
@@ -53,9 +53,9 @@
                 <when test="id != null">
                     acl_id = #{id}
                 </when>
-                <when test="principalId != null and resourceId != null">
-                    acl_principal_id = #{principalId}
-                    and acl_resource_id = #{resourceId}
+                <when test="principalName != null and resourceName != null">
+                    acl_principal_name = #{principalId}
+                    and acl_resource_name = #{resourceId}
                 </when>
                 <otherwise>
                     1 == 0

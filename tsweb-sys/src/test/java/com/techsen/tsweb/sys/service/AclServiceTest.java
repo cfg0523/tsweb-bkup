@@ -25,8 +25,8 @@ public class AclServiceTest {
     
     @Before
     public void init() {
-        this.acl = new Acl().setPrincipalId("U1")
-                .setPrincipalType(PrincipalType.User).setResourceId("M1")
+        this.acl = new Acl().setPrincipalName("U1")
+                .setPrincipalType(PrincipalType.User).setResourceName("M1")
                 .setResourceType(ResourceType.Menu).setAclCode(0x01);
 
         this.aclService.addAcl(this.acl);
@@ -44,23 +44,23 @@ public class AclServiceTest {
         Assert.assertNotNull(tmp.getId());
         Assert.assertNotNull(tmp.getCreateDate());
         Assert.assertEquals(this.acl.getId(), tmp.getId());
-        Assert.assertEquals(this.acl.getPrincipalId(), tmp.getPrincipalId());
+        Assert.assertEquals(this.acl.getPrincipalName(), tmp.getPrincipalName());
         Assert.assertEquals(this.acl.getPrincipalType(), tmp.getPrincipalType());
-        Assert.assertEquals(this.acl.getResourceId(), tmp.getResourceId());
+        Assert.assertEquals(this.acl.getResourceName(), tmp.getResourceName());
         Assert.assertEquals(this.acl.getResourceType(), tmp.getResourceType());
         Assert.assertEquals(this.acl.getAclCode(), tmp.getAclCode());
 
-        tmp.setPrincipalId("R1").setPrincipalType(PrincipalType.Role)
-                .setResourceId("C1").setResourceType(ResourceType.Controller);
+        tmp.setPrincipalName("R1").setPrincipalType(PrincipalType.Role)
+                .setResourceName("C1").setResourceType(ResourceType.Controller);
         this.aclService.updateAcl(tmp);
         
         Acl tmp2 = this.aclService.getAcl(tmp);
         Assert.assertNotNull(tmp2);
         Assert.assertNotNull(tmp2.getUpdateDate());
         Assert.assertEquals(tmp.getId(), tmp2.getId());
-        Assert.assertEquals(tmp.getPrincipalId(), tmp2.getPrincipalId());
+        Assert.assertEquals(tmp.getPrincipalName(), tmp2.getPrincipalName());
         Assert.assertEquals(tmp.getPrincipalType(), tmp2.getPrincipalType());
-        Assert.assertEquals(tmp.getResourceId(), tmp2.getResourceId());
+        Assert.assertEquals(tmp.getResourceName(), tmp2.getResourceName());
         Assert.assertEquals(tmp.getResourceType(), tmp2.getResourceType());
         Assert.assertEquals(tmp.getAclCode(), tmp2.getAclCode());
     }

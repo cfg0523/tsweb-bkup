@@ -31,6 +31,7 @@ public class AuthResourceScanner {
         deleteAllAuthResources();
         List<Class<?>> classList = scanClass("com.techsen.tsweb.sys");
         importAuthResources(classList);
+        System.exit(0);
     }
     
     /**

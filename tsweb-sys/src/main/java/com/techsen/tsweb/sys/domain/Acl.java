@@ -9,20 +9,11 @@ public class Acl extends BaseEntity<Acl> {
 
     private static final long serialVersionUID = -4382277645585649978L;
 
-    private String principalId;
     private PrincipalType principalType;
-    private String resourceId;
+    private String principalName;
     private ResourceType resourceType;
+    private String resourceName;
     private int aclCode;
-
-    public String getPrincipalId() {
-        return principalId;
-    }
-
-    public Acl setPrincipalId(String principalId) {
-        this.principalId = principalId;
-        return this;
-    }
 
     public PrincipalType getPrincipalType() {
         return principalType;
@@ -33,12 +24,12 @@ public class Acl extends BaseEntity<Acl> {
         return this;
     }
 
-    public String getResourceId() {
-        return resourceId;
+    public String getPrincipalName() {
+        return principalName;
     }
 
-    public Acl setResourceId(String resourceId) {
-        this.resourceId = resourceId;
+    public Acl setPrincipalName(String principalName) {
+        this.principalName = principalName;
         return this;
     }
 
@@ -48,6 +39,15 @@ public class Acl extends BaseEntity<Acl> {
 
     public Acl setResourceType(ResourceType resourceType) {
         this.resourceType = resourceType;
+        return this;
+    }
+
+    public String getResourceName() {
+        return resourceName;
+    }
+
+    public Acl setResourceName(String resourceName) {
+        this.resourceName = resourceName;
         return this;
     }
 

@@ -1,5 +1,7 @@
 package com.techsen.tsweb.sys.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -45,6 +47,14 @@ public class AclServiceImpl implements AclService {
     @Override
     public void deleteAcl(Acl acl) {
         this.aclDao.deleteEntity(acl);
+    }
+
+    /**
+     * 根据角色名获取Acl集合
+     */
+    @Override
+    public List<Acl> getAclsByRoleName(String roleName) {
+        return this.aclDao.getAclsByRoleName(roleName);
     }
 
 }

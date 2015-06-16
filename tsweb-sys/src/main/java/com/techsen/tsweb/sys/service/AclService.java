@@ -1,5 +1,7 @@
 package com.techsen.tsweb.sys.service;
 
+import java.util.List;
+
 import com.techsen.tsweb.sys.domain.Acl;
 
 public interface AclService {
@@ -24,4 +26,9 @@ public interface AclService {
      */
     public void deleteAcl(Acl acl);
 
+    /**
+     * 根据角色名获取Acl集合
+     */
+    public List<Acl> getAclsByRoleName(String roleName);
+    
 }

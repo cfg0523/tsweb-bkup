@@ -2,15 +2,32 @@ package com.techsen.tsweb.sys.auth;
 
 import org.apache.shiro.authz.Permission;
 
-public class AclPermission implements Permission {
+import com.techsen.tsweb.core.domain.BaseObject;
 
+public class AclPermission extends BaseObject<AclPermission> implements Permission {
+    
+    private static final long serialVersionUID = -3937296852119792240L;
+    
     private String resourceType = "*";
     private String resourceName = "*";
-    private int aclCode = 0x00;
+    private int aclCode = 0xFFFFFFFF;
 
     public AclPermission() {
     }
 
+    public AclPermission(String permissionString) {
+        String[] arr = permissionString.split(":");
+        if (arr.length >= 1) {
+            this.resourceType = arr[0];
+        }
+        if (arr.length >= 2) {
+            this.resourceName = arr[1];
+        }
+        if (arr.length >= 3) {
+            this.aclCode = Integer.valueOf(arr[2]);
+        }
+    }
+    
     public AclPermission(String resourceType, String resourceName, int aclCode) {
         this.resourceType = resourceType;
         this.resourceName = resourceName;

@@ -89,4 +89,13 @@
         <include refid="AclWhereCondition"/>
     </select>
     
+    <select id="getAclsByRoleName" parameterType="string" resultMap="AclMap">
+        select <include refid="AclColumns"/>
+        from <include refid="AclTable"/>
+        <where>
+            acl_principal_type = 'Role'
+            and acl_principal_name = #{principalName}
+        </where>
+    </select>
+    
 </mapper>

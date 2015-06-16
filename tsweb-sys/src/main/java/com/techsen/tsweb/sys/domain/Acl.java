@@ -1,6 +1,7 @@
 package com.techsen.tsweb.sys.domain;
 
 import com.techsen.tsweb.core.domain.BaseEntity;
+import com.techsen.tsweb.sys.auth.AclPermission;
 
 /**
  * 访问控制列表记录
@@ -22,6 +23,14 @@ public class Acl extends BaseEntity<Acl> {
     public Acl setPrincipalType(PrincipalType principalType) {
         this.principalType = principalType;
         return this;
+    }
+    
+    public AclPermission toAclPermission() {
+        return new AclPermission(this.resourceType.toString(), this.resourceName, this.aclCode);
+    }
+    
+    public String toAclPermissionString() {
+        return this.resourceType + ":" + this.resourceName + ":" + this.aclCode;
     }
 
     public String getPrincipalName() {

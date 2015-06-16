@@ -1,5 +1,9 @@
 package com.techsen.tsweb.sys.service;
 
+import java.util.List;
+
+import org.apache.shiro.authz.Permission;
+
 import com.techsen.tsweb.sys.domain.Acl;
 
 public interface AclService {
@@ -24,4 +28,13 @@ public interface AclService {
      */
     public void deleteAcl(Acl acl);
 
+    /**
+     * 根据角色名获取AclPermission集合
+     */
+    public List<Permission> getAclPermissionsByRoleName(String roleName);
+    
+    /**
+     * 根据用户民名获取AclPermission集合
+     */
+    public List<Permission> getAclPermissionByUserName(String userName);
 }

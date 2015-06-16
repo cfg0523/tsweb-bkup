@@ -14,22 +14,29 @@ import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.Permission;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.springframework.stereotype.Component;
 
 import com.techsen.tsweb.sys.domain.Role;
 import com.techsen.tsweb.sys.domain.User;
+import com.techsen.tsweb.sys.service.AclService;
 import com.techsen.tsweb.sys.service.UserService;
 
 /**
  * 访问本地数据库安全数据的Realm
  */
+@Component("localRealm")
 public class LocalRealm extends AuthorizingRealm {
 
     @Resource
     private UserService userService;
 
+    @Resource
+    private AclService aclService;
+    
     /**
      * 处理用户授权
      */
@@ -50,6 +57,10 @@ public class LocalRealm extends AuthorizingRealm {
                     authzInfo.addRole(roleName);
                 }
             }
+            
+            // 获取直接赋予用户的权限
+            List<Permission> auths = this.aclService.getAclPermissionByUserName(user.getUsername());
+            authzInfo.addObjectPermissions(auths);
         }
 
         return authzInfo;

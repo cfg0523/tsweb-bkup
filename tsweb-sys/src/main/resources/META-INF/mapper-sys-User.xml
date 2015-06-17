@@ -6,7 +6,6 @@
         <id property="id" column="user_id"/>
         <result property="username" column="user_name"/>
         <result property="password" column="user_password"/>
-        <result property="principalType" column="user_principal_type"/>
         <result property="createBy" column="user_create_by"/>
         <result property="createDate" column="user_create_date"/>
         <result property="updateBy" column="user_update_by"/>
@@ -21,14 +20,14 @@
     <sql id="RoleTable">sys_role_mstr</sql>
 
     <sql id="UserColumns">
-        user_id, user_name, user_password, user_principal_type,
+        user_id, user_name, user_password,
         user_create_by, user_create_date,
         user_update_by, user_update_date,
         user_remark
     </sql>
 
     <sql id="UserProperties">
-        #{id}, #{username}, #{password}, #{principalType},
+        #{id}, #{username}, #{password},
         #{createBy}, #{createDate},
         #{updateBy}, #{updateDate},
         #{remark}
@@ -37,7 +36,6 @@
     <sql id="UserUpdateMap">
         user_name = #{username},
         user_password = #{password},
-        user_principal_type = #{principalType},
         <!-- user_create_by = #{createBy}, -->
         <!-- user_create_date = #{createDate}, -->
         user_update_by = #{updateBy},
@@ -80,16 +78,16 @@
         <include refid="UserWhereCondition"/>
     </update>
 
-    <select id="getById" parameterType="String" resultMap="UserMap">
-        select <include refid="UserColumns"/>
-        from <include refid="UserTable"/>
-        <where> user_id = #{id} </where>
-    </select>
-
     <select id="getEntity" parameterType="User" resultMap="UserMap">
         select <include refid="UserColumns"/>
         from <include refid="UserTable"/>
         <include refid="UserWhereCondition"/>
+    </select>
+
+    <select id="getById" parameterType="String" resultMap="UserMap">
+        select <include refid="UserColumns"/>
+        from <include refid="UserTable"/>
+        <where> user_id = #{id} </where>
     </select>
 
 </mapper>

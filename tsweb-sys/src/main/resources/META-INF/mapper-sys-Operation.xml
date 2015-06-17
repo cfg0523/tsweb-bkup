@@ -15,11 +15,11 @@
         <result property="remark" column="operation_remark"/>
         
         <association property="component" column="operation_component_id"
-                javaType="Component" select="getComponentByComponentId"/>
+                javaType="Component" select="com.techsen.tsweb.sys.dao.ComponentDao.getById"/>
     </resultMap>
 
-    <sql id="ComponentTable">sys_component_mstr</sql>
     <sql id="OperationTable">sys_operation_det</sql>
+    <sql id="ComponentTable">sys_component_mstr</sql>
 
     <sql id="OperationColumns">
         operation_id, operation_component_id,

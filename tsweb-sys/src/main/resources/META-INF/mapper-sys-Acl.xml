@@ -95,4 +95,22 @@
         <where> acl_id = #{id} </where>
     </select>
     
+    <select id="getAclsByRoleName" parameterType="string" resultMap="AclMap">
+        select <include refid="AclColumns"/>
+        from <include refid="AclTable"/>
+        <where>
+            acl_principal_type = 'role'
+            and acl_principal_name = #{roleName}
+        </where>
+    </select>
+    
+    <select id="getAclsByUsername" parameterType="string" resultMap="AclMap">
+        select <include refid="AclColumns"/>
+        from <include refid="AclTable"/>
+        <where>
+            acl_principal_type = 'user'
+            and acl_principal_name = #{username}
+        </where>
+    </select>
+    
 </mapper>

@@ -98,4 +98,10 @@
         <where> menu_id = #{id} </where>
     </select>
 
+    <select id="getSubMenusByParentId" parameterType="string" resultMap="MenuMap">
+        select <include refid="MenuColumns"/>
+        from <include refid="MenuTable"/>
+        <where> menu_parent_id = #{parentId} </where>
+    </select>
+    
 </mapper>

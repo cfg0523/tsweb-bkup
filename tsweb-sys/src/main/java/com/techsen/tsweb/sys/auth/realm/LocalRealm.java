@@ -1,5 +1,7 @@
 package com.techsen.tsweb.sys.auth.realm;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.apache.shiro.authc.AuthenticationException;
@@ -15,9 +17,11 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.stereotype.Component;
 
-import com.techsen.tsweb.sys.dao.AclDao;
-import com.techsen.tsweb.sys.dao.UserDao;
+import com.techsen.tsweb.sys.auth.AclPermission;
+import com.techsen.tsweb.sys.domain.Role;
 import com.techsen.tsweb.sys.domain.User;
+import com.techsen.tsweb.sys.service.AclService;
+import com.techsen.tsweb.sys.service.UserService;
 
 /**
  * 访问本地数据库安全数据的Realm
@@ -26,10 +30,10 @@ import com.techsen.tsweb.sys.domain.User;
 public class LocalRealm extends AuthorizingRealm {
 
     @Resource
-    private UserDao userDao;
-
+    private UserService userService;
+    
     @Resource
-    private AclDao aclDao;
+    private AclService aclService;
     
     /**
      * 处理用户授权
@@ -40,7 +44,22 @@ public class LocalRealm extends AuthorizingRealm {
         SimpleAuthorizationInfo authzInfo = new SimpleAuthorizationInfo();
 
         String userId = (String) this.getAvailablePrincipal(principals);
-        User user = this.userDao.getEntity(new User().setId(userId));
+        User user = this.userService.getEntity(new User().setId(userId));
+        
+        /**
+         * 设置用户拥有的权限
+         */
+        for (Role role : user.getRoles()) {
+            authzInfo.addRole(role.getName());
+        }
+        
+        /**
+         * 设置用户直接拥有的权限
+         */
+        List<AclPermission> aclPermissions = this.aclService.getAclPermissionsByUsername(user.getUsername());
+        for (AclPermission aclPermission : aclPermissions) {
+            authzInfo.addObjectPermission(aclPermission);
+        }
         
         return authzInfo;
     }
@@ -55,7 +74,7 @@ public class LocalRealm extends AuthorizingRealm {
         String username = token.getUsername();
         String password = String.valueOf(token.getPassword());
 
-        User user = this.userDao.getEntity(new User(username));
+        User user = this.userService.getEntity(new User(username));
         if (user != null) {
             if (user.getPassword().equals(password)) {
                 return new SimpleAuthenticationInfo(user.getId(), password,

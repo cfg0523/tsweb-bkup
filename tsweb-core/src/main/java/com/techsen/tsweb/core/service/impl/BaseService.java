@@ -1,7 +1,5 @@
 package com.techsen.tsweb.core.service.impl;
 
-import javax.annotation.Resource;
-
 import com.techsen.tsweb.core.dao.Dao;
 import com.techsen.tsweb.core.domain.BaseEntity;
 import com.techsen.tsweb.core.service.Service;
@@ -9,8 +7,9 @@ import com.techsen.tsweb.core.service.Service;
 public abstract class BaseService<E extends BaseEntity<E>, T extends Dao<E>>
         implements Service<E> {
 
-    @Resource
     protected T dao;
+    
+    public abstract void setDao(T dao);
 
     @Override
     public E addEntity(E entity) {

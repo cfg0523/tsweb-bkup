@@ -3,18 +3,19 @@ package com.techsen.tsweb.sys.domain;
 import java.util.List;
 
 import com.techsen.tsweb.core.domain.BaseEntity;
+import com.techsen.tsweb.sys.auth.AuthResource;
 
 /**
  * 组件资源类<br/>
  * 通常是系统中的Controller资源和Service
  */
-public class Component extends BaseEntity<Component> implements Resource {
+public class Component extends BaseEntity<Component> implements AuthResource {
 
     private static final long serialVersionUID = -1236091399373795740L;
 
     private String name;
-    private String type;
     private String desc;
+    private String resourceType = "controller";
     private String javaType;
 
     /**
@@ -25,14 +26,9 @@ public class Component extends BaseEntity<Component> implements Resource {
     public Component() {
     }
 
-    public Component(String name, String type) {
+    public Component(String resourceType, String name) {
+        this.resourceType = resourceType;
         this.name = name;
-        this.type = type;
-    }
-
-    public Component(String name, String type, String desc) {
-        this(name, type);
-        this.desc = desc;
     }
 
     public String getName() {
@@ -44,21 +40,21 @@ public class Component extends BaseEntity<Component> implements Resource {
         return this;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public Component setType(String type) {
-        this.type = type;
-        return this;
-    }
-
     public String getDesc() {
         return desc;
     }
 
     public Component setDesc(String desc) {
         this.desc = desc;
+        return this;
+    }
+
+    public String getResourceType() {
+        return resourceType;
+    }
+
+    public Component setResourceType(String resourceType) {
+        this.resourceType = resourceType;
         return this;
     }
 
@@ -77,11 +73,6 @@ public class Component extends BaseEntity<Component> implements Resource {
 
     public void setOperations(List<Operation> operations) {
         this.operations = operations;
-    }
-
-    @Override
-    public ResourceType getResourceType() {
-        return ResourceType.Controller;
     }
 
 }

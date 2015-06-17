@@ -2,8 +2,8 @@ package com.techsen.tsweb.sys.auth;
 
 import static com.techsen.tsweb.core.util.ExceptionUtil.throwRuntimeException;
 import static com.techsen.tsweb.core.util.ValidUtil.isEmpty;
-import static com.techsen.tsweb.core.util.ValidUtil.isValid;
 import static com.techsen.tsweb.core.util.ValidUtil.isNull;
+import static com.techsen.tsweb.core.util.ValidUtil.isValid;
 
 import java.io.File;
 import java.lang.reflect.Method;
@@ -23,24 +23,20 @@ import com.techsen.tsweb.sys.service.OperationService;
 public class AuthResourceScanner {
 
     private static ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath*:META-INF/spring-*.xml");
+    private static ClassLoader classLoader = AuthResourceScanner.class.getClassLoader();
     private static ComponentService componentService = ctx.getBean(ComponentService.class);
     private static OperationService operationService = ctx.getBean(OperationService.class);
-    private static ClassLoader classLoader = AuthResourceScanner.class.getClassLoader();
-
+    
     public static void main(String[] args) {
-        deleteAllAuthResources();
+        removeAllAuthResources();
         List<Class<?>> classList = scanClass("com.techsen.tsweb.sys");
         importAuthResources(classList);
         System.exit(0);
     }
     
-    /**
-     * 清空组件资源表<br/>
-     * 清空组件操作资源表
-     */
-    public static void deleteAllAuthResources() {
-        componentService.removeAll();
+    public static void removeAllAuthResources() {
         operationService.removeAll();
+        componentService.remoteAll();
     }
     
     /**
@@ -54,14 +50,14 @@ public class AuthResourceScanner {
                 AuthComponent authComponent = clazz.getAnnotation(AuthComponent.class);
                 if (!isNull(authComponent)) {
                     String componentName = isEmpty(authComponent.name()) ? clazz.getSimpleName() : authComponent.name();
-                    String componentType = authComponent.type().toString();
+                    String componentType = authComponent.resourceType();
                     String componentDesc = isEmpty(authComponent.desc()) ? clazz.getName() : authComponent.desc();
                     String componentJavaType = authComponent.javaType() == Object.class ? clazz.getName() : authComponent.javaType().getName();
                     
                     Component component = new Component().setName(componentName)
-                            .setType(componentType).setDesc(componentDesc)
+                            .setResourceType(componentType).setDesc(componentDesc)
                             .setJavaType(componentJavaType);
-                    componentService.addComponent(component);
+                    componentService.addEntity(component);
                     
                     for (Method method : clazz.getDeclaredMethods()) {
                         AuthOperation authOperation = method.getAnnotation(AuthOperation.class);
@@ -69,13 +65,13 @@ public class AuthResourceScanner {
                         String operationName = isEmpty(authOperation.name()) ? method.getName() : authOperation.name();
                         String operationDiff = authOperation.diff();
                         String operationDesc = isEmpty(authOperation.desc()) ? clazz.getName() + "." + method.getName() : authOperation.desc();
-                        int operationAclBit = authOperation.aclBit();
+                        int operationAclBit = authOperation.aclPos();
 
                         Operation operation = new Operation()
                                 .setName(operationName).setDiff(operationDiff)
-                                .setDesc(operationDesc).setAclBit(operationAclBit)
+                                .setDesc(operationDesc).setAclPos(operationAclBit)
                                 .setComponent(component);
-                        operationService.addOperation(operation);
+                        operationService.addEntity(operation);
                     }
                 }
             }

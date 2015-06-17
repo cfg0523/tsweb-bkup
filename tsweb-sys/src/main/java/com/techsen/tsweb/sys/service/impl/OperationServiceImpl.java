@@ -4,64 +4,35 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.techsen.tsweb.sys.auth.AuthComponentType;
-import com.techsen.tsweb.sys.auth.annotation.AuthComponent;
-import com.techsen.tsweb.sys.auth.annotation.AuthOperation;
+import com.techsen.tsweb.core.service.impl.BaseService;
 import com.techsen.tsweb.sys.dao.OperationDao;
 import com.techsen.tsweb.sys.domain.Operation;
 import com.techsen.tsweb.sys.service.OperationService;
 
 @Service("operationService")
-@AuthComponent(name = "OperationService", desc = "组件操作资源服务", type = AuthComponentType.Service)
-public class OperationServiceImpl implements OperationService {
+public class OperationServiceImpl extends BaseService<Operation, OperationDao>
+        implements OperationService {
 
+    @Override
     @Resource
-    private OperationDao operationDao;
-
-    /**
-     * 根据Operation的Id或name获取Operation
-     */
-    @Override
-    @AuthOperation(aclBit = 0x01, desc = "根据Operation的Id或name获取Operation")
-    public Operation getOperation(Operation operation) {
-        return this.operationDao.getEntity(operation);
+    public void setDao(OperationDao dao) {
+        this.dao = dao;
     }
 
     /**
-     * 新增Operation
+     * 根据组件类型、组件名、组件的操作名获取Operation
      */
-    @Override
-    @AuthOperation(aclBit = 0x02, desc = "新增Operation")
-    public Operation addOperation(Operation operation) {
-        this.operationDao.addEntity(operation);
-        return operation;
+    public Operation getOperationByComponentAndOperationName(
+            String componentType, String componentName, String operationName) {
+        return this.dao.getOperationByComponentAndOperationName(componentType, componentName, operationName);
     }
 
     /**
-     * 修改Operation
+     * 删除所有操作资源
      */
     @Override
-    @AuthOperation(aclBit = 0x03, desc = "修改Operation")
-    public void updateComponent(Operation operation) {
-        this.operationDao.updateEntity(operation);
-    }
-
-    /**
-     * 删除Operation
-     */
-    @Override
-    @AuthOperation(aclBit = 0x04, desc = "删除Operation")
-    public void deleteOperation(Operation operation) {
-        this.operationDao.deleteEntity(operation);
-    }
-
-    /**
-     * 删除所有Operation
-     */
-    @Override
-    @AuthOperation(aclBit = 0x05, desc = "删除所有Operation")
     public void removeAll() {
-        this.operationDao.removeAll();
+        this.dao.removeAll();
     }
 
 }

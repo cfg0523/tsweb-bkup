@@ -5,8 +5,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import com.techsen.tsweb.sys.auth.AuthComponentType;
-
 /**
  * 用了标识组件资源，以便于被权限资源扫描器扫描 权限资源扫描器:<br/>
  * {@link com.techsen.tsweb.sys.auth.AuthResourceScanner}
@@ -23,10 +21,8 @@ public @interface AuthComponent {
 
     /**
      * 权限资源的类型<br/>
-     * 没有指定时，被{@link com.techsen.tsweb.sys.auth.AuthResourceScanner}扫描时，值为
-     * {@link com.techsen.tsweb.sys.auth.annotation.AuthComponentType.Controller}
      */
-    public AuthComponentType type() default AuthComponentType.Controller;
+    public String resourceType();
 
     /**
      * 权限资源的描述<br/>

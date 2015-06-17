@@ -1,5 +1,6 @@
 package com.techsen.tsweb.sys.controller;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -8,11 +9,12 @@ import com.techsen.tsweb.sys.auth.annotation.AuthOperation;
 
 @Controller
 @RequestMapping("/sys")
-@AuthComponent(desc = "主页控制器")
+@AuthComponent(resourceType = "sys", name = "main")
 public class MainController {
 
     @RequestMapping("/main")
-    @AuthOperation(aclBit = 0x01, desc = "跳转到主页")
+    @AuthOperation(aclPos = 3)
+    @RequiresPermissions("sys:main:main")
     public String main() {
         return "/sys/main";
     }

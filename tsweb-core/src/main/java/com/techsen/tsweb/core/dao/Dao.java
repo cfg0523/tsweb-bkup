@@ -10,7 +10,7 @@ public interface Dao<T extends BaseEntity<T>> {
     /**
      * 根据id查找一个实体
      */
-    T getById(String id);
+    T getById(String entityId);
     
     /**
      * 根据id或实体对象的唯一键查找一个实体

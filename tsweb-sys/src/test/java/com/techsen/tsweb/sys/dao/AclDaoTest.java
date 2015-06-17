@@ -11,8 +11,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.techsen.tsweb.sys.domain.Acl;
-import com.techsen.tsweb.sys.domain.PrincipalType;
-import com.techsen.tsweb.sys.domain.ResourceType;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath*:META-INF/spring-*.xml")
@@ -26,8 +24,8 @@ public class AclDaoTest {
     @Before
     public void init() {
         this.acl = new Acl().setId("ACL0").setPrincipalName("U1")
-                .setPrincipalType(PrincipalType.User).setResourceName("M1")
-                .setResourceType(ResourceType.Menu).setAclCode(0x01);
+                .setPrincipalType("user").setResourceName("M1")
+                .setResourceType("menu").setAclCode(0x01);
 
         this.aclDao.addEntity(this.acl);
     }
@@ -48,8 +46,8 @@ public class AclDaoTest {
         Assert.assertEquals(this.acl.getResourceType(), tmp.getResourceType());
         Assert.assertEquals(this.acl.getAclCode(), tmp.getAclCode());
 
-        tmp.setPrincipalName("R1").setPrincipalType(PrincipalType.Role)
-                .setResourceName("C1").setResourceType(ResourceType.Controller);
+        tmp.setPrincipalName("R1").setPrincipalType("role")
+                .setResourceName("C1").setResourceType("controller");
         this.aclDao.updateEntity(tmp);
         
         Acl tmp2 = this.aclDao.getEntity(tmp);
@@ -62,8 +60,4 @@ public class AclDaoTest {
         Assert.assertEquals(tmp.getAclCode(), tmp2.getAclCode());
     }
 
-    @Test
-    public void testGetAclsByRoleName() {
-        System.out.println(this.aclDao.getAclsByRoleName("Programmer"));
-    }
 }

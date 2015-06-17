@@ -9,16 +9,20 @@
 <body>
     User: <shiro:principal/>
     <br/>
-    <shiro:hasPermission name="Menu:SysMenu">
-        hasPermission: Menu:SysMenu<br/>
+    <shiro:hasPermission name="menu:sys">
+        hasPermission: menu:sys<br/>
     </shiro:hasPermission>
     
-    <shiro:hasRole name="Programmer">
-        hasRole: Programmer<br/>
+    <shiro:hasRole name="programmer">
+        hasRole: programmer<br/>
     </shiro:hasRole>
     
-    <shiro:hasPermission name="Menu:MenuMenu">
-        hasPermission: Menu:MenuMenu<br/>
+    <shiro:hasPermission name="menu:menu">
+        hasPermission: menu:menu<br/>
+    </shiro:hasPermission>
+    
+    <shiro:hasPermission name="sys:main:main">
+        hasPermission: sys:main:main
     </shiro:hasPermission>
     
 </body>

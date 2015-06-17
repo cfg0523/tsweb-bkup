@@ -3,19 +3,20 @@ package com.techsen.tsweb.sys.domain;
 import java.util.List;
 
 import com.techsen.tsweb.core.domain.BaseEntity;
+import com.techsen.tsweb.sys.auth.AuthResource;
 
 /**
  * 菜单对象
  */
-public class Menu extends BaseEntity<Menu> implements Resource {
+public class Menu extends BaseEntity<Menu> implements AuthResource {
 
     private static final long serialVersionUID = -7771118378089691104L;
 
     private String name; // 菜单资源名
     private String desc; // 菜单描述
     private String path; // 菜单路径
-    private String type; // 菜单类别
-    private int aclBit = 0x01; // 菜单访问控制位
+    private String resourceType = "menu"; // 菜单资源类别
+    private int aclPos = 1; // 菜单访问控制位
 
     /**
      * 父级菜单
@@ -62,22 +63,22 @@ public class Menu extends BaseEntity<Menu> implements Resource {
         return this;
     }
 
-    public String getType() {
-        return type;
+    public int getAclPos() {
+        return aclPos;
     }
 
-    public Menu setType(String type) {
-        this.type = type;
+    public Menu setAclPos(int aclPos) {
+        this.aclPos = aclPos;
         return this;
     }
 
-    public int getAclBit() {
-        return aclBit;
-    }
-
-    public Menu setAclBit(int aclBit) {
-        this.aclBit = aclBit;
+    public Menu setResourceType(String resourceType) {
+        this.resourceType = resourceType;
         return this;
+    }
+    
+    public String getResourceType() {
+        return resourceType;
     }
 
     public Menu getParent() {
@@ -96,11 +97,6 @@ public class Menu extends BaseEntity<Menu> implements Resource {
     public Menu setSubMenus(List<Menu> subMenus) {
         this.subMenus = subMenus;
         return this;
-    }
-
-    @Override
-    public ResourceType getResourceType() {
-        return ResourceType.Menu;
     }
 
 }

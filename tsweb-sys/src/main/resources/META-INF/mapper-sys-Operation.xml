@@ -7,7 +7,7 @@
         <result property="name" column="operation_name"/>
         <result property="diff" column="operation_diff"/>
         <result property="desc" column="operation_desc"/>
-        <result property="aclBit" column="operation_acl_bit"/>
+        <result property="aclPos" column="operation_acl_pos"/>
         <result property="createBy" column="operation_create_by"/>
         <result property="createDate" column="operation_create_date"/>
         <result property="updateBy" column="operation_update_by"/>
@@ -15,16 +15,16 @@
         <result property="remark" column="operation_remark"/>
         
         <association property="component" column="operation_component_id"
-                javaType="Component" select="getComponentByComponentId"/>
+                javaType="Component" select="com.techsen.tsweb.sys.dao.ComponentDao.getById"/>
     </resultMap>
 
-    <sql id="ComponentTable">sys_component_mstr</sql>
     <sql id="OperationTable">sys_operation_det</sql>
+    <sql id="ComponentTable">sys_component_mstr</sql>
 
     <sql id="OperationColumns">
         operation_id, operation_component_id,
         operation_name, operation_diff,
-        operation_desc, operation_acl_bit,
+        operation_desc, operation_acl_pos,
         operation_create_by, operation_create_date,
         operation_update_by, operation_update_date,
         operation_remark
@@ -33,7 +33,7 @@
     <sql id="OperationProperties">
         #{id}, #{component.id},
         #{name}, #{diff},
-        #{desc}, #{aclBit},
+        #{desc}, #{aclPos},
         #{createBy}, #{createDate},
         #{updateBy}, #{updateDate},
         #{remark}
@@ -44,7 +44,7 @@
         operation_name = #{name},
         operation_diff = #{diff},
         operation_desc = #{desc},
-        operation_acl_bit = #{aclBit},
+        operation_acl_pos = #{aclPos},
         <!-- operation_create_by = #{createBy}, -->
         <!-- operation_create_date = #{createDate}, -->
         operation_update_by = #{updateBy},
@@ -98,15 +98,20 @@
         from <include refid="OperationTable"/>
         <where> operation_id = #{id} </where>
     </select>
-
-    <select id="getComponentByComponentId" parameterType="string"
-            resultMap="com.techsen.tsweb.sys.dao.ComponentDao.ComponentMap">
-        select <include refid="com.techsen.tsweb.sys.dao.ComponentDao.ComponentColumns"/>
-        from <include refid="ComponentTable"/>
-        <where> component_id = #{id} </where>
-    </select>
-
-    <select id="removeAll">
+    
+    <delete id="removeAll">
         delete from <include refid="OperationTable"/>
+    </delete>
+    
+    <select id="getOperationByComponentAndOperationName" resultMap="OperationMap">
+        select <include refid="OperationColumns"/>
+        from <include refid="OperationTable"/>
+        join <include refid="ComponentTable"/> on operation_component_id = component_id
+        <where>
+            component_resource_type = #{componentType}
+            and component_name = #{componentName}
+            and operation_name = #{operationName}
+        </where>
     </select>
+
 </mapper>

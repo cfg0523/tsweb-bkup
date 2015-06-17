@@ -9,7 +9,14 @@ import com.techsen.tsweb.sys.domain.Acl;
 @LocalMyBatisDao
 public interface AclDao extends Dao<Acl> {
 
+    /**
+     * 根据角色名获取Acl集合
+     */
     public List<Acl> getAclsByRoleName(String roleName);
     
-    public List<Acl> getAclsByUserName(String userName);
+    /**
+     * 根据用户名获取Acl集合
+     */
+    public List<Acl> getAclsByUsername(String username);
+    
 }

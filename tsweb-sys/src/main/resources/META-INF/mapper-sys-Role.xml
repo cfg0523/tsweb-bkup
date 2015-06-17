@@ -78,16 +78,16 @@
         <include refid="RoleWhereCondition"/>
     </update>
 
-    <select id="getById" parameterType="string" resultMap="RoleMap">
-        select <include refid="RoleColumns"/>
-        from <include refid="RoleTable"/>
-        <where> role_id = #{id} </where>
-    </select>
-
     <select id="getEntity" parameterType="Role" resultMap="RoleMap">
         select <include refid="RoleColumns"/>
         from <include refid="RoleTable"/>
         <include refid="RoleWhereCondition"/>
+    </select>
+
+    <select id="getById" parameterType="string" resultMap="RoleMap">
+        select <include refid="RoleColumns"/>
+        from <include refid="RoleTable"/>
+        <where> role_id = #{id} </where>
     </select>
 
 </mapper>

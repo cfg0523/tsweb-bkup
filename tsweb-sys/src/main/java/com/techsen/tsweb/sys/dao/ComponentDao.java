@@ -11,12 +11,12 @@ import com.techsen.tsweb.sys.domain.Operation;
 public interface ComponentDao extends Dao<Component>{
 
     /**
-     * 根据componentId获取Operation集合
+     * 根据组件Id获取所有组件的操作
      */
     public List<Operation> getOperationsByComponentId(String componentId);
     
     /**
-     * 删除所有组件
+     * 删除所有组件资源
      */
     public void removeAll();
 }

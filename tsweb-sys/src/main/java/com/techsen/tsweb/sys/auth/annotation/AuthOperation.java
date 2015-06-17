@@ -16,7 +16,7 @@ public @interface AuthOperation {
 
     /**
      * 组件操作方法的名称<br/>
-     * 没有指定时，被{@link com.techsen.tsweb.sys.auth.AuthResourceScanner}扫描时，值为方法名
+     * 没有指定时，被{@link com.techsen.tsweb.sys.auth.AuthResourceScanner}扫描时，默认值为方法名
      */
     public String name() default "";
 
@@ -39,6 +39,6 @@ public @interface AuthOperation {
      * 因为int的存储占32bit，所以即在同一个组件名下只能有32个aclBit值，<br/>
      * 也就是只能拥有32个方法资源
      */
-    public int aclBit();
+    public int aclPos();
 
 }

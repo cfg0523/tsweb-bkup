@@ -88,22 +88,28 @@
         from <include refid="AclTable"/>
         <include refid="AclWhereCondition"/>
     </select>
+
+    <select id="getById" parameterType="string" resultMap="AclMap">
+        select <include refid="AclColumns"/>
+        from <include refid="AclTable"/>
+        <where> acl_id = #{id} </where>
+    </select>
     
     <select id="getAclsByRoleName" parameterType="string" resultMap="AclMap">
         select <include refid="AclColumns"/>
         from <include refid="AclTable"/>
         <where>
-            acl_principal_type = 'Role'
-            and acl_principal_name = #{principalName}
+            acl_principal_type = 'role'
+            and acl_principal_name = #{roleName}
         </where>
     </select>
     
-    <select id="getAclsByUserName" parameterType="string" resultMap="AclMap">
+    <select id="getAclsByUsername" parameterType="string" resultMap="AclMap">
         select <include refid="AclColumns"/>
         from <include refid="AclTable"/>
         <where>
-            acl_principal_type = 'User'
-            and acl_principal_name = #{principalName}
+            acl_principal_type = 'user'
+            and acl_principal_name = #{username}
         </where>
     </select>
     

@@ -78,16 +78,16 @@
         <include refid="UserWhereCondition"/>
     </update>
 
-    <select id="getById" parameterType="String" resultMap="UserMap">
-        select <include refid="UserColumns"/>
-        from <include refid="UserTable"/>
-        <where> user_id = #{id} </where>
-    </select>
-
     <select id="getEntity" parameterType="User" resultMap="UserMap">
         select <include refid="UserColumns"/>
         from <include refid="UserTable"/>
         <include refid="UserWhereCondition"/>
+    </select>
+
+    <select id="getById" parameterType="String" resultMap="UserMap">
+        select <include refid="UserColumns"/>
+        from <include refid="UserTable"/>
+        <where> user_id = #{id} </where>
     </select>
 
 </mapper>

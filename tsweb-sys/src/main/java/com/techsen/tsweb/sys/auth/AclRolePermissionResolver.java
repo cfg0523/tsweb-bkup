@@ -1,6 +1,8 @@
 package com.techsen.tsweb.sys.auth;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -18,7 +20,12 @@ public class AclRolePermissionResolver implements RolePermissionResolver {
     
     @Override
     public Collection<Permission> resolvePermissionsInRole(String roleName) {
-        return this.aclService.getAclPermissionsByRoleName(roleName);
+        List<Permission> retVal = new ArrayList<Permission>();
+        List<AclPermission> aclPermissions = this.aclService.getAclPermissionsByRoleName(roleName);
+        for (AclPermission aclPermission : aclPermissions) {
+            retVal.add(aclPermission);
+        }
+        return retVal;
     }
 
 }

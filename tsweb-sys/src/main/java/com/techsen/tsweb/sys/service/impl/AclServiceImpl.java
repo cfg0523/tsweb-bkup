@@ -1,80 +1,42 @@
 package com.techsen.tsweb.sys.service.impl;
 
-import java.util.ArrayList;
+import static com.techsen.tsweb.sys.util.AclUtil.convert;
+
 import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.apache.shiro.authz.Permission;
 import org.springframework.stereotype.Service;
 
+import com.techsen.tsweb.core.service.impl.BaseService;
+import com.techsen.tsweb.sys.auth.AclPermission;
 import com.techsen.tsweb.sys.dao.AclDao;
 import com.techsen.tsweb.sys.domain.Acl;
 import com.techsen.tsweb.sys.service.AclService;
 
-@Service
-public class AclServiceImpl implements AclService {
+@Service("aclService")
+public class AclServiceImpl extends BaseService<Acl, AclDao> implements AclService {
 
+    @Override
     @Resource
-    private AclDao aclDao;
-    
-    /**
-     * 根据Acl的Id获取Acl
-     */
-    @Override
-    public Acl getAcl(Acl acl) {
-        return this.aclDao.getEntity(acl);
-    }
-
-    /**
-     * 新增Acl
-     */
-    @Override
-    public Acl addAcl(Acl acl) {
-        this.aclDao.addEntity(acl);
-        return acl;
-    }
-
-    /**
-     * 更新Acl
-     */
-    @Override
-    public void updateAcl(Acl acl) {
-        this.aclDao.updateEntity(acl);
-    }
-
-    /**
-     * 删除Acl
-     */
-    @Override
-    public void deleteAcl(Acl acl) {
-        this.aclDao.deleteEntity(acl);
+    public void setDao(AclDao dao) {
+        this.dao = dao;
     }
 
     /**
      * 根据角色名获取AclPermission集合
      */
     @Override
-    public List<Permission> getAclPermissionsByRoleName(String roleName) {
-        List<Permission> retList = new ArrayList<Permission>();
-        List<Acl> aclList = this.aclDao.getAclsByRoleName(roleName);
-        for (Acl acl : aclList) {
-            retList.add(acl.toAclPermission());
-        }
-        return retList;
+    public List<AclPermission> getAclPermissionsByRoleName(String roleName) {
+        return convert(this.dao.getAclsByRoleName(roleName));
     }
 
     /**
-     * 根据用户民名获取AclPermission集合
+     * 根据用户名获取AclPermission集合
      */
     @Override
-    public List<Permission> getAclPermissionByUserName(String userName) {
-        List<Permission> retList = new ArrayList<Permission>();
-        List<Acl> aclList = this.aclDao.getAclsByUserName(userName);
-        for (Acl acl : aclList) {
-            retList.add(acl.toAclPermission());
-        }
-        return retList;
+    public List<AclPermission> getAclPermissionsByUsername(String username) {
+        return convert(this.dao.getAclsByUsername(username));
     }
 
 }

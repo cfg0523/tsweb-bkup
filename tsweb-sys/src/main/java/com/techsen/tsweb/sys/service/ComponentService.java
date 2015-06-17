@@ -1,31 +1,13 @@
 package com.techsen.tsweb.sys.service;
 
+import com.techsen.tsweb.core.service.Service;
 import com.techsen.tsweb.sys.domain.Component;
 
-public interface ComponentService {
+public interface ComponentService extends Service<Component> {
 
     /**
-     * 根据组件Id或componentName获取组件
+     * 删除所有组件资源
      */
-    public Component getComponent(Component component);
+    public void remoteAll();
     
-    /**
-     * 新增组件
-     */
-    public Component addComponent(Component component);
-    
-    /**
-     * 修改组件
-     */
-    public void updateComponent(Component component);
-    
-    /**
-     * 删除组件
-     */
-    public void deleteComponent(Component component);
-    
-    /**
-     * 删除所有组件
-     */
-    public void removeAll();
 }

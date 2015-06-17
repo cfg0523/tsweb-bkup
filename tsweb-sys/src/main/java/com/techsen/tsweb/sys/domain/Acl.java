@@ -1,5 +1,7 @@
 package com.techsen.tsweb.sys.domain;
 
+import static com.techsen.tsweb.core.util.ExceptionUtil.throwRuntimeException;
+
 import com.techsen.tsweb.core.domain.BaseEntity;
 import com.techsen.tsweb.sys.auth.AclPermission;
 import com.techsen.tsweb.sys.auth.AuthPrincipalType;
@@ -18,6 +20,23 @@ public class Acl extends BaseEntity<Acl> {
     private String resourceName;
     private int aclCode;
 
+    public Acl setPermission(int aclPos, boolean permission) {
+        if (aclPos > 31 || aclPos < 0) {
+            throwRuntimeException("aclPos取值只能在0到31之间");
+        }
+        int val = 1 << aclPos;
+        this.aclCode = permission ? this.aclCode | val : this.aclCode & ~val;
+        return this;
+    }
+    
+    public boolean checkPermission(int aclPos) {
+        if (aclPos > 31 || aclPos < 0) {
+            throwRuntimeException("aclPos取值只能在0到31之间");
+        }
+        int val = 1 << aclPos;
+        return (this.aclCode & val) > 0;
+    }
+
     public AuthPrincipalType getPrincipalType() {
         return principalType;
     }
@@ -26,11 +45,12 @@ public class Acl extends BaseEntity<Acl> {
         this.principalType = principalType;
         return this;
     }
-    
+
     public AclPermission toAclPermission() {
-        return new AclPermission(this.resourceType.toString(), this.resourceName, this.aclCode);
+        return new AclPermission(this.resourceType.toString(),
+                this.resourceName, this.aclCode);
     }
-    
+
     public String toAclPermissionString() {
         return this.resourceType + ":" + this.resourceName + ":" + this.aclCode;
     }

@@ -98,5 +98,20 @@
         from <include refid="OperationTable"/>
         <where> operation_id = #{id} </where>
     </select>
+    
+    <delete id="removeAll">
+        delete from <include refid="OperationTable"/>
+    </delete>
+    
+    <select id="getOperationByComponentAndOperationName" resultMap="OperationMap">
+        select <include refid="OperationColumns"/>
+        from <include refid="OperationTable"/>
+        join <include refid="ComponentTable"/> on operation_component_id = component_id
+        <where>
+            component_resource_type = #{componentType}
+            and component_name = #{componentName}
+            and operation_name = #{operationName}
+        </where>
+    </select>
 
 </mapper>

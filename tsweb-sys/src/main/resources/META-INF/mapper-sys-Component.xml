@@ -95,6 +95,10 @@
         <where> component_id = #{id} </where>
     </select>
 
+    <delete id="removeAll">
+        delete from <include refid="ComponentTable"/>
+    </delete>
+
     <select id="getOperationsByComponentId" parameterType="string" resultMap="com.techsen.tsweb.sys.dao.OperationDao.OperationMap">
         select <include refid="com.techsen.tsweb.sys.dao.OperationDao.OperationColumns"/>
         from <include refid="OperationTable"/>

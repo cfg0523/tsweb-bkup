@@ -15,19 +15,6 @@ public class AclPermission extends BaseObject<AclPermission> implements Permissi
     public AclPermission() {
     }
 
-    public AclPermission(String permissionString) {
-        String[] arr = permissionString.split(":");
-        if (arr.length >= 1) {
-            this.resourceType = arr[0];
-        }
-        if (arr.length >= 2) {
-            this.resourceName = arr[1];
-        }
-        if (arr.length >= 3) {
-            this.aclCode = Integer.valueOf(arr[2]);
-        }
-    }
-    
     public AclPermission(String resourceType, String resourceName, int aclCode) {
         this.resourceType = resourceType;
         this.resourceName = resourceName;
@@ -36,10 +23,12 @@ public class AclPermission extends BaseObject<AclPermission> implements Permissi
 
     @Override
     public boolean implies(Permission permission) {
+        
         if (!(permission instanceof AclPermission)) {
             return false;
         }
         AclPermission other = (AclPermission) permission;
+        
         if (!"*".equals(this.resourceType)
                 && !this.resourceType.equals(other.getResourceType())) {
             return false;
@@ -48,6 +37,13 @@ public class AclPermission extends BaseObject<AclPermission> implements Permissi
                 && !this.resourceName.equals(other.getResourceName())) {
             return false;
         }
+
+        System.out.println("------------------");
+        System.out.println((this.aclCode));
+        System.out.println(this.getAclCode());
+        System.out.println(this.aclCode & other.getAclCode());
+        System.out.println("------------------");
+        
         return (this.aclCode & other.getAclCode()) > 0;
     }
 

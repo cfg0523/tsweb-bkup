@@ -27,11 +27,16 @@ public class AuthResourceScanner {
     private static ComponentService componentService = ctx.getBean(ComponentService.class);
     private static OperationService operationService = ctx.getBean(OperationService.class);
     
-    
     public static void main(String[] args) {
+        removeAllAuthResources();
         List<Class<?>> classList = scanClass("com.techsen.tsweb.sys");
         importAuthResources(classList);
         System.exit(0);
+    }
+    
+    public static void removeAllAuthResources() {
+        operationService.removeAll();
+        componentService.remoteAll();
     }
     
     /**

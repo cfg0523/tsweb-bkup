@@ -15,4 +15,8 @@ public interface ComponentDao extends Dao<Component>{
      */
     public List<Operation> getOperationsByComponentId(String componentId);
     
+    /**
+     * 删除所有组件资源
+     */
+    public void removeAll();
 }

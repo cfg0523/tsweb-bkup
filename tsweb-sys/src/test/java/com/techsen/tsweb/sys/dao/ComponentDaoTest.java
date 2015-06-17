@@ -23,7 +23,7 @@ public class ComponentDaoTest {
     
     @Before
     public void init() {
-        this.component = new Component("userController", "controller").setId("usercontroller");
+        this.component = new Component("controller", "user").setId("usercontroller");
         this.componentDao.addEntity(this.component);
     }
     
@@ -50,6 +50,7 @@ public class ComponentDaoTest {
         Assert.assertNotNull(tmp);
         Assert.assertEquals(tmp.getId(), tmp2.getId());
         Assert.assertEquals(tmp.getName(), tmp2.getName());
+        Assert.assertEquals(tmp.getResourceType(), tmp2.getResourceType());
         Assert.assertEquals(tmp.getDesc(), tmp2.getDesc());
     }
 }

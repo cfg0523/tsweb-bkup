@@ -19,4 +19,11 @@ public class ComponentServiceImpl extends BaseService<Component, ComponentDao>
         this.dao = dao;
     }
 
+    /**
+     * 删除所有组件资源
+     */
+    public void remoteAll() {
+        this.dao.removeAll();
+    }
+    
 }

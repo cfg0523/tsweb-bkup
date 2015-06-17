@@ -5,4 +5,9 @@ import com.techsen.tsweb.sys.domain.Component;
 
 public interface ComponentService extends Service<Component> {
 
+    /**
+     * 删除所有组件资源
+     */
+    public void remoteAll();
+    
 }

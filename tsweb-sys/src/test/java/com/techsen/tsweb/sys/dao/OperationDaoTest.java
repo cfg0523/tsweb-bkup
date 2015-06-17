@@ -65,4 +65,13 @@ public class OperationDaoTest {
         Assert.assertEquals(tmp.getComponent().getId(), tmp2.getComponent().getId());
     }
     
+    @Test
+    public void testGetOperationByComponentAndOperationName(){
+        Operation operation = this.operationDao.getOperationByComponentAndOperationName("sys", "main", "main");
+        System.out.println();
+        System.out.println(operation.getName());
+        System.out.println(operation.getAclPos());
+        System.out.println();
+    }
+    
 }

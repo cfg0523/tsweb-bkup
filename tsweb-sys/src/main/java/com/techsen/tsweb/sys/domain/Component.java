@@ -26,9 +26,9 @@ public class Component extends BaseEntity<Component> implements AuthResource {
     public Component() {
     }
 
-    public Component(String name, String desc) {
+    public Component(String resourceType, String name) {
+        this.resourceType = resourceType;
         this.name = name;
-        this.desc = desc;
     }
 
     public String getName() {

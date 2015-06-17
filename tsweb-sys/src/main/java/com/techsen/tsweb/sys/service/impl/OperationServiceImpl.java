@@ -19,4 +19,20 @@ public class OperationServiceImpl extends BaseService<Operation, OperationDao>
         this.dao = dao;
     }
 
+    /**
+     * 根据组件类型、组件名、组件的操作名获取Operation
+     */
+    public Operation getOperationByComponentAndOperationName(
+            String componentType, String componentName, String operationName) {
+        return this.dao.getOperationByComponentAndOperationName(componentType, componentName, operationName);
+    }
+
+    /**
+     * 删除所有操作资源
+     */
+    @Override
+    public void removeAll() {
+        this.dao.removeAll();
+    }
+
 }

@@ -6,6 +6,7 @@
         <id property="id" column="user_id"/>
         <result property="username" column="user_name"/>
         <result property="password" column="user_password"/>
+        <result property="principalType" column="user_principal_type"/>
         <result property="createBy" column="user_create_by"/>
         <result property="createDate" column="user_create_date"/>
         <result property="updateBy" column="user_update_by"/>
@@ -20,14 +21,14 @@
     <sql id="RoleTable">sys_role_mstr</sql>
 
     <sql id="UserColumns">
-        user_id, user_name, user_password,
+        user_id, user_name, user_password, user_principal_type,
         user_create_by, user_create_date,
         user_update_by, user_update_date,
         user_remark
     </sql>
 
     <sql id="UserProperties">
-        #{id}, #{username}, #{password},
+        #{id}, #{username}, #{password}, #{principalType},
         #{createBy}, #{createDate},
         #{updateBy}, #{updateDate},
         #{remark}
@@ -36,6 +37,7 @@
     <sql id="UserUpdateMap">
         user_name = #{username},
         user_password = #{password},
+        user_principal_type = #{principalType},
         <!-- user_create_by = #{createBy}, -->
         <!-- user_create_date = #{createDate}, -->
         user_update_by = #{updateBy},

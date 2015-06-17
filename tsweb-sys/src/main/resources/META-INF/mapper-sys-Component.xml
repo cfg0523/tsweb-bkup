@@ -5,7 +5,7 @@
     <resultMap type="Component" id="ComponentMap">
         <id property="id" column="component_id"/>
         <result property="name" column="component_name"/>
-        <result property="type" column="component_type"/>
+        <result property="resourceType" column="component_resource_type"/>
         <result property="desc" column="component_desc"/>
         <result property="javaType" column="component_java_type"/>
         <result property="createBy" column="component_create_by"/>
@@ -21,7 +21,7 @@
     <sql id="OperationTable">sys_operation_det</sql>
 
     <sql id="ComponentColumns">
-        component_id, component_name, component_type,
+        component_id, component_name, component_resource_type,
         component_desc, component_java_type,
         component_create_by, component_create_date,
         component_update_by, component_update_date,
@@ -29,7 +29,7 @@
     </sql>
 
     <sql id="ComponentProperties">
-        #{id}, #{name}, #{type},
+        #{id}, #{name}, #{resourceType},
         #{desc}, #{javaType},
         #{createBy}, #{createDate},
         #{updateBy}, #{updateDate},
@@ -38,7 +38,7 @@
     
     <sql id="ComponentUpdateMap">
         component_name = #{name},
-        component_type = #{type},
+        component_resource_type = #{resourceType},
         component_desc = #{desc},
         component_java_type = #{javaType},
         <!-- component_create_by = #{createBy}, -->
@@ -95,13 +95,4 @@
         <where> component_id = #{id} </where>
     </select>
 
-    <select id="getOperationsByComponentId" parameterType="string" resultMap="com.techsen.tsweb.sys.dao.OperationDao.OperationMap">
-        select <include refid="com.techsen.tsweb.sys.dao.OperationDao.OperationColumns"/>
-        from <include refid="OperationTable"/>
-        <where> operation_component_id = #{id} </where>
-    </select>
-
-    <select id="removeAll">
-        delete from <include refid="ComponentTable"/>
-    </select>
 </mapper>

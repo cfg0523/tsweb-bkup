@@ -14,6 +14,7 @@ public class User extends BaseEntity<User> implements AuthPrincipal {
     
     private String username;
     private String password;
+    private AuthPrincipalType principalType = AuthPrincipalType.User;
     
     /**
      * 用户所拥有的角色集合
@@ -58,9 +59,13 @@ public class User extends BaseEntity<User> implements AuthPrincipal {
         return this;
     }
 
-    @Override
     public AuthPrincipalType getPrincipalType() {
-        return AuthPrincipalType.User;
+        return principalType;
+    }
+
+    public User setPrincipalType(AuthPrincipalType principalType) {
+        this.principalType = principalType;
+        return this;
     }
 
 }

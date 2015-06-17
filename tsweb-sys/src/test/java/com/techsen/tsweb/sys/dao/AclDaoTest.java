@@ -62,8 +62,4 @@ public class AclDaoTest {
         Assert.assertEquals(tmp.getAclCode(), tmp2.getAclCode());
     }
 
-    @Test
-    public void testGetAclsByRoleName() {
-        System.out.println(this.aclDao.getAclsByRoleName("Programmer"));
-    }
 }

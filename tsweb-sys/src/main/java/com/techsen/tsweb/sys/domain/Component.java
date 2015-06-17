@@ -15,8 +15,8 @@ public class Component extends BaseEntity<Component> implements AuthResource {
     private static final long serialVersionUID = -1236091399373795740L;
 
     private String name;
-    private String type;
     private String desc;
+    private AuthResourceType resourceType = AuthResourceType.Controller;
     private String javaType;
 
     /**
@@ -27,13 +27,8 @@ public class Component extends BaseEntity<Component> implements AuthResource {
     public Component() {
     }
 
-    public Component(String name, String type) {
+    public Component(String name, String desc) {
         this.name = name;
-        this.type = type;
-    }
-
-    public Component(String name, String type, String desc) {
-        this(name, type);
         this.desc = desc;
     }
 
@@ -46,21 +41,21 @@ public class Component extends BaseEntity<Component> implements AuthResource {
         return this;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public Component setType(String type) {
-        this.type = type;
-        return this;
-    }
-
     public String getDesc() {
         return desc;
     }
 
     public Component setDesc(String desc) {
         this.desc = desc;
+        return this;
+    }
+
+    public AuthResourceType getResourceType() {
+        return resourceType;
+    }
+
+    public Component setResourceType(AuthResourceType resourceType) {
+        this.resourceType = resourceType;
         return this;
     }
 
@@ -79,11 +74,6 @@ public class Component extends BaseEntity<Component> implements AuthResource {
 
     public void setOperations(List<Operation> operations) {
         this.operations = operations;
-    }
-
-    @Override
-    public AuthResourceType getResourceType() {
-        return AuthResourceType.Controller;
     }
 
 }

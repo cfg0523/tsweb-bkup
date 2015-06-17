@@ -14,6 +14,7 @@ public class Role extends BaseEntity<Role> implements AuthPrincipal {
 
     private String name;
     private String desc;
+    private AuthPrincipalType principalType = AuthPrincipalType.Role;
     
     /**
      * 角色所包含的用户集合
@@ -54,9 +55,13 @@ public class Role extends BaseEntity<Role> implements AuthPrincipal {
         return this;
     }
 
-    @Override
     public AuthPrincipalType getPrincipalType() {
-        return AuthPrincipalType.Role;
+        return principalType;
+    }
+
+    public Role setPrincipalType(AuthPrincipalType principalType) {
+        this.principalType = principalType;
+        return this;
     }
 
 }

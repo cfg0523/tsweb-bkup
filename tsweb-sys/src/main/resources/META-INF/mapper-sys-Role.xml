@@ -6,6 +6,7 @@
         <id property="id" column="role_id"/>
         <result property="name" column="role_name"/>
         <result property="desc" column="role_desc"/>
+        <result property="principalType" column="role_principal_type"/>
         <result property="createBy" column="role_create_by"/>
         <result property="createDate" column="role_create_date"/>
         <result property="updateBy" column="role_update_by"/>
@@ -20,14 +21,14 @@
     <sql id="RoleTable">sys_role_mstr</sql>
     
     <sql id="RoleColumns">
-        role_id, role_name, role_desc,
+        role_id, role_name, role_desc, role_principal_type,
         role_create_by, role_create_date,
         role_update_by, role_update_date,
         role_remark
     </sql>
 
     <sql id="RoleProperties">
-        #{id}, #{name}, #{desc},
+        #{id}, #{name}, #{desc}, #{principalType},
         #{createBy}, #{createDate},
         #{updateBy}, #{updateDate},
         #{remark}
@@ -36,6 +37,7 @@
     <sql id="RoleUpdateMap">
         role_name = #{name},
         role_desc = #{desc},
+        role_principal_type = #{principalType},
         <!-- role_create_by = #{createBy}, -->
         <!-- role_create_date = #{createDate}, -->
         role_update_by = #{updateBy},

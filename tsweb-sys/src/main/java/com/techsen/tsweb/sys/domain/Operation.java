@@ -13,7 +13,7 @@ public class Operation extends BaseEntity<Operation> {
     private String name;
     private String diff;
     private String desc;
-    private int aclBit;
+    private int aclPos;
     
     /**
      * 该操作所属的组件
@@ -55,12 +55,12 @@ public class Operation extends BaseEntity<Operation> {
         return this;
     }
 
-    public int getAclBit() {
-        return aclBit;
+    public int getAclPos() {
+        return aclPos;
     }
 
-    public Operation setAclBit(int aclBit) {
-        this.aclBit = aclBit;
+    public Operation setAclPos(int aclPos) {
+        this.aclPos = aclPos;
         return this;
     }
 

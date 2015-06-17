@@ -16,8 +16,8 @@ public class Menu extends BaseEntity<Menu> implements AuthResource {
     private String name; // 菜单资源名
     private String desc; // 菜单描述
     private String path; // 菜单路径
-    private String type; // 菜单类别
-    private int aclBit = 0x01; // 菜单访问控制位
+    private AuthResourceType resourceType = AuthResourceType.Menu; // 菜单类别
+    private int aclPos = 1; // 菜单访问控制位
 
     /**
      * 父级菜单
@@ -64,22 +64,22 @@ public class Menu extends BaseEntity<Menu> implements AuthResource {
         return this;
     }
 
-    public String getType() {
-        return type;
+    public int getAclPos() {
+        return aclPos;
     }
 
-    public Menu setType(String type) {
-        this.type = type;
+    public Menu setAclPos(int aclPos) {
+        this.aclPos = aclPos;
         return this;
     }
 
-    public int getAclBit() {
-        return aclBit;
-    }
-
-    public Menu setAclBit(int aclBit) {
-        this.aclBit = aclBit;
+    public Menu setResourceType(AuthResourceType resourceType) {
+        this.resourceType = resourceType;
         return this;
+    }
+    
+    public AuthResourceType getResourceType() {
+        return resourceType;
     }
 
     public Menu getParent() {
@@ -98,11 +98,6 @@ public class Menu extends BaseEntity<Menu> implements AuthResource {
     public Menu setSubMenus(List<Menu> subMenus) {
         this.subMenus = subMenus;
         return this;
-    }
-
-    @Override
-    public AuthResourceType getResourceType() {
-        return AuthResourceType.Menu;
     }
 
 }

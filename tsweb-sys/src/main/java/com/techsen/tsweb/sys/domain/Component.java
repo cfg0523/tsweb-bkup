@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.techsen.tsweb.core.domain.BaseEntity;
 import com.techsen.tsweb.sys.auth.AuthResource;
-import com.techsen.tsweb.sys.auth.AuthResourceType;
 
 /**
  * 组件资源类<br/>
@@ -16,7 +15,7 @@ public class Component extends BaseEntity<Component> implements AuthResource {
 
     private String name;
     private String desc;
-    private AuthResourceType resourceType = AuthResourceType.Controller;
+    private String resourceType = "controller";
     private String javaType;
 
     /**
@@ -50,11 +49,11 @@ public class Component extends BaseEntity<Component> implements AuthResource {
         return this;
     }
 
-    public AuthResourceType getResourceType() {
+    public String getResourceType() {
         return resourceType;
     }
 
-    public Component setResourceType(AuthResourceType resourceType) {
+    public Component setResourceType(String resourceType) {
         this.resourceType = resourceType;
         return this;
     }

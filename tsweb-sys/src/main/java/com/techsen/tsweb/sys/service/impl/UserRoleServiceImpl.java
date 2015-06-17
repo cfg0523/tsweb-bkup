@@ -14,8 +14,8 @@ public class UserRoleServiceImpl extends BaseService<UserRole, UserRoleDao> impl
 
     @Override
     @Resource
-    public void setDao(UserRoleDao userRoleDao) {
-        this.dao = userRoleDao;
+    public void setDao(UserRoleDao dao) {
+        this.dao = dao;
     }
     
 }

@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.techsen.tsweb.core.domain.BaseEntity;
 import com.techsen.tsweb.sys.auth.AuthResource;
-import com.techsen.tsweb.sys.auth.AuthResourceType;
 
 /**
  * 菜单对象
@@ -16,7 +15,7 @@ public class Menu extends BaseEntity<Menu> implements AuthResource {
     private String name; // 菜单资源名
     private String desc; // 菜单描述
     private String path; // 菜单路径
-    private AuthResourceType resourceType = AuthResourceType.Menu; // 菜单类别
+    private String resourceType = "menu"; // 菜单资源类别
     private int aclPos = 1; // 菜单访问控制位
 
     /**
@@ -73,12 +72,12 @@ public class Menu extends BaseEntity<Menu> implements AuthResource {
         return this;
     }
 
-    public Menu setResourceType(AuthResourceType resourceType) {
+    public Menu setResourceType(String resourceType) {
         this.resourceType = resourceType;
         return this;
     }
     
-    public AuthResourceType getResourceType() {
+    public String getResourceType() {
         return resourceType;
     }
 

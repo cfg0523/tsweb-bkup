@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.techsen.tsweb.core.domain.BaseEntity;
 import com.techsen.tsweb.sys.auth.AuthPrincipal;
-import com.techsen.tsweb.sys.auth.AuthPrincipalType;
 
 /**
  * 角色实体
@@ -12,9 +11,10 @@ import com.techsen.tsweb.sys.auth.AuthPrincipalType;
 public class Role extends BaseEntity<Role> implements AuthPrincipal {
     private static final long serialVersionUID = -7838821087064025453L;
 
+    private static final String PRINCIPAL_TYPE = "role";
+
     private String name;
     private String desc;
-    private AuthPrincipalType principalType = AuthPrincipalType.Role;
     
     /**
      * 角色所包含的用户集合
@@ -26,6 +26,10 @@ public class Role extends BaseEntity<Role> implements AuthPrincipal {
     public Role(String name, String desc) {
         this.name = name;
         this.desc = desc;
+    }
+
+    public String getPrincipalType() {
+        return PRINCIPAL_TYPE;
     }
 
     public String getName() {
@@ -52,15 +56,6 @@ public class Role extends BaseEntity<Role> implements AuthPrincipal {
 
     public Role setUsers(List<User> users) {
         this.users = users;
-        return this;
-    }
-
-    public AuthPrincipalType getPrincipalType() {
-        return principalType;
-    }
-
-    public Role setPrincipalType(AuthPrincipalType principalType) {
-        this.principalType = principalType;
         return this;
     }
 

@@ -14,8 +14,8 @@ public class RoleServiceImpl extends BaseService<Role, RoleDao> implements RoleS
 
     @Override
     @Resource
-    public void setDao(RoleDao roleDao) {
-        this.dao = roleDao;
+    public void setDao(RoleDao dao) {
+        this.dao = dao;
     }
 
 }

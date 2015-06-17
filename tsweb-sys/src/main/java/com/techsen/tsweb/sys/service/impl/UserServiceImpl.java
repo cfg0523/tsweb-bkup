@@ -14,8 +14,8 @@ public class UserServiceImpl extends BaseService<User, UserDao> implements UserS
 
     @Override
     @Resource
-    public void setDao(UserDao userDao) {
-        this.dao = userDao;
+    public void setDao(UserDao dao) {
+        this.dao = dao;
     }
     
 }

@@ -10,8 +10,6 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.techsen.tsweb.sys.auth.AuthPrincipalType;
-import com.techsen.tsweb.sys.auth.AuthResourceType;
 import com.techsen.tsweb.sys.domain.Acl;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -26,8 +24,8 @@ public class AclDaoTest {
     @Before
     public void init() {
         this.acl = new Acl().setId("ACL0").setPrincipalName("U1")
-                .setPrincipalType(AuthPrincipalType.User).setResourceName("M1")
-                .setResourceType(AuthResourceType.Menu).setAclCode(0x01);
+                .setPrincipalType("user").setResourceName("M1")
+                .setResourceType("menu").setAclCode(0x01);
 
         this.aclDao.addEntity(this.acl);
     }
@@ -48,8 +46,8 @@ public class AclDaoTest {
         Assert.assertEquals(this.acl.getResourceType(), tmp.getResourceType());
         Assert.assertEquals(this.acl.getAclCode(), tmp.getAclCode());
 
-        tmp.setPrincipalName("R1").setPrincipalType(AuthPrincipalType.Role)
-                .setResourceName("C1").setResourceType(AuthResourceType.Controller);
+        tmp.setPrincipalName("R1").setPrincipalType("role")
+                .setResourceName("C1").setResourceType("controller");
         this.aclDao.updateEntity(tmp);
         
         Acl tmp2 = this.aclDao.getEntity(tmp);

@@ -3,11 +3,13 @@ package com.techsen.tsweb.sys.domain;
 import java.util.List;
 
 import com.techsen.tsweb.core.domain.BaseEntity;
+import com.techsen.tsweb.sys.auth.AuthResource;
+import com.techsen.tsweb.sys.auth.AuthResourceType;
 
 /**
  * 菜单对象
  */
-public class Menu extends BaseEntity<Menu> implements Resource {
+public class Menu extends BaseEntity<Menu> implements AuthResource {
 
     private static final long serialVersionUID = -7771118378089691104L;
 
@@ -99,8 +101,8 @@ public class Menu extends BaseEntity<Menu> implements Resource {
     }
 
     @Override
-    public ResourceType getResourceType() {
-        return ResourceType.Menu;
+    public AuthResourceType getResourceType() {
+        return AuthResourceType.Menu;
     }
 
 }

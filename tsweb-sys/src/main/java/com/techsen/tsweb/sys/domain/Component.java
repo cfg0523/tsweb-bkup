@@ -3,12 +3,14 @@ package com.techsen.tsweb.sys.domain;
 import java.util.List;
 
 import com.techsen.tsweb.core.domain.BaseEntity;
+import com.techsen.tsweb.sys.auth.AuthResource;
+import com.techsen.tsweb.sys.auth.AuthResourceType;
 
 /**
  * 组件资源类<br/>
  * 通常是系统中的Controller资源和Service
  */
-public class Component extends BaseEntity<Component> implements Resource {
+public class Component extends BaseEntity<Component> implements AuthResource {
 
     private static final long serialVersionUID = -1236091399373795740L;
 
@@ -80,8 +82,8 @@ public class Component extends BaseEntity<Component> implements Resource {
     }
 
     @Override
-    public ResourceType getResourceType() {
-        return ResourceType.Controller;
+    public AuthResourceType getResourceType() {
+        return AuthResourceType.Controller;
     }
 
 }

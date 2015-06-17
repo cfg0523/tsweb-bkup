@@ -2,6 +2,8 @@ package com.techsen.tsweb.sys.domain;
 
 import com.techsen.tsweb.core.domain.BaseEntity;
 import com.techsen.tsweb.sys.auth.AclPermission;
+import com.techsen.tsweb.sys.auth.AuthPrincipalType;
+import com.techsen.tsweb.sys.auth.AuthResourceType;
 
 /**
  * 访问控制列表记录
@@ -10,17 +12,17 @@ public class Acl extends BaseEntity<Acl> {
 
     private static final long serialVersionUID = -4382277645585649978L;
 
-    private PrincipalType principalType;
+    private AuthPrincipalType principalType;
     private String principalName;
-    private ResourceType resourceType;
+    private AuthResourceType resourceType;
     private String resourceName;
     private int aclCode;
 
-    public PrincipalType getPrincipalType() {
+    public AuthPrincipalType getPrincipalType() {
         return principalType;
     }
 
-    public Acl setPrincipalType(PrincipalType principalType) {
+    public Acl setPrincipalType(AuthPrincipalType principalType) {
         this.principalType = principalType;
         return this;
     }
@@ -42,11 +44,11 @@ public class Acl extends BaseEntity<Acl> {
         return this;
     }
 
-    public ResourceType getResourceType() {
+    public AuthResourceType getResourceType() {
         return resourceType;
     }
 
-    public Acl setResourceType(ResourceType resourceType) {
+    public Acl setResourceType(AuthResourceType resourceType) {
         this.resourceType = resourceType;
         return this;
     }

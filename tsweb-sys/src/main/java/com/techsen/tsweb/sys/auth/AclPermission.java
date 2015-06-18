@@ -4,10 +4,11 @@ import org.apache.shiro.authz.Permission;
 
 import com.techsen.tsweb.core.domain.BaseObject;
 
-public class AclPermission extends BaseObject<AclPermission> implements Permission {
-    
+public class AclPermission extends BaseObject<AclPermission> implements
+        Permission {
+
     private static final long serialVersionUID = -3937296852119792240L;
-    
+
     private String resourceType = "*";
     private String resourceName = "*";
     private int aclCode = 0xFFFFFFFF;
@@ -21,14 +22,20 @@ public class AclPermission extends BaseObject<AclPermission> implements Permissi
         this.aclCode = aclCode;
     }
 
+    public String toString() {
+        return "AclPermission[resourceType = " + resourceType
+                + ", resourceName = " + resourceName + ", aclCode = " + aclCode
+                + "]";
+    }
+
     @Override
     public boolean implies(Permission permission) {
-        
+
         if (!(permission instanceof AclPermission)) {
             return false;
         }
         AclPermission other = (AclPermission) permission;
-        
+
         if (!"*".equals(this.resourceType)
                 && !this.resourceType.equals(other.getResourceType())) {
             return false;
@@ -38,12 +45,6 @@ public class AclPermission extends BaseObject<AclPermission> implements Permissi
             return false;
         }
 
-        System.out.println("------------------");
-        System.out.println((this.aclCode));
-        System.out.println(this.getAclCode());
-        System.out.println(this.aclCode & other.getAclCode());
-        System.out.println("------------------");
-        
         return (this.aclCode & other.getAclCode()) > 0;
     }
 

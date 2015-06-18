@@ -23,6 +23,9 @@
         <property name="securityManager" ref="securityManager"/>
     </bean>
 
+    <!-- 处理静态资源 -->
+    <mvc:default-servlet-handler/>
+
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value=""/>
         <property name="suffix" value=".jsp"/>

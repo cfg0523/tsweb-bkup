@@ -7,8 +7,8 @@
 <title>Main</title>
 </head>
 <body>
-    User: <shiro:principal/>
-    <br/>
+    User: <shiro:principal/><br/>
+    
     <shiro:hasPermission name="menu:sys">
         hasPermission: menu:sys<br/>
     </shiro:hasPermission>

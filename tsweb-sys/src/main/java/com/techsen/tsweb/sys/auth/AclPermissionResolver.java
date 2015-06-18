@@ -37,9 +37,6 @@ public class AclPermissionResolver implements PermissionResolver {
                 operationName = arr[2];
                 Operation operation = this.operationService.getOperationByComponentAndOperationName(resourceType, resourceName, operationName);
                 aclCode = isNull(operation) ? 0 : 1 << operation.getAclPos();
-                System.out.println();
-                System.out.println("aclCode: " + aclCode);
-                System.out.println();
             }
         }
         return new AclPermission(resourceType, resourceName, aclCode);

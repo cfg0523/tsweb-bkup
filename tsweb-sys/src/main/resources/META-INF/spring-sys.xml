@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:context="http://www.springframework.org/schema/context"
-    xmlns:cache="http://www.springframework.org/schema/cache" xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:cache="http://www.springframework.org/schema/cache"
+    xmlns:aop="http://www.springframework.org/schema/aop"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
@@ -10,26 +11,17 @@
         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
 
     <!-- 配置EhCache缓存管理器 -->
-    <bean id="ehcacheCacheManager"
-        class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+    <bean id="ehcacheCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
         <property name="configLocation" value="classpath:META-INF/ehcache-sys.xml" />
     </bean>
 
     <!-- 配置Spring的缓存管理器 -->
-    <bean id="springCacheManager"
-        class="org.springframework.cache.ehcache.EhCacheCacheManager">
+    <bean id="springCacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
         <property name="cacheManager" ref="ehcacheCacheManager" />
     </bean>
 
     <!-- 启用Spring缓存的注解配置 -->
     <cache:annotation-driven cache-manager="springCacheManager"/>
-
-    <!-- 配置访问本地数据库安全数据的Realm -->
-    <!-- 
-    <bean id="localRealm" class="com.techsen.tsweb.sys.auth.realm.LocalRealm">
-        <property name="name" value="localRealm" />
-    </bean>
-     -->
 
     <!-- 创建一个实现了Shiro功能的EhCache缓存管理器的包装类 -->
     <bean id="shiroCacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
@@ -66,30 +58,19 @@
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
 
     <!-- 启用Shiro的注解权限配置 -->
-    <bean
-        class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
-        depends-on="lifecycleBeanPostProcessor">
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor">
         <property name="proxyTargetClass" value="true" />
-    </bean>
-    <bean
-        class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
-        <property name="securityManager" ref="securityManager" />
     </bean>
 
     <!-- 拦截Service的新增、修改操作，设置被新增对象的creatBy和createDate，设置被修改对象的updateBy和updateDate -->
     <!-- 暂时存在一个Bug，设置了AOP之后，配置的缓存注解失效 -->
-    <bean id="newAddAndUpdateEntityAspect"
-        class="com.techsen.tsweb.sys.aspect.NewAddAndUpdateEntityAspect" />
+    <bean id="newAddAndUpdateEntityAspect" class="com.techsen.tsweb.sys.aspect.NewAddAndUpdateEntityAspect" />
     <aop:config>
-        <aop:pointcut id="newAddEntityPointCut"
-            expression="execution(* com.techsen.tsweb..service.impl.*Service*.add*(..))" />
-        <aop:pointcut id="updateEntityPointCut"
-            expression="execution(* com.techsen.tsweb..service.impl.*Service*.update*(..))" />
+        <aop:pointcut id="newAddEntityPointCut" expression="execution(* com.techsen.tsweb..service.impl.*Service*.add*(..))" />
+        <aop:pointcut id="updateEntityPointCut" expression="execution(* com.techsen.tsweb..service.impl.*Service*.update*(..))" />
         <aop:aspect ref="newAddAndUpdateEntityAspect">
-            <aop:before method="beforeNewAddEntity"
-                pointcut-ref="newAddEntityPointCut" />
-            <aop:before method="beforeUpdateEntity"
-                pointcut-ref="updateEntityPointCut" />
+            <aop:before method="beforeNewAddEntity" pointcut-ref="newAddEntityPointCut" />
+            <aop:before method="beforeUpdateEntity" pointcut-ref="updateEntityPointCut" />
         </aop:aspect>
     </aop:config>
 </beans>

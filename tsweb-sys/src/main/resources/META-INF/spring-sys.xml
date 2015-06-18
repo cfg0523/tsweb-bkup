@@ -45,8 +45,7 @@
         <property name="unauthorizedUrl" value="/sys/error" />
         <property name="filterChainDefinitions">
             <value>
-                *.js=anon
-                *.css=anon
+                /static/**=anon
                 /sys/login=anon
                 /sys/error=anon
                 /**=authc

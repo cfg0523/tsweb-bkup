@@ -87,11 +87,19 @@ create table sys_menu_mstr (
     primary key(menu_id),
     unique key(menu_resource_type, menu_name)
 ) comment '菜单资源表';
-insert into sys_menu_mstr values ('M1', 'sys', '系统管理', '', 'menu', '', 1, '', null, '', null, '');
-insert into sys_menu_mstr values ('M2', 'user', '用户管理', '/menu/user', 'menu', 'M1', 1, '', null, '', null, '');
-insert into sys_menu_mstr values ('M3', 'role', '角色管理', '/menu/role', 'menu', 'M1', 1, '', null, '', null, '');
-insert into sys_menu_mstr values ('M4', 'menu', '菜单管理', '/menu/menu', 'menu', 'M1', 1, '', null, '', null, '');
-insert into sys_menu_mstr values ('M5', 'comp', '组件管理', '/menu/component', 'menu', 'M1', 1, '', null, '', null, '');
+insert into sys_menu_mstr values ('M1', 'sys', '系统管理', '', 'navbar-nav-top', '', 1, '', null, '', null, '');
+insert into sys_menu_mstr values ('M2', 'qareport', 'QAReport', '/qareport', 'navbar-nav-top', '', 1, '', null, '', null, '');
+insert into sys_menu_mstr values ('M3', 'eimi', 'EIMI', '/eimi', 'navbar-nav-top', '', 1, '', null, '', null, '');
+insert into sys_menu_mstr values ('M4', 'custrpt', 'CustRpt', '/custrpt', 'navbar-nav-top', '', 1, '', null, '', null, '');
+insert into sys_menu_mstr values ('M5', 'user', '用户管理', '/sys/user', 'menu', 'M1', 1, '', null, '', null, '');
+insert into sys_menu_mstr values ('M6', 'role', '角色管理', '/sys/role', 'menu', 'M1', 1, '', null, '', null, '');
+insert into sys_menu_mstr values ('M7', 'menu', '菜单管理', '/sys/menu', 'menu', 'M1', 1, '', null, '', null, '');
+insert into sys_menu_mstr values ('M8', 'comp', '组件管理', '/sys/comp', 'menu', 'M1', 1, '', null, '', null, '');
+
+insert into sys_menu_mstr values ('M9', 'qareport-daily', 'Daily', '/qareport/daily', 'qareport-nav-aside', 'M2', 1, '', null, '', null, '');
+insert into sys_menu_mstr values ('M10', 'qareport-detail', 'Detail', '/qareport/detail', 'qareport-nav-aside', 'M2', 1, '', null, '', null, '');
+insert into sys_menu_mstr values ('M11', 'qareport-master', 'Master', '/qareport/Master', 'qareport-nav-aside', 'M2', 1, '', null, '', null, '');
+insert into sys_menu_mstr values ('M12', 'qareport-report', 'Report', '/qareport/Report', 'qareport-nav-aside', 'M2', 1, '', null, '', null, '');
 
 /**
  * sys_component_mstr

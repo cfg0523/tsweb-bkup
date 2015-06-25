@@ -104,4 +104,9 @@
         <where> menu_parent_id = #{parentId} </where>
     </select>
     
+    <select id="getMenusByResourceType" parameterType="string" resultMap="MenuMap">
+        select <include refid="MenuColumns"/>
+        from <include refid="MenuTable"/>
+        <where> menu_resource_type = #{resourceType} </where>
+    </select>
 </mapper>

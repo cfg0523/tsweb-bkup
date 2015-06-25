@@ -25,7 +25,7 @@ public class MenuDaoTest {
 
     @Before
     public void init() {
-        this.menu = new Menu("menu:test", "menu-test-desc").setId("M0")
+        this.menu = new Menu("menu:test", "menu-test-desc").setId("M0").setResourceType("menu")
                 .setParent(new Menu().setId("M1"));
         this.menuDao.addEntity(this.menu);
     }
@@ -71,4 +71,13 @@ public class MenuDaoTest {
         Assert.assertEquals(parent.getId(), tmpParent.getId());
     }
 
+    @Test
+    public void testGetMenusByResourceType() {
+        List<Menu> menus = this.menuDao.getMenusByResourceType("menu");
+        System.out.println();
+        for (Menu menu : menus) {
+            System.out.println(menu.getDesc());
+        }
+        System.out.println();
+    }
 }

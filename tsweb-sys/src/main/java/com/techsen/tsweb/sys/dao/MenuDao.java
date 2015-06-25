@@ -14,4 +14,9 @@ public interface MenuDao extends Dao<Menu> {
      */
     public List<Menu> getSubMenusByParentId(String parentId);
     
+    /**
+     * 根据菜单资源类型获取菜单
+     */
+    public List<Menu> getMenusByResourceType(String resourceType);
+     
 }

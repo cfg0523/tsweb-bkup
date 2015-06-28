@@ -1,7 +1,5 @@
 package com.techsen.tsweb.sys.controller;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
@@ -12,19 +10,22 @@ import com.techsen.tsweb.sys.domain.Menu;
 import com.techsen.tsweb.sys.service.MenuService;
 
 @Controller
-@RequestMapping("/sys")
-public class MainController {
+@RequestMapping("/")
+public class SysController {
 
     @Resource
     private MenuService menuService;
     
-    @RequestMapping("/main")
-    public String main(Model model) {
+    @RequestMapping("/sys")
+    public String sys(Model model) {
         
-        List<Menu> navbarTopMenus = this.menuService.getMenusByResourceType("navbar-nav-top");
-        model.addAttribute("navbarTopMenus", navbarTopMenus);
+        Menu brandMenu = this.menuService.getBrandMenu();
+        model.addAttribute("brandMenu", brandMenu);
+        
+        Menu rootMenu = this.menuService.getMenuByPath("/qareport");
+        model.addAttribute("rootMenu", rootMenu);
         
         return "/sys/main";
     }
-
+    
 }

@@ -15,8 +15,12 @@ public interface MenuDao extends Dao<Menu> {
     public List<Menu> getSubMenusByParentId(String parentId);
     
     /**
-     * 根据菜单资源类型获取菜单
+     * 获取导航条的Brand菜单
      */
-    public List<Menu> getMenusByResourceType(String resourceType);
-     
+    public Menu getBrandMenu();
+
+    /**
+     * 根据路径获取菜单
+     */
+    public Menu getMenuByPath(String menuPath);
 }

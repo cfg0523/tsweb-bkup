@@ -1,7 +1,5 @@
 package com.techsen.tsweb.sys.service.impl;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -21,11 +19,19 @@ public class MenuServiceImpl extends BaseService<Menu, MenuDao> implements MenuS
     }
 
     /**
-     * 根据菜单资源类型获取菜单
+     * 获取导航条的Brand菜单
      */
     @Override
-    public List<Menu> getMenusByResourceType(String resourceType) {
-        return this.dao.getMenusByResourceType(resourceType);
+    public Menu getBrandMenu() {
+        return this.dao.getBrandMenu();
+    }
+
+    /**
+     * 根据路径获取菜单
+     */
+    @Override
+    public Menu getMenuByPath(String menuPath) {
+        return this.dao.getMenuByPath(menuPath);
     }
 
 }

@@ -71,13 +71,4 @@ public class MenuDaoTest {
         Assert.assertEquals(parent.getId(), tmpParent.getId());
     }
 
-    @Test
-    public void testGetMenusByResourceType() {
-        List<Menu> menus = this.menuDao.getMenusByResourceType("menu");
-        System.out.println();
-        for (Menu menu : menus) {
-            System.out.println(menu.getDesc());
-        }
-        System.out.println();
-    }
 }

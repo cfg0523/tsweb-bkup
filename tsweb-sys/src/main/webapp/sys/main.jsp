@@ -17,7 +17,7 @@
         background-color: #222;
     }
     
-    #pagecontent {
+    #pagebody {
         margin-top: 70px;
     }
 </style>
@@ -35,28 +35,28 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a href="#" class="navbar-brand">TSWEB</a>
+                    <a href="<c:url value="${brandMenu.path}"/>" class="navbar-brand">${brandMenu.desc}</a>
                 </div>
                 <div class="collapse navbar-collapse" id="pageheader-navbar">
                     <ul class="nav navbar-nav">
-                        <c:forEach items="${navbarTopMenus}" var="menu">
-                        <c:choose>
-                            <c:when test="${menu.subMenus.size() > 0}">
-                                <li class="dropdown">
-                                    <a href="<c:url value="${menu.path}"/>" class="dropdown-toggle" data-toggle="dropdown">
-                                        ${menu.desc} <span class="caret"></span>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <c:forEach items="${menu.subMenus}" var="subMenu">
-                                            <li><a href="<c:url value="${subMenu.path}"/>">${subMenu.desc}</a></li>
-                                        </c:forEach>
-                                    </ul>
-                                </li>
-                            </c:when>
-                            <c:otherwise>
-                                <li><a href="<c:url value="${menu.path}"/>">${menu.desc}</a></li>
-                            </c:otherwise>
-                        </c:choose>
+                        <c:forEach items="${brandMenu.subMenus}" var="moduleMenu">
+                            <c:choose>
+                                <c:when test="${empty moduleMenu.path}">
+                                    <li class="dropdown">
+                                        <a href="<c:url value="${moduleMenu.path}"/>" class="dropdown-toggle" data-toggle="dropdown">
+                                            ${moduleMenu.desc} <span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <c:forEach items="${moduleMenu.subMenus}" var="subModuleMenu">
+                                                <li><a href="<c:url value="${subModuleMenu.path}"/>" class="tsweb-module">${subModuleMenu.desc}</a></li>
+                                            </c:forEach>
+                                        </ul>
+                                    </li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li><a href="<c:url value="${moduleMenu.path}"/>" class="tsweb-module">${moduleMenu.desc}</a></li>
+                                </c:otherwise>
+                            </c:choose>
                         </c:forEach>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
@@ -74,62 +74,59 @@
         </div>
     </div>
     
-    <div id="pagecontent">
-        <div class="col-md-2">
-            <ul class="list-group">
-                <li class="list-group-item">
-                    <div class="collapsed" data-toggle="collapse" data-target="#qareport-daily-menus">
-                        <span>Daily</span>
-                        <span class="glyphicon glyphicon-chevron-down pull-right"></span>
+    <div id="pagebody">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2" id="pageaside">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">${rootMenu.desc}</div>
+                        <ul class="list-group">
+                            <c:forEach items="${rootMenu.subMenus}" var="appMenu">
+                                <c:choose>
+                                    <c:when test="${empty appMenu.path}">
+                                        <li class="list-group-item">
+	                                        <div class="collapsed" data-toggle="collapse" data-target="#dropdown-menu-${appMenu.name}">
+	                                            <span>${appMenu.desc}</span>
+	                                            <span class="glyphicon glyphicon-chevron-down pull-right"></span>
+	                                        </div>
+	                                        <ul class="nav nav-list collapse" id="dropdown-menu-${appMenu.name}">
+	                                            <c:forEach items="${appMenu.subMenus}" var="menuItem">
+	                                                <li><a href="<c:url value="${menuItem.path}"/>" class="module-menu">${menuItem.desc}</a></li>
+	                                            </c:forEach>
+	                                        </ul>
+                                        </li>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <li class="list-group-item">
+                                            <a href="<c:url value="${appMenu.path}"/>" class="module-menu">${appMenu.desc}</a>
+                                        </li>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
+                        </ul>
                     </div>
-                    <ul class="nav nav-list collapse" id="qareport-daily-menus">
-                        <li><a href="#">PO Daily</a></li>
-                        <li><a href="#">DFT Daily</a></li>
-                        <li><a href="#">AQL Daily</a></li>
-                        <li><a href="#">PKG Daily</a></li>
-                        <li><a href="#">TECH Daily</a></li>
-                    </ul>
-                </li>
-                <li class="list-group-item">
-                    <div class="collapsed" data-toggle="collapse" data-target="#qareport-datail-menus">
-                        <span>Detail</span>
-                        <span class="glyphicon glyphicon-chevron-down pull-right"></span>
-                    </div>
-                    <ul class="nav nav-list collapse" id="qareport-datail-menus">
-                        <li><a href="#">PO Detail</a></li>
-                        <li><a href="#">DFT Detail</a></li>
-                        <li><a href="#">AQL Detail</a></li>
-                        <li><a href="#">PKG Detail</a></li>
-                        <li><a href="#">TECH Detail</a></li>
-                    </ul>
-                </li>
-                <li class="list-group-item">
-                    <div class="collapsed" data-toggle="collapse" data-target="#qareport-master-menus">
-                        <span>Master</span>
-                        <span class="glyphicon glyphicon-chevron-down pull-right"></span>
-                    </div>
-                    <ul class="nav nav-list collapse" id="qareport-master-menus">
-                        <li><a href="#">Defect Master</a></li>
-                        <li><a href="#">Status Master</a></li>
-                        <li><a href="#">Tech Master</a></li>
-                        <li><a href="#">Model Master</a></li>
-                        <li><a href="#">Customer Master</a></li>
-                        <li><a href="#">Package Master</a></li>
-                    </ul>
-                </li>
-                <li class="list-group-item">
-                    <div class="collapsed" data-toggle="collapse" data-target="#qareport-report-menus">
-                        <span>Report</span>
-                        <span class="glyphicon glyphicon-chevron-down pull-right"></span>
-                    </div>
-                    <ul class="nav nav-list collapse" id="qareport-report-menus">
-                        <li><a href="#">For Report Generation</a></li>
-                        <li><a href="#">Generate Report</a></li>
-                    </ul>
-                </li>
-            </ul>
+                </div>
+                <div class="col-md-10" id="pagecontent"></div>
+            </div>
         </div>
-        <div class="col-md-10"></div>
     </div>
+    
+    <script type="text/javascript">
+        var $pageheader = $('#pageheader');
+	    var $pageaside = $('#pageaside');
+	    var $pagecontent = $('#pagecontent');
+	    var $tswebModules = $pageheader.find('a.tsweb-module').on('click', function(e) {
+	    	e.preventDefault();
+	    	console.log(this.href);
+	    });
+	    var $moduleMenu = $pageaside.find('a.module-menu').on('click', function(e) {
+	    	e.preventDefault();
+	    	console.log(this.href);
+	    });
+	    $pagecontent.find('a').on('click', function(e) {
+	    	e.preventDefault();
+	    });
+    </script>
+    
 </body>
 </html>

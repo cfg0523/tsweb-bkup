@@ -30,7 +30,7 @@ public class LoginController {
             Subject subject = SecurityUtils.getSubject();
             subject.login(token);
         }
-        return "redirect:/sys";
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/logout")

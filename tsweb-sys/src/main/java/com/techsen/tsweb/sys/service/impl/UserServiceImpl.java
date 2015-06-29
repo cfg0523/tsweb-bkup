@@ -1,5 +1,7 @@
 package com.techsen.tsweb.sys.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -16,6 +18,11 @@ public class UserServiceImpl extends BaseService<User, UserDao> implements UserS
     @Resource
     public void setDao(UserDao dao) {
         this.dao = dao;
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        return this.dao.getAllUsers();
     }
     
 }

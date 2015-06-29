@@ -90,4 +90,9 @@
         <where> user_id = #{id} </where>
     </select>
 
+    <select id="getAllUsers" resultMap="UserMap">
+        select <include refid="UserColumns"/>
+        from <include refid="UserTable"/>
+    </select>
+
 </mapper>

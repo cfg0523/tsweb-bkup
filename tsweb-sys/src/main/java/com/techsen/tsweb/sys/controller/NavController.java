@@ -29,7 +29,7 @@ public class NavController {
     public String nav(@PathVariable String module, Model model) {
         Menu rootMenu = this.menuService.getMenuByPath("/" + module);
         model.addAttribute("rootMenu", rootMenu);
-        return "/sys/pageaside";
+        return "/sys/aside";
     }
     
 }

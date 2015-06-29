@@ -20,6 +20,10 @@
     #pagebody {
         margin-top: 70px;
     }
+    
+    .tab-close {
+        margin-left:0.8em;
+    }
 </style>
 
 <title>Main</title>
@@ -77,22 +81,46 @@
     <div id="pagebody">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-2 col-sm-2" id="pageaside"></div>
-                <div class="col-md-10 col-sm-10" id="pagecontent"></div>
+                <div class="col-md-2" id="pageaside"></div>
+                <div class="col-md-10" id="pagecontent">
+                    <ul class="nav nav-tabs" style="border:0;"></ul>
+                    <div class="tab-content"></div>
+                </div>
             </div>
         </div>
     </div>
     
     <script type="text/javascript">
     $(function() {
+    	$('.nav-tabs a').on('click', function(e) {
+    		e.preventDefault();
+    		$(this).tab('show');
+    	});
+    	
         var $pagecontent = $('#pagecontent');
-        var $pageaside = $('#pageaside').on('click', '.list-group-item a', function(e) {
+        var $navtabs = $pagecontent.find('.nav-tabs');
+        var $tabcontent = $pagecontent.find('.tab-content');
+        var $pageaside = $('#pageaside');
+        var $pagenavbar = $('#pagenavbar');
+        
+        $pageaside.on('click', '.list-group-item a', function(e) {
             e.preventDefault();
+            var $this = $(this);
             $.get(this.href, function(html) {
-                $pagecontent.empty().html(html);
+            	var tabid = 'tab-pane-' + $this.attr('menu-name');
+            	var $span = $('<span class="glyphicon glyphicon-remove tab-close"/>');
+            	var $a = $('<a/>').attr('href', '#' + tabid).text($this.text()).append($span);
+            	var $li = $('<li/>').append($a);
+            	$navtabs.append($li);
+            	var $tabpane = $('<div class="tab-pane"/>').attr('id', tabid).html(html);
+            	$tabcontent.append($tabpane);
+            	
+            	$a.tab('show');
+                //$pagecontent.empty().html(html);
             });
         });
-        var $pagenavbar = $('#pagenavbar').on('click', 'a:not(".dropdown-toggle")', function(e) {
+        
+        $pagenavbar.on('click', 'a:not(".dropdown-toggle")', function(e) {
             e.preventDefault();
             $.get(this.href, function(html) {
                 $pageaside.empty().html(html);

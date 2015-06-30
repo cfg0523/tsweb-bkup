@@ -1,5 +1,7 @@
 package com.techsen.tsweb.sys.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -16,6 +18,11 @@ public class RoleServiceImpl extends BaseService<Role, RoleDao> implements RoleS
     @Resource
     public void setDao(RoleDao dao) {
         this.dao = dao;
+    }
+
+    @Override
+    public List<Role> getAllRoles() {
+        return this.dao.getAllRoles();
     }
 
 }

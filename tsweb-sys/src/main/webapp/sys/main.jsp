@@ -29,7 +29,7 @@
 <title>Main</title>
 </head>
 <body>
-
+    
     <div id="pageheader">
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
@@ -83,41 +83,32 @@
             <div class="row">
                 <div class="col-md-2" id="pageaside"></div>
                 <div class="col-md-10" id="pagecontent">
-                    <ul class="nav nav-tabs" style="border:0;"></ul>
-                    <div class="tab-content"></div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Header</div>
+                        <div class="panel-body">
+                            <ul class="nav nav-pills">
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#">Date</a></li>
+                                <li><a href="#">ABCD</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     
+    <div id="pagemodal"></div>
+    
     <script type="text/javascript">
     $(function() {
-    	$('.nav-tabs a').on('click', function(e) {
-    		e.preventDefault();
-    		$(this).tab('show');
-    	});
-    	
-        var $pagecontent = $('#pagecontent');
-        var $navtabs = $pagecontent.find('.nav-tabs');
-        var $tabcontent = $pagecontent.find('.tab-content');
-        var $pageaside = $('#pageaside');
         var $pagenavbar = $('#pagenavbar');
+        var $pageaside = $('#pageaside');
+        var $pagecontent = $('#pagecontent');
         
         $pageaside.on('click', '.list-group-item a', function(e) {
             e.preventDefault();
             var $this = $(this);
-            $.get(this.href, function(html) {
-            	var tabid = 'tab-pane-' + $this.attr('menu-name');
-            	var $span = $('<span class="glyphicon glyphicon-remove tab-close"/>');
-            	var $a = $('<a/>').attr('href', '#' + tabid).text($this.text()).append($span);
-            	var $li = $('<li/>').append($a);
-            	$navtabs.append($li);
-            	var $tabpane = $('<div class="tab-pane"/>').attr('id', tabid).html(html);
-            	$tabcontent.append($tabpane);
-            	
-            	$a.tab('show');
-                //$pagecontent.empty().html(html);
-            });
         });
         
         $pagenavbar.on('click', 'a:not(".dropdown-toggle")', function(e) {
@@ -126,6 +117,7 @@
                 $pageaside.empty().html(html);
             });
         });
+        
     });
     </script>
 </body>

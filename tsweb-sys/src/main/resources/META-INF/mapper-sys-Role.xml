@@ -90,4 +90,9 @@
         <where> role_id = #{id} </where>
     </select>
 
+    <select id="getAllRoles" resultMap="RoleMap">
+        select <include refid="RoleColumns"/>
+        from <include refid="RoleTable"/>
+    </select>
+
 </mapper>

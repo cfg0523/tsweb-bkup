@@ -20,10 +20,6 @@
     #pagebody {
         margin-top: 70px;
     }
-    
-    .tab-close {
-        margin-left:0.8em;
-    }
 </style>
 
 <title>Main</title>
@@ -82,17 +78,8 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-2" id="pageaside"></div>
-                <div class="col-md-10" id="pagecontent">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Header</div>
-                        <div class="panel-body">
-                            <ul class="nav nav-pills">
-                                <li><a href="#">Home</a></li>
-                                <li><a href="#">Date</a></li>
-                                <li><a href="#">ABCD</a></li>
-                            </ul>
-                        </div>
-                    </div>
+                <div class="col-md-10">
+                    <iframe name="pagecontent" id="pagecontent" style="width:100%; height:100px; border:0;"></iframe>
                 </div>
             </div>
         </div>
@@ -106,11 +93,6 @@
         var $pageaside = $('#pageaside');
         var $pagecontent = $('#pagecontent');
         
-        $pageaside.on('click', '.list-group-item a', function(e) {
-            e.preventDefault();
-            var $this = $(this);
-        });
-        
         $pagenavbar.on('click', 'a:not(".dropdown-toggle")', function(e) {
             e.preventDefault();
             $.get(this.href, function(html) {
@@ -118,7 +100,15 @@
             });
         });
         
+        $(window).on('resize', function() {
+            var windowHeight = $(window).height();
+            var iframeTop = $pagecontent.offset().top;
+            var marginHeight = $pagecontent.outerHeight() - $pagecontent.innerHeight();
+            var height = windowHeight - iframeTop - marginHeight - 10;
+            $pagecontent.height(height);
+        }).resize();
     });
     </script>
+    
 </body>
 </html>

@@ -6,13 +6,13 @@ import org.springframework.beans.factory.DisposableBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 /**
  * 以静态变量保存Spring ApplicationContext，<br/>
  * 可在代码任何地方任何时候获取ApplicaitonContext
  */
-@Service
+@Component
 @Lazy(false)
 @SuppressWarnings("unchecked")
 public class SpringContextUtil implements ApplicationContextAware, DisposableBean {

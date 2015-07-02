@@ -65,8 +65,12 @@
     <!-- 暂时存在一个Bug，设置了AOP之后，配置的缓存注解失效 -->
     <bean id="newAddAndUpdateEntityAspect" class="com.techsen.tsweb.sys.aspect.NewAddAndUpdateEntityAspect" />
     <aop:config>
+        <!-- 
         <aop:pointcut id="newAddEntityPointCut" expression="execution(* com.techsen.tsweb..service.impl.*Service*.add*(..))" />
         <aop:pointcut id="updateEntityPointCut" expression="execution(* com.techsen.tsweb..service.impl.*Service*.update*(..))" />
+         -->
+        <aop:pointcut id="newAddEntityPointCut" expression="execution(* com.techsen.tsweb.core.service.impl.BaseService.add*(..))" />
+        <aop:pointcut id="updateEntityPointCut" expression="execution(* com.techsen.tsweb.core.service.impl.BaseService.update*(..))" />
         <aop:aspect ref="newAddAndUpdateEntityAspect">
             <aop:before method="beforeNewAddEntity" pointcut-ref="newAddEntityPointCut" />
             <aop:before method="beforeUpdateEntity" pointcut-ref="updateEntityPointCut" />

@@ -22,9 +22,33 @@
     }
 </style>
 
+<script type="text/javascript">
+	$(function() {
+	    var $pagenavbar = $('#pagenavbar');
+	    var $pageaside = $('#pageaside');
+	    var $pagecontent = $('#pagecontent');
+	    
+	    $pagenavbar.on('click', 'a:not(".dropdown-toggle")', function(e) {
+	        e.preventDefault();
+	        $.get(this.href, function(html) {
+	            $pageaside.empty().html(html);
+	        });
+	    });
+	    
+	    $(window).on('resize', function() {
+	        var windowHeight = $(window).height();
+	        var iframeTop = $pagecontent.offset().top;
+	        var marginHeight = $pagecontent.outerHeight() - $pagecontent.innerHeight();
+	        var height = windowHeight - iframeTop - marginHeight - 10;
+	        $pagecontent.height(height);
+	    }).resize();
+	});
+</script>
+
 <title>Main</title>
 </head>
 <body>
+    <div id="mainmodal">mainmodal</div>
     
     <div id="pageheader">
         <div class="navbar navbar-inverse navbar-fixed-top">
@@ -73,7 +97,6 @@
             </div>
         </div>
     </div>
-    
     <div id="pagebody">
         <div class="container-fluid">
             <div class="row">
@@ -84,31 +107,5 @@
             </div>
         </div>
     </div>
-    
-    <div id="pagemodal"></div>
-    
-    <script type="text/javascript">
-    $(function() {
-        var $pagenavbar = $('#pagenavbar');
-        var $pageaside = $('#pageaside');
-        var $pagecontent = $('#pagecontent');
-        
-        $pagenavbar.on('click', 'a:not(".dropdown-toggle")', function(e) {
-            e.preventDefault();
-            $.get(this.href, function(html) {
-                $pageaside.empty().html(html);
-            });
-        });
-        
-        $(window).on('resize', function() {
-            var windowHeight = $(window).height();
-            var iframeTop = $pagecontent.offset().top;
-            var marginHeight = $pagecontent.outerHeight() - $pagecontent.innerHeight();
-            var height = windowHeight - iframeTop - marginHeight - 10;
-            $pagecontent.height(height);
-        }).resize();
-    });
-    </script>
-    
 </body>
 </html>

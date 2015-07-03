@@ -8,16 +8,10 @@
                 <button type="button" class="close" data-dismiss="modal">
                     <span>&times;</span>
                 </button>
-                <h4 class="modal-title">修改用户</h4>
+                <h4 class="modal-title">添加用户</h4>
             </div>
             <div class="modal-body">
-	            <form action="<c:url value="/sys/user/update/${user.id}"/>" class="form-horizontal" id="form-user-update">
-	                <div class="form-group">
-	                    <label class="control-label col-md-2" for="id">用户Id:</label>
-	                    <div class="col-md-8">
-	                        <input type="text" class="form-control" name="id" readonly value="${user.id}"/>
-	                    </div>
-	                </div>
+	            <form action="<c:url value="/sys/user/add"/>" class="form-horizontal" id="form-user-add">
 	                <div class="form-group">
 	                    <label class="control-label col-md-2" for="username">用户名:</label>
 	                    <div class="col-md-8">
@@ -41,21 +35,19 @@
     </div>
 </div>
 
-
-
 <script type="text/javascript">
 $(function() {
     var $mainmodal = window.top.$('#mainmodal');
     var iframeWindow = window.top.pagecontent.window;
-    $('#form-user-update').on('submit', function(e) {
+    $('#form-user-add').on('submit', function(e) {
         var $this = $(this);
         $this.ajaxSubmit({
-	        type: 'post',
-	        dataType: 'json',
-	        success: function(json) {
-	            $mainmodal.find('.modal').modal('hide');
-	            iframeWindow.location.reload();
-	        }
+            type: 'post',
+            dataType: 'json',
+            success: function(json) {
+                $mainmodal.find('.modal').modal('hide');
+                iframeWindow.location.reload();
+            }
         });
         return false;
     });

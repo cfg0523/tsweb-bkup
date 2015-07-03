@@ -25,62 +25,36 @@
 
 <script type="text/javascript">
 $(function(){
-    //var $mymodal = $(window.top.document.getElementById('mainmodal'));
-    var $mymodal = $('#mymodal');
     var $navtabHeader = $('#navtab-header');
     var $navtabContent = $('#navtab-content');
+    var $mainmodal = window.top.$('#mainmodal');
     
     $navtabHeader.on('click', 'a', function(e){
         $(this).tab('show');
     });
     
-    $('a.tab-trigger').on('click', function(e){
-        e.preventDefault();
-        var $this = $(this);
-        var tabpaneid = $this.attr('tab-pane-id');
-        var tabpanelabel = $this.attr('tab-pane-label');
-        var $taba = $navtabHeader.find('a[href*="' + tabpaneid + '"]');
-        if ($taba.size() > 0) {
-            $taba.tab('show');
-        } else {
-            $.get(this.href, function(html) {
-                $navtabHeader.find('li.active').removeClass('active');
-                $navtabContent.find('.tab-pane.active').removeClass('active');
-                
-                var $tabclose = $('<span class="glyphicon glyphicon-remove tab-close"/>');
-                var $a = $('<a/>').attr('href', '#' + tabpaneid).text($this.text() + tabpanelabel).append($tabclose);
-                var $li = $('<li class="active"/>').append($a);
-                var $div = $('<div class="tab-pane active"/>').attr('id', tabpaneid).html(html);
-                
-                $navtabHeader.append($li);
-                $navtabContent.append($div);
-                
-                $tabclose.on('click', function() {
-                    $li.detach();
-                    $div.detach();
-                    $navtabHeader.find('li:first a').tab('show');
-                });
-            });
-        }
-    });
-    
     $('a.modal-trigger').on('click', function(e) {
         e.preventDefault();
         $.get(this.href, function(html) {
-            $mymodal.html(html).find('.modal').modal({
+            $mainmodal.html(html).find('.modal').modal({
                 backdrop: 'static'
             });
         });
     });
     
+    $('a.delete-trigger').on('click', function(e) {
+        e.preventDefault();
+        $.get(this.href, function(json) {
+            if (json.success) {
+	            window.location.reload();
+            }
+        });
+    });
 });
 </script>
 
 </head>
 <body>
-    
-    <div id="mymodal"></div>
-
     <div class="navtab">
 	    <ul class="nav nav-tabs" id="navtab-header">
 	        <li class="active"><a href="#tab-pane-user-list">用户列表</a></li>
@@ -88,11 +62,11 @@ $(function(){
 	    <div class="tab-content" id="navtab-content">
 	        <div class="tab-pane active" id="tab-pane-user-list">
 	            <div class="panel panel-default">
-	                <div class="panel-body">
-	                   <div class="btn-group pull-right">
-	                       <button class="btn btn-primary">添加</button>
-	                   </div>
-	                </div>
+                    <div class="panel-body">
+                        <div class="btn-group pull-right">
+                            <a href="<c:url value="/sys/user/add"/>" class="btn btn-primary modal-trigger">添加</a>
+                        </div>
+                    </div>
 	                <table class="table table-bordered table-responsive table-hover">
 	                    <thead>
 	                        <tr>
@@ -107,14 +81,15 @@ $(function(){
 	                                <td>${user.username}</td>
 	                                <td>${user.password}</td>
 	                                <td>
-	                                    <a class="tab-trigger" tab-pane-id="tab-pane-viewuser-${user.id}" tab-pane-label="用户:${user.username}" href="<c:url value="/sys/user/${user.id}"/>">查看</a>
+	                                    <a class="modal-trigger" href="<c:url value="/sys/user/${user.id}"/>">查看</a>
 	                                    <a class="modal-trigger" href="<c:url value="/sys/user/update/${user.id}"/>">修改</a>
-	                                    <a href="<c:url value="/sys/user/delete/${user.id}"/>">删除</a>
+	                                    <a class="delete-trigger" href="<c:url value="/sys/user/delete/${user.id}"/>">删除</a>
 	                                </td>
 	                            </tr>
 	                        </c:forEach>
 	                    </tbody>
 	                </table>
+                    <div class="panel-body"></div>
 	            </div>
 	        </div>
 	   </div>

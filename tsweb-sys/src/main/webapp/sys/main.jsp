@@ -10,6 +10,7 @@
 
 <link rel="stylesheet" type="text/css" href="<c:url value="/static/bootstrap/css/bootstrap.css"/>" />
 <script type="text/javascript" src="<c:url value="/static/js/jquery.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/static/js/jquery.form.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/static/bootstrap/js/bootstrap.js"/>"></script>
 
 <style type="text/css">
@@ -48,7 +49,7 @@
 <title>Main</title>
 </head>
 <body>
-    <div id="mainmodal">mainmodal</div>
+    <div id="mainmodal"></div>
     
     <div id="pageheader">
         <div class="navbar navbar-inverse navbar-fixed-top">

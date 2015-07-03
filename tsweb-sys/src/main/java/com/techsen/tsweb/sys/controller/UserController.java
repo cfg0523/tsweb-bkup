@@ -37,17 +37,28 @@ public class UserController {
     @ResponseBody
     @RequestMapping(value="/update/{userId}", method=RequestMethod.POST)
     public JsonResult update(@PathVariable String userId, User user) {
-        
-        System.out.println();
-        System.out.println("------------------");
-        try {
-            this.userService.updateEntity(user);
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-        System.out.println("------------------");
-        System.out.println();
-        
+        this.userService.updateEntity(user);
         return new JsonResult(user);
     }
+    
+    @RequestMapping(value="/add", method=RequestMethod.GET)
+    public String add() {
+        return "/sys/user-add";
+    }
+    
+    @ResponseBody
+    @RequestMapping(value="/add", method=RequestMethod.POST)
+    public JsonResult add(User user, Model model) {
+        this.userService.addEntity(user);
+        return new JsonResult(user);
+    }
+    
+    @ResponseBody
+    @RequestMapping(value="/delete/{userId}", method=RequestMethod.GET)
+    public JsonResult delete(@PathVariable String userId) {
+        User user = new User().setId(userId);
+        this.userService.deleteEntity(user);
+        return new JsonResult(user);
+    }
+    
 }
